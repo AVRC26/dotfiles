@@ -1,0 +1,214 @@
+# Starship Prompt — moir layout, colors driven by set-theme.
+# Credit: https://github.com/starship/starship/discussions/1107#discussioncomment-11890875
+
+format = """
+$os(bg:color_bg)\
+[{{SEP_TRANS}}](bg:color_bg fg:color_seg0)\
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+[{{SEP_TRANS}}](bg:color_seg1 fg:color_bg)\
+$directory\
+[{{SEP_TRANS}}](bg:color_seg2 fg:color_seg1)\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_status\
+$git_commit\
+$git_metrics\
+[{{SEP_TRANS}}](fg:color_seg2)\
+$cmd_duration\
+$fill\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$fill\
+[](fg:color_seg4)\
+$memory_usage\
+[](fg:color_seg5 bg:color_seg4)\
+$time\
+$battery\
+$line_break\
+$container\
+$shell\
+[ ╰─](fg:color_seg5)\
+$character"""
+
+palette = 'theme'
+
+[palettes.theme]
+color_seg0 = "{{COLOR_SEG0}}"
+color_seg1 = "{{COLOR_SEG1}}"
+color_seg2 = "{{COLOR_SEG2}}"
+color_seg3 = "{{COLOR_SEG3}}"
+color_seg4 = "{{COLOR_SEG4}}"
+color_seg5 = "{{COLOR_SEG5}}"
+color_bg   = "{{COLOR_BG}}"
+color_text = "{{COLOR_TEXT}}"
+color_fg   = "{{COLOR_FG}}"
+color_ok   = "{{COLOR_OK}}"
+color_err  = "{{COLOR_ERR}}"
+color_warn = "{{COLOR_WARN}}"
+
+
+[git_branch]
+symbol = " "
+style  = "bg:color_seg2 fg:color_fg"
+format = '[[ $symbol$branch ](bg:color_seg2 fg:color_fg)]($style)'
+
+[git_status]
+style  = "bg:color_seg2 fg:color_fg"
+format = '([ $all_status$ahead_behind ](bg:color_seg2 fg:color_fg))'
+conflicted  = "$count "
+ahead       = "$count"
+behind      = "$count"
+diverged    = "$count"
+up_to_date  = ""
+untracked   = "$count "
+stashed     = "$count "
+modified    = "$count "
+staged      = "$count "
+renamed     = "$count "
+deleted     = "$count "
+typechanged = "$count "
+
+[git_commit]
+only_detached      = true
+commit_hash_length = 8
+tag_disabled       = false
+tag_symbol         = '  '
+style              = 'bg:color_seg2 fg:color_fg'
+format             = '([ $hash$tag ](bg:color_seg2 fg:color_fg))'
+
+[git_metrics]
+added_style   = 'bg:color_seg2 fg:color_fg'
+deleted_style = 'bg:color_seg2 fg:color_fg'
+format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
+disabled      = false
+[username]
+show_always = true
+style_user  = "bg:color_bg fg:color_text"
+style_root  = "bg:color_bg fg:color_err bold"
+format      = '[ $user ](bg:color_bg fg:color_text)'
+
+[hostname]
+ssh_only = false
+style    = "bg:color_bg fg:color_text"
+format   = "[  $hostname ](bg:color_bg fg:color_text)"
+
+[directory]
+style             = "bg:color_seg1 fg:color_fg"
+format            = "[ $path ]($style)"
+truncation_length = 0
+truncation_symbol = ""
+truncate_to_repo  = false
+[time]
+disabled    = false
+style       = "bg:color_seg5 fg:color_fg"
+format      = '[ $time ](bg:color_seg5 fg:color_fg)'
+
+[memory_usage]
+disabled   = false
+threshold  = -1
+style      = "bg:color_seg4 fg:color_fg"
+format     = '[ ${ram} ](bg:color_seg4 fg:color_fg)'
+
+[battery]
+disabled           = false
+full_symbol        = ' '
+charging_symbol    = ' '
+discharging_symbol = ' '
+unknown_symbol     = ' '
+empty_symbol       = ' '
+format             = '[ $symbol$percentage ](bg:color_seg3 fg:color_fg) '
+
+[[battery.display]]
+threshold = 100
+style     = "bg:color_seg3 fg:color_fg"
+
+[os]
+disabled = false
+style    = "bg:color_seg0 fg:color_bg"
+
+[os.symbols]
+Linux   = " 󰌓 "
+Ubuntu  = "  "
+Windows = " 󰍲 "
+Macos   = " 󰅵 "
+Unknown = " 󰠥 "
+[shell]
+disabled = true
+
+[fill]
+symbol = '·'
+style  = 'fg:color_seg5'
+
+[character]
+success_symbol = '[❯](bold blink fg:color_ok)'
+error_symbol   = '[❯](bold blink fg:color_err)'
+vimcmd_symbol  = '[❯](bold fg:color_ok)' 

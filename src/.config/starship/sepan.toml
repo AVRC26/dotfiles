@@ -1,0 +1,889 @@
+# Credit: https://gitlab.com/sjsepan/sjsepan.powerline
+# ~/.config/starship.toml
+#
+# Run in zsh to see palette of available colors:
+# for i in {0..255}; do print -Pn "%K{$i} %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+
+# Refresh
+#eval "$(starship init bash)"
+#
+#    ~   󰈙      🔑     
+# fade_left: =       
+# fade_right: =       
+# end_left: =  
+# end_right: =  
+#
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Disable the blank line at the start of the prompt
+add_newline = true
+palette = 'theme'
+
+# =========prompt=========
+
+format = """
+[](bg:none fg:color_seg0)\
+[ ](bg:color_seg0)\
+$os\
+$cmd_duration\
+[](fg:color_seg4 bg:color_seg0)\
+$battery\
+[](fg:color_bg bg:color_seg4)\
+$status\
+$sudo\
+[](fg:color_bg)\
+[](fg:color_bg)\
+$env_var\
+$username\
+$hostname\
+$localip\
+[ ](fg:color_bg bg:color_seg1)\
+$directory\
+$direnv\
+[ ](fg:color_seg1 bg:color_seg2)\
+$git_branch\
+$git_status\
+$git_metrics\
+$git_commit\
+$git_state\
+$fossil_branch\
+$fossil_metrics\
+$hg_branch\
+$hg_state\
+$pijul_channel\
+$vcs\
+$vcsh\
+[ ](fg:color_seg2 bg:color_seg3)\
+$buf\
+$bun\
+$c\
+$cmake\
+$cobol\
+$conda\
+$crystal\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$fortran\
+$gleam\
+$golang\
+$gradle\
+$haxe\
+$helm\
+$haskell\
+$java\
+$julia\
+$kotlin\
+$lua\
+$maven\
+$meson\
+$mise\
+$mojo\
+$nats\
+$nim\
+$nix_shell\
+$nodejs\
+$ocaml\
+$odin\
+$opa\
+$package\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$red\
+$rlang\
+$ruby\
+$scala\
+$rust\
+$spack\
+$swift\
+$terraform\
+$typst\
+$vagrant\
+$vlang\
+$xmake\
+$zig\
+[ ](fg:color_seg3 bg:color_seg4)\
+$aws\
+$azure\
+$container\
+$docker_context\
+$gcloud\
+$guix_shell\
+$kubernetes\
+$netns\
+$openstack\
+$pixi\
+$singularity\
+[ ](fg:color_seg4 bg:color_seg5)\
+$time\
+$shlvl\
+$jobs\
+$shell\
+[ ](fg:color_seg5)\
+$line_break\
+$character"""
+
+#${custom.files}${custom.directories}\
+
+# A continuation prompt that displays right half-circle and filled-in arrow
+continuation_prompt = "[ ](bg:color_seg5)[ ](fg:color_seg5)"
+
+#the continuation prompt may not be shown if the right prompt is used; RP only appears in fish/zsh/xonsh, not bash/pwsh/tcsh/ion
+# right_format = """
+# [ ](fg:color_seg5)\
+# [ ](fg:color_seg4 bg:color_seg5)\
+# [ ](fg:color_seg0 bg:color_seg4)\
+# [test](fg:color_fg bg:color_seg0)\
+# [](fg:color_seg0)\
+# """
+
+follow_symlinks = false
+
+[palettes.theme]
+color_seg0 = "{{COLOR_SEG0}}"
+color_seg1 = "{{COLOR_SEG1}}"
+color_seg2 = "{{COLOR_SEG2}}"
+color_seg3 = "{{COLOR_SEG3}}"
+color_seg4 = "{{COLOR_SEG4}}"
+color_seg5 = "{{COLOR_SEG5}}"
+color_bg   = "{{COLOR_BG}}"
+color_text = "{{COLOR_TEXT}}"
+color_fg   = "{{COLOR_FG}}"
+color_ok   = "{{COLOR_OK}}"
+color_err  = "{{COLOR_ERR}}"
+color_warn = "{{COLOR_WARN}}"
+
+[line_break]
+disabled = false
+
+# [fill]
+# symbol = ' '
+
+# =======OS===========
+#GhostBSD: replace $os with \U000f02a0 󰊠
+
+[os]
+format = "[$symbol]($style)"
+style = "fg:color_bg bg:color_seg0"
+disabled = false
+
+[os.symbols]
+AIX = "➿ "
+Alpaquita = " " #alpaca
+Alpine = " "
+AlmaLinux = " "
+ALTLinux = "Ⓐ "
+Amazon = " "
+Android = " " #
+AOSC = "🐱 "
+Arch = " "
+Artix = " "
+Bluefin = "🐟 "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Elementary = "🍏 "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+#GhostBSD = "󰊠 " #use this char in FreeBSD
+HardenedBSD = "󰞌 "
+Illumos = " "
+Ios = "📱 "
+InstantOS = "⏲️ "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "#🌿
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = " " #󰈺
+OpenCloudOS = ''
+openEuler = ''
+openSUSE = " "
+OracleLinux = " " #󰌷 ⊂⊃
+PikaOS = "🐤 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = "󰀘 "
+RockyLinux = " "
+Solus = "󰠳 " #
+SUSE = " "
+Ubuntu = " "
+Ultramarine = "󰼮 "
+Unknown = " "
+Void = " "
+Windows = " " #
+Zorin = "🔹 "
+
+# ==========battery========
+
+[battery]
+full_symbol = "󰂃 "
+charging_symbol = "⚡️ "
+discharging_symbol = "󰁽 "
+empty_symbol = '󰂎 '
+format = "[$symbol$percentage]($style)"
+disabled = true
+
+# [[battery.display]]
+# threshold = 25
+# style = "bold fg:fg_red2 bg:color_seg4"
+
+# [[battery.display]]
+# threshold = 50
+# style = "bold fg:orange bg:color_seg4"
+
+# [[battery.display]]
+# threshold = 75
+# style = "bold fg:yellow bg:color_seg4"
+
+[[battery.display]]
+threshold = 100
+style = "fg:color_fg bg:color_seg4"
+# style = "bold fg:green bg:color_seg4"
+
+# ==========status========
+
+[cmd_duration] #    
+format='[ $duration]($style)'
+style='fg:color_fg bg:color_seg5'
+
+[character]
+disabled       = false
+success_symbol = '[❯](bold blink fg:color_ok)'
+error_symbol   = '[❯](bold blink fg:color_err)'
+vimcmd_symbol  = '[❮](bold fg:color_ok)'
+
+[status]
+disabled = false
+format = '[$status:$common_meaning ](fg:color_err bg:color_seg0)'
+
+[sudo]
+symbol = "🔑" #
+style = "fg:color_fg bg:color_seg0"
+disabled = false
+
+# =========user/host=========
+
+[env_var.STY]
+#variable = 'STY'
+style = "fg:color_fg bg:color_seg0"
+format = "[  $env_value ]($style)"
+# default=""
+# disabled = true
+
+[hostname]
+format   = '[ $hostname ](bg:color_bg fg:color_text)'
+ssh_only = false
+disabled = false
+
+[username] #          
+show_always = true
+style_user  = "bg:color_bg fg:color_text"
+style_root  = "bg:color_bg fg:color_err bold"
+format      = '[ ($user) ]($style)'
+
+[localip]
+ssh_only = true
+style = "fg:color_fg bg:color_seg0"
+format = '[󰩠 $localipv4]($style)' #@
+disabled = true
+
+# ========directory==========
+
+[directory]
+style = "fg:color_fg bg:color_seg1"
+format = "[$read_only$path]($style)"
+read_only = '󰌾 ' #🔒
+home_symbol=" " #🏠
+truncation_length = 0
+truncation_symbol = ""
+truncate_to_repo  = false
+
+[direnv]
+style = "fg:color_fg bg:color_seg1"
+format="[ $symbol $loaded/$allowed ]($style)"
+symbol=" "
+# detect_files=['.envrc']
+# detect_folders=[]
+# detect_env_vars=['TESTDIRENV']
+allowed_msg=" "
+not_allowed_msg=" "
+denied_msg=" "
+loaded_msg=" "
+unloaded_msg=" "
+disabled=false
+
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"Documents" = "󰈙 " # Doc
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"Videos" = " "
+"Projects" = "󰲋 "
+".config" = ""
+"Bash"=" "
+"CookLang"="󰭼 " 
+"DotNet" = "󰪮 "
+"dotnet" = "󰪮 "
+"Java"="☕"
+# "jq"=" "
+"Jupyter"=" "
+"Rust"=" "
+"Starship"="󱓟 "
+"Themes"="󰔎 "
+"themes"="󰔎 "
+"icons"=" "
+"VSCode"=" "
+"scripts"="󰯃 "
+"thunderbird"=" "
+"firefox"=" "
+"mozilla"=" "
+#"School" = "󰑴"
+#"GitHub" = ""
+# "Important Documents" = " 󰈙 "
+# will not be replaced, because "Documents" was already substituted before.
+# So either put "Important Documents" before "Documents" or use the substituted version:
+# "Important 󰈙 " = " 󰈙 "
+
+# inspired by @lolbat on CodeBerg
+# [custom.files]
+# description = "Show files count for current directory"
+# command = "find ./ -maxdepth 1 -type f | wc -l"
+# format = "[ 󰈔 $output]($style)"
+# style = "fg:color_fg bg:color_seg1"
+# when = "true"
+
+# [custom.directories]
+# description = "Show directory count count for current directory"
+# command = "find ./ -maxdepth 1 -type d | tail -n +2 | wc -l"
+# format = "[  $output]($style)"
+# style = "fg:color_fg bg:color_seg1"
+# when = "true"
+
+# =========src ctrl=========
+
+[git_branch]
+symbol = "" #              |
+style = "fg:color_fg bg:color_seg2"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style  = "bg:color_seg2 fg:color_fg"
+format = '([ $all_status$ahead_behind ](bg:color_seg2 fg:color_fg))'
+conflicted  = "$count "
+ahead       = "$count"
+behind      = "$count"
+diverged    = "$count"
+up_to_date  = ""
+untracked   = "$count "
+stashed     = "$count "
+modified    = "$count "
+staged      = "$count "
+renamed     = "$count "
+deleted     = "$count "
+typechanged = "$count "
+
+#[git_status]
+#style = "fg:color_fg bg:color_seg2"
+#format = '[ $all_status$ahead_behind ]($style)'#"[ $ahead$behind$untracked$modified$staged$deleted ]($style)"
+#conflicted = '󰞇= $count'
+#ahead = "⇡ $count "
+#behind = "⇣ $count "
+#deleted = "🗑 $count " #
+#diverged = "󰃻 $count " #
+#renamed = " $count "
+#stashed = "📦 $count "
+#modified = "󰙏 $count " #  
+#staged = " $count "
+#untracked = "󰙌 $count " # 🤷󰙌
+#up_to_date = '✓'
+
+[git_commit]
+disabled=true
+only_detached=false
+tag_disabled=false
+tag_symbol = ' '
+# tag_max_candidates=1
+style = "fg:color_fg bg:color_seg2"
+format = "[$symbol$hash$tag ]($style)"
+commit_hash_length = 4
+
+[git_state]
+disabled=false
+style = "bg:color_seg2"
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+cherry_pick = '[🍒 PICKING]'
+rebase = '[ REBASING]'
+merge = '[ MERGING]'
+bisect = '[🔍 BISECTING]'
+am = '[AM]'
+am_or_rebase = '[AM/REBASE]'
+revert = '[󰕍 REVERTING]'
+#progress_divider = ' of '
+
+[git_metrics]
+added_style = "fg:color_fg bg:color_seg2"
+deleted_style = "fg:color_fg bg:color_seg2"
+format = '([+$added ]($added_style))([-$deleted ]($deleted_style))'
+disabled = false
+
+[fossil_branch]
+symbol = '󰘬'
+style = "bg:color_seg2"
+format = '[[ $symbol $branch ](fg:color_fg bg:color_seg2)]($style)'
+
+[fossil_metrics]
+added_style = "fg:color_fg bg:color_seg2"
+deleted_style = "fg:color_fg bg:color_seg2"
+format = '([+$added ]($added_style))([-$deleted ]($deleted_style))'
+
+[hg_branch]
+symbol = " "
+style = "bg:color_seg2"
+format = '[[ $symbol $branch ](fg:color_fg bg:color_seg2)]($style)'
+
+[hg_state]
+style = "fg:color_fg bg:color_seg2"
+format = '[[ $symbol $branch ](fg:color_fg bg:color_seg2)]($style)'
+
+[pijul_channel]
+symbol = " "
+style = "bg:color_seg2"
+format = '[[ $symbol $branch ](fg:color_fg bg:color_seg2)]($style)'
+
+[vcs]
+disabled=true
+
+[vcsh]
+symbol = '󰘬'
+style = "bg:color_seg2"
+format = '[[ $symbol $branch ](fg:color_fg bg:color_seg2)]($style)'
+
+# ========toolchains/packages==========
+
+# [ansible]
+# symbol = "Ⓐ "
+# style = "fg:color_fg bg:color_seg3"
+# format = '[$symbol $version ]($style)'
+
+[buf]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[bun]
+symbol = ''
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[c]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[cmake]
+symbol = ''
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[cobol]
+symbol = '⚙️'
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[conda]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[crystal]
+symbol = ''
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[daml]
+symbol = '𝜦'
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[dart]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[deno]
+symbol = '' #🦕
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[dotnet]
+symbol = "󰪮 " # 
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[elixir]
+symbol = " " #💧
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[elm]
+symbol = " " #🌳
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[erlang]
+symbol = ''
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[fennel]
+symbol = '' #󰬍  󰬍
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[fortran]
+symbol = '󱈚 ' # 
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[gleam]
+symbol = 'GLEAM'
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[golang]
+symbol = " " #🐹
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[gradle]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[haskell]
+symbol = " " #λ
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[haxe]
+symbol = " " #
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[helm]
+symbol = ''
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[java]
+symbol = "☕ "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[julia]
+symbol = "ஃ " #
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[kotlin]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[lua]
+symbol = " " #
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[maven]
+symbol = " " #🅼
+style = "fg:color_fg bg:color_seg3"
+format = '[ $symbol $version ]($style)'
+
+[meson]
+symbol = "󰔷 " # M
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[mise]
+symbol = "󰰏 "
+#health = 'ready'
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[mojo]
+symbol = 'MOJO'
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[nats]
+symbol = "󰰒 "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[nim]
+symbol = " " #👑
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[nix_shell]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[nodejs]
+symbol = "󰎙 " #󰎙 🔷 
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[ocaml]
+symbol = " "# 
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[odin]
+symbol = 'ODIN'
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[opa]
+symbol = ' ' #   
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[package]
+disabled=false
+symbol = "󰏗 " #  📦
+style = "fg:color_fg bg:color_seg3 bold"
+format = '[$symbol $version ]($style)'
+
+[perl]
+symbol = " " #
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[php]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[pulumi]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[purescript]
+symbol = ''
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[python]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[quarto]
+symbol = 'QUARTO'
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[raku]
+symbol = ' ' #
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[red]
+symbol = 'RED'
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[rlang]
+symbol = "󰟔 " # R
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[ruby]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[rust]
+symbol = "" #🦀
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[scala]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[spack]
+symbol = " " # S 🅢
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[swift]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[terraform]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[typst]
+symbol = ''
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[vagrant]
+symbol = ""
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[vlang]
+symbol = ""
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[xmake]
+symbol = "󰰰 " # 󰰲
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+[zig]
+symbol = " "
+style = "fg:color_fg bg:color_seg3"
+format = '[$symbol $version ]($style)'
+
+# ========containers==========
+
+[aws]
+symbol = "  "
+style = "fg:color_fg bg:color_seg4"
+format = '[[ $symbol $context ](bg:color_seg4)]($style) $path'
+
+[azure]
+symbol = " " # 󰠅
+style = "fg:color_fg bg:color_seg4"
+format = '[[ $symbol $context ](bg:color_seg4)]($style) $path'
+
+[container]
+symbol = "🐳 "
+style = "fg:color_fg bg:color_seg4"
+format = '[ $symbol $context $path ]($style)'
+
+[docker_context]
+symbol = "🐳 "
+style = "fg:color_fg bg:color_seg4"
+format = '[[ $symbol $context ](bg:color_seg4)]($style) $path'
+
+[gcloud]
+disabled = false
+symbol = "☁️ "
+style = "fg:color_fg bg:color_seg4"
+format = '[[ $symbol $context ](bg:color_seg4)]($style) $path'
+
+[guix_shell]
+symbol = " "
+style = "fg:color_fg bg:color_seg4"
+format = '[[ $symbol $context ](bg:color_seg4)]($style) $path'
+disabled = false
+
+[kubernetes]
+symbol = " "
+format = '[ $symbol $context $namespace]($style) '
+style = "fg:color_fg bg:color_seg4"
+disabled = false
+
+[netns]
+symbol = " " #"🛜 "
+style = "fg:color_fg bg:color_seg4"
+format = '[ $symbol $name ]($style)'
+
+[openstack]
+symbol = " "
+style = "fg:color_fg bg:color_seg4"
+format = '[[ $symbol $context ](bg:color_seg4)]($style) $path'
+
+[pixi]
+symbol = "󰰘 " # 󰰚
+style = "fg:color_fg bg:color_seg4"
+format = '[[ $symbol $context ](bg:color_seg4)]($style) $path'
+
+[singularity]
+symbol = "󰯭 "
+disabled = false
+style = "fg:color_fg bg:color_seg4"
+format = '[ $symbol $context $namespace]($style) ' #AppTainer
+
+# ========time/shell/shlvl/jobs/memory_usage==========
+
+[time]
+disabled = false
+style = "bg:color_seg5"
+format = '[[  $time ](fg:color_fg bg:color_seg5)]($style)'
+
+[shell]
+disabled=false
+bash_indicator = ''
+fish_indicator='󰈺' #🐟
+zsh_indicator="󰰶"
+powershell_indicator = '' # 
+cmd_indicator = ' ' #
+ion_indicator = ''
+elvish_indicator = "󰘧"
+tcsh_indicator = "󰰤"
+nu_indicator = "nu"
+xonsh_indicator = "🐚" # seashell emoji
+unknown_indicator = ' '
+style = "fg:color_fg bg:color_seg5"
+format="[ $indicator ]($style)" #space on right b/c double-width symbol
+
+[shlvl]
+disabled=false
+symbol=""
+style = "fg:color_fg bg:color_seg5"
+format = '[ $symbol$shlvl]($style)'
+
+[jobs]
+disabled = false
+symbol = ' '
+number_threshold = 1
+symbol_threshold = 1
+style = "fg:color_fg bg:color_seg5"
+format="[ $symbol$number]($style)"
+
+[memory_usage]
+disabled=true
+symbol = " "
+style = "fg:color_fg bg:color_seg5"
+format = '[ $symbol ]($style)'

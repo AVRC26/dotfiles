@@ -1,0 +1,17 @@
+Font=Consolas
+FontHeight=11
+FontSmoothing=full
+Transparency=off
+OpaqueWhenFocused=no
+CursorType=line
+CursorBlinks=yes
+BoldAsFont=no
+Locale=C
+Charset=UTF-8
+Columns=220
+Rows=50
+ScrollbackLines=10000
+Term=xterm-256color
+BellType=0
+ClicksPlaceCursor=yes
+RightClickAction=paste

@@ -1,0 +1,231 @@
+﻿# Starship Prompt — powerline layout, colors driven by set-theme.
+# Credit: https://starship.rs/presets/plain-text-symbols
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](fg:color_seg0)\
+$os\
+[{{SEP_TRANS}}](bg:color_bg fg:color_seg0)\
+$username\
+$hostname\
+[{{SEP_TRANS}}](bg:color_seg1 fg:color_bg)\
+$directory\
+[{{SEP_TRANS}}](fg:color_seg1 bg:color_seg2)\
+$git_branch\
+$git_status\
+$git_commit\
+$git_metrics\
+[{{SEP_TRANS}}](fg:color_seg2 bg:color_seg3)\
+$c\
+$cpp\
+$rust\
+$golang\
+$nodejs\
+$bun\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+[{{SEP_TRANS}}](fg:color_seg3 bg:color_seg4)\
+$docker_context\
+$conda\
+[{{SEP_TRANS}}](fg:color_seg4 bg:color_seg5)\
+$time\
+[](fg:color_seg5)\
+$cmd_duration\
+$line_break\
+$character"""
+
+palette = 'theme'
+
+[palettes.theme]
+color_seg0 = "{{COLOR_SEG0}}"
+color_seg1 = "{{COLOR_SEG1}}"
+color_seg2 = "{{COLOR_SEG2}}"
+color_seg3 = "{{COLOR_SEG3}}"
+color_seg4 = "{{COLOR_SEG4}}"
+color_seg5 = "{{COLOR_SEG5}}"
+color_bg   = "{{COLOR_BG}}"
+color_text = "{{COLOR_TEXT}}"
+color_fg   = "{{COLOR_FG}}"
+color_ok   = "{{COLOR_OK}}"
+color_err  = "{{COLOR_ERR}}"
+color_warn = "{{COLOR_WARN}}"
+
+[os]
+disabled = false
+style = "bg:color_seg0 fg:color_bg"
+
+[os.symbols]
+Windows          = "󰍲 "
+Ubuntu           = " "
+SUSE             = " "
+Raspbian         = "󰃿 "
+Mint             = "󰍨 "
+Macos            = "󰅵 "
+Manjaro          = " "
+Linux            = "󰌓 "
+Gentoo           = "󰏨 "
+Fedora           = "󰍻 "
+Alpine           = " "
+Amazon           = " "
+Android          = " "
+AOSC             = " "
+Arch             = "󰄇 "
+Artix            = "󰄇 "
+EndeavourOS      = " "
+CentOS           = " "
+Debian           = "󰍺 "
+Redhat           = "󱒛 "
+RedHatEnterprise = "󱒛 "
+Pop              = " "
+
+[username]
+show_always = true
+style_user = "bg:color_bg fg:color_text"
+style_root = "bg:color_bg fg:color_text"
+format = '[ $user]($style)'
+
+[hostname]
+ssh_only = false
+style = "bg:color_bg fg:color_text"
+format = '[  $hostname ]($style)'
+
+[directory]
+style = "fg:color_fg bg:color_seg1"
+format = "[ $path ]($style)"
+truncation_length = 0
+truncation_symbol = ""
+truncate_to_repo  = false
+
+[directory.substitutions]
+"Documents" = "󰈘 "
+"Downloads" = "󰆚 "
+"Music"     = "󰝚 "
+"Pictures"  = "󰏠 "
+"Developer" = "󰬫 "
+
+[git_branch]
+symbol = ""
+style  = "bg:color_seg2"
+format = '[[ $symbol $branch ](fg:color_fg bg:color_seg2)]($style)'
+
+[git_status]
+style  = "bg:color_seg2"
+format = '[[($all_status$ahead_behind )](fg:color_fg bg:color_seg2)]($style)'
+conflicted  = "$count "
+ahead       = "$count"
+behind      = "$count"
+diverged    = "$count"
+up_to_date  = ""
+untracked   = "$count "
+stashed     = "$count "
+modified    = "$count "
+staged      = "$count "
+renamed     = "$count "
+deleted     = "$count "
+typechanged = "$count "
+
+[git_commit]
+only_detached      = true
+commit_hash_length = 8
+tag_disabled       = false
+tag_symbol         = '  '
+style              = 'bg:color_seg2'
+format             = '[[ $hash$tag ](fg:color_fg bg:color_seg2)]($style)'
+
+[git_metrics]
+added_style   = 'bg:color_seg2 fg:color_fg'
+deleted_style = 'bg:color_seg2 fg:color_fg'
+format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
+disabled      = false
+[nodejs]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[bun]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[c]
+symbol = " "
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[cpp]
+symbol = " "
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[rust]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[golang]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[php]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[java]
+symbol = " "
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[kotlin]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[haskell]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[python]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:color_fg bg:color_seg3)]($style)'
+
+[docker_context]
+symbol = ""
+style  = "bg:color_seg4"
+format = '[[ $symbol( $context) ](fg:color_fg bg:color_seg4)]($style)'
+
+[conda]
+style      = "bg:color_seg4"
+format     = '[[ $symbol( $environment) ](fg:color_fg bg:color_seg4)]($style)'
+ignore_base = false
+
+[time]
+disabled    = false
+style       = "bg:color_seg5"
+format      = '[[  $time ](fg:color_fg bg:color_seg5)]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled                  = false
+success_symbol            = '[❯](bold blink fg:color_ok)'
+error_symbol              = '[❯](bold blink fg:color_err)'
+vimcmd_symbol             = '[❮](bold fg:color_ok)'
+vimcmd_replace_one_symbol = '[❮](bold fg:color_warn)'
+vimcmd_replace_symbol     = '[❮](bold fg:color_warn)'
+vimcmd_visual_symbol      = '[❮](bold fg:color_warn)'
+
+[cmd_duration]
+show_milliseconds  = true
+format             = " in $duration "
+disabled           = false
+show_notifications = true
+min_time_to_notify = 45000

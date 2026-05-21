@@ -1,0 +1,240 @@
+﻿# Starship Prompt — seeker layout, colors driven by set-theme.
+# Credit: https://github.com/starship/starship/discussions/1107#discussioncomment-13575853
+
+format = """
+[╭─](bg:none fg:color_seg0)\
+$os\
+[ ](bg:color_bg fg:color_seg0)\
+$username\
+$hostname\
+[](bg:color_seg1 fg:color_bg)\
+[  ](bg:color_seg1 fg:color_fg)\
+$directory\
+[ ](bg:color_seg1)\
+[](bg:color_seg2 fg:color_seg1)\
+$git_branch\
+$git_status\
+$git_commit\
+$git_metrics\
+[](fg:color_seg2 bg:color_seg3)\
+$c\
+$rust\
+$golang\
+$nodejs\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+[](fg:color_seg3 bg:color_seg4)\
+$docker_context\
+$conda\
+[](fg:color_seg4)\
+$fill\
+$status\
+$cmd_duration\
+$time\
+[─╮](fg:color_seg5)\
+$line_break\
+[╰─](color_seg0)\
+$character\
+"""
+
+palette = 'theme'
+
+[palettes.theme]
+color_seg0 = "{{COLOR_SEG0}}"
+color_seg1 = "{{COLOR_SEG1}}"
+color_seg2 = "{{COLOR_SEG2}}"
+color_seg3 = "{{COLOR_SEG3}}"
+color_seg4 = "{{COLOR_SEG4}}"
+color_seg5 = "{{COLOR_SEG5}}"
+color_bg   = "{{COLOR_BG}}"
+color_text = "{{COLOR_TEXT}}"
+color_fg   = "{{COLOR_FG}}"
+color_ok   = "{{COLOR_OK}}"
+color_err  = "{{COLOR_ERR}}"
+color_warn = "{{COLOR_WARN}}"
+
+[os]
+format   = "[ $symbol]($style)()"
+style    = "bg:color_seg0 fg:color_bg"
+disabled = false
+
+[os.symbols]
+AIX              = "AIX "
+Alpine           = " "
+Amazon           = " "
+Android          = " "
+Arch             = " "
+Artix            = " "
+CentOS           = " "
+Debian           = " "
+DragonFly        = " "
+EndeavourOS      = " "
+Fedora           = " "
+FreeBSD          = " "
+Garuda           = " "
+Gentoo           = " "
+Kali             = " "
+Linux            = " "
+Macos            = " "
+Manjaro          = " "
+Mint             = " "
+NixOS            = " "
+OpenBSD          = " "
+openSUSE         = " "
+Pop              = " "
+Raspbian         = " "
+Redhat           = " "
+RedHatEnterprise = " "
+RockyLinux       = " "
+SUSE             = " "
+Ubuntu           = " "
+Unknown          = " "
+Void             = " "
+Windows          = " "
+
+[username]
+show_always = true
+style_user  = "bg:color_bg fg:color_text"
+style_root  = "bg:color_bg fg:color_err bold"
+format      = '[$user ]($style)'
+
+[hostname]
+format   = '[ $hostname ](bg:color_bg fg:color_text)'
+ssh_only = false
+disabled = false
+
+[fill]
+symbol = ' '
+style  = 'bold fg:color_seg5'
+
+[directory]
+style             = "bg:color_seg1 fg:color_fg"
+format            = '[$path]($style)[$read_only]($read_only_style)'
+truncation_length = 3
+truncation_symbol = "~/"
+read_only         = ' 🔒'
+read_only_style   = 'bg:color_seg1'
+
+[git_branch]
+symbol = ""
+style  = "bg:color_seg2"
+format = '[[ $symbol $branch ](fg:color_fg bg:color_seg2)]($style)'
+
+[git_commit]
+only_detached      = true
+format             = '[\($hash$tag\)]($style)[ ]()'
+style              = 'bg:color_seg2'
+commit_hash_length = 8
+tag_symbol         = '  '
+tag_disabled       = false
+disabled           = false
+
+[git_metrics]
+format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
+added_style   = 'bg:color_seg2 fg:color_fg'
+deleted_style = 'bg:color_seg2 fg:color_fg'
+disabled      = false
+
+[git_status]
+style  = "bg:color_seg2"
+format = '[[($all_status$ahead_behind )](fg:color_fg bg:color_seg2)]($style)'
+conflicted  = "$count "
+ahead       = "$count"
+behind      = "$count"
+diverged    = "$count"
+up_to_date  = ""
+untracked   = "$count "
+stashed     = "$count "
+modified    = "$count "
+staged      = "$count "
+renamed     = "$count "
+deleted     = "$count "
+typechanged = "$count "
+
+[nodejs]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[c]
+symbol = " "
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[rust]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[golang]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[php]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[java]
+symbol = " "
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[kotlin]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[haskell]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+
+[python]
+symbol = ""
+style  = "bg:color_seg3"
+format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:color_fg bg:color_seg3)]($style)'
+
+[docker_context]
+symbol          = ""
+style           = "bg:color_seg4"
+detect_files    = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+only_with_files = true
+format          = '[[ $symbol( $context) ](fg:color_fg bg:color_seg4)]($style)'
+disabled        = false
+
+[conda]
+symbol      = " "
+style       = "fg:color_fg bg:color_seg4"
+format      = '[$symbol$environment ]($style)'
+ignore_base = false
+
+[status]
+format         = "[](fg:color_err)[$symbol $status $hex_status ]($style)"
+style          = 'bg:color_err fg:color_fg'
+success_symbol = ''
+symbol         = " ✗"
+disabled       = false
+map_symbol     = false
+
+[time]
+format   = "[](fg:color_seg5)[ $time ](bg:color_seg5 fg:color_bg)"
+disabled = false
+
+[cmd_duration]
+format             = '[](fg:color_warn)[ $duration ](bg:color_warn fg:color_bg)'
+min_time           = 500
+disabled           = false
+show_notifications = false
+
+[character]
+success_symbol = '[❯](bold blink fg:color_ok)'
+error_symbol   = '[❯](bold blink fg:color_err)'
+vimcmd_symbol  = '[❯](bold fg:color_ok)' 
+
+[battery]
+disabled           = true

@@ -1,0 +1,63 @@
+# --- OS Generated Files ---
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+.claude/
+
+# --- Security & Credentials (CRITICAL) ---
+# Never version these!
+*.pem
+*.key
+*.pub
+ssh_config
+known_hosts
+authorized_keys
+.netrc
+.bash_history
+.zsh_history
+.python_history
+.node_repl_history
+
+# --- Secrets & Environment ---
+.env
+.env.*
+!.env.example
+secrets.yml
+*.secret
+
+# --- Local Overrides ---
+# Allow for local-only settings that aren't synced across machines
+*.local
+*.local.zsh
+.gitconfig.local
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+.coverage
+htmlcov/
+
+# --- Application Specific Junk ---
+.vscode/
+.idea/
+*.swp
+*~
+.nvm/
+.npm/
+.fzf/
+
+# --- Dotfiles installer state (written at install time, never committed) ---
+# System state lives at /var/lib/dotfiles/ (outside the repo).
+# User-local state lives at ~/.local/state/dotfiles/ (outside the repo).
+# The entries below guard against accidentally having a .state/ directory
+# inside a development checkout of this repo.
+.state/
+**/.state/

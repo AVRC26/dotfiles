@@ -1,0 +1,46 @@
+# [user] is intentionally absent.
+# The installer will prompt for name and email and write them here,
+# or you can set them yourself:
+#   git config --global user.name  "Your Name"
+#   git config --global user.email "you@example.com"
+# For per-repo overrides use a local .git/config.
+
+[color]
+    ui = true
+
+[include]
+    path = ~/.config/git/theme.conf
+
+[core]
+    editor = nvim
+    pager  = delta
+    excludesfile = ~/.gitignore_global
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate    = true
+    side-by-side = true
+    line-numbers = true
+    features    = theme-colors
+
+[diff]
+    tool       = vimdiff
+    colorMoved = default
+
+[merge]
+    tool = vimdiff
+
+[difftool]
+    prompt = false
+
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+
+[alias]
+    d  = difftool
+    lg = log --oneline --graph --decorate --all

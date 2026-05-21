@@ -1,0 +1,307 @@
+# Starship Prompt — sanmue layout (Power10 bg variant), colors driven by set-theme.
+# Credit: https://gist.github.com/sanmue/e04657a7ca37841c8e97e7fdf0dd6a5c
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# ### ------------
+# ### "Power10 bg"
+# ### ------------
+# ### Variant 2 with background: two line prompt, with background in top line, separators on left side
+# - This preset is inspired by a [powerlevel10k](https://github.com/romkatv/powerlevel10k) configuration variant.
+#
+# - Recommended / tested with Font 'MesloLGS NF Regular' from: Meslo Nerd Font patched for Powerlevel10k
+#   Link: https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#manual-font-installation
+#         --> "Manual font installation", with currently 4 Font Types
+
+# - If you do not want the filling solid line in top row:
+#   set the fill symbol to ' '
+# - Shell [shell]:
+#   If you want to see the content of the shell module, search for [shell] and change 'disabled = true' to false
+# - '$line_break': everything from the next line on refers to the second line of the prompt
+# - Some modules listed further down will not show up (all the time), as their default value is 'disabled = true' or
+#   they are only displayed under certain conditions
+# - added but disabled modules: [battery]
+#   - if you want to see them: search for the module and set 'disabled' to 'false' 
+# - Symbols:
+#   Don't be confused if you don't see any "real" symbols here. If Nerd-fonts are installed on your system, it should work.
+
+# Customizing the prompt (and placing desired modules at desired position and sequence):
+# ╭╴ # \u256D\u2574
+# ╰╴ # \u2570\u2574
+format = """
+[╭╴](fg:color_seg5)\
+$os\
+$shell\
+$username\
+$hostname\
+$sudo\
+$directory\
+$direnv\
+$php\
+$python\
+$git_branch$git_status$git_commit$git_state$git_metrics\
+[ ](fg:color_bg)\
+$fill\
+$fill\
+[ ](fg:color_bg)\
+$status\
+$jobs\
+$memory_usage\
+$cmd_duration\
+$battery\
+$time\
+$line_break\
+\
+[╰╴](fg:color_seg5)\
+[$character]($style)"""
+
+# move the rest of the prompt to the right
+right_format = """
+[$localip]($style)"""
+
+# Inserts a blank line between shell prompts:
+add_newline = true
+palette = 'theme'
+
+[palettes.theme]
+color_seg0 = "{{COLOR_SEG0}}"
+color_seg1 = "{{COLOR_SEG1}}"
+color_seg2 = "{{COLOR_SEG2}}"
+color_seg3 = "{{COLOR_SEG3}}"
+color_seg4 = "{{COLOR_SEG4}}"
+color_seg5 = "{{COLOR_SEG5}}"
+color_bg   = "{{COLOR_BG}}"
+color_text = "{{COLOR_TEXT}}"
+color_fg   = "{{COLOR_FG}}"
+color_ok   = "{{COLOR_OK}}"
+color_err  = "{{COLOR_ERR}}"
+color_warn = "{{COLOR_WARN}}"
+
+# Customization and activation of some modules:
+# Listed in the order of their position in the module row above
+[os]
+format = "[](fg:color_bg)[$symbol]($style)(bg:color_bg)"
+style = "bg:color_bg fg:color_seg0"
+disabled = false
+
+[os.symbols]
+AIX = "AIX "
+Alpaquita = "\uf26a " # \uf26a  # \ue3a5\ue390 
+AlmaLinux = "\uf31d " # 
+Alpine = "\uf300 " # ""
+Amazon = "\uf270 " # ""
+Android = "\ue70e " # ""
+Arch = "\uf303 " # ""
+Artix = "\uf31f " # 
+CentOS = "\uf304 " # ""
+Debian = "\uf306 " # ""
+DragonFly = "\ueef8 " #    🐉
+Emscripten = "\u26A1 " # ⚡
+EndeavourOS = "\uf322 " # "" # 
+Fedora = "\uf30a " # ""
+FreeBSD = "\uf30c " # ""
+Garuda = "\uf337 " # ""
+Gentoo = "\uf30d " # ""
+HardenedBSD = "\uf132 " # 
+Illumos = "\uf326 " # "🐦"
+Kali = "\uf327 " # 
+Linux = "\uf17c " # ""
+Mabox = "\uf1b2 " #  📦
+Macos = "\uf302 " # ""
+Manjaro = "\uf312 " # ""
+Mariner = "\ue7ae " # \ue7ae 
+MidnightBSD = "\ue3e0 " # 🌘
+Mint = "\uf30e " # ""
+NetBSD = "\u2691 " # ⚑
+NixOS = "\uf313 " # ""
+OpenBSD = "\uf328 " # ""
+OpenCloudOS = "\uf0c2 " # 
+openEuler = "\u2208 " # \u2208 ∈
+openSUSE = "\uf314 " # ""
+OracleLinux = "\u213A " # \u213A ℺ # ⊂⊃ \u2282\u2283
+Pop = "\uf32a " # ""
+Raspbian = "\uf315 " # ""
+Redhat = "\uf316 " # "" # 󱄛
+RedHatEnterprise = "\uf316 " # "" # 󱄛
+RockyLinux = "\uf32b " # 
+Redox = "\uf331 " #   󰺕
+Solus = "\uf32d " # "" # " "
+SUSE = "\uef6d " # ""
+Ubuntu = "\uf31b " # ""
+Ultramarine = "󱙳 " # 🔷
+Unknown = "\uf108 " # ""
+Void = "\uf32e " #  
+Windows = "\uf17a " # ""
+
+[shell]
+format = '[$indicator]($style)()'
+style = 'fg:#424242 bg:color_bg'
+# empty indicator (''): e.g. if you do not want to see indicator for your standard shell
+zsh_indicator = '%_ ' # '%_ ' '󰰶 '
+bash_indicator = '\$_ ' # "\uebca " ' ' '\$_ '
+fish_indicator = '>> ' # "\uee41 " '󰈺 ' '>>_ '
+powershell_indicator = '>_ ' # "\uebc7 " ' ' '>_'
+unknown_indicator = '?_ ' # '?_ ' ' '
+disabled = true # set to false if you want to see the shell indicator
+
+[username]
+format = '[ ](bg:color_bg fg:color_text bold)[$user]($style)[ ](bg:color_bg)'
+style_user = 'bg:color_bg fg:color_text'
+style_root = 'bg:color_bg fg:color_err bold'
+show_always = true
+disabled = false
+
+[hostname]
+ssh_only = false
+style    = "bg:color_bg fg:color_text"
+format   = "[  $hostname ](bg:color_bg fg:color_text)"
+
+[sudo]
+format = '[ ](fg:color_err bold bg:color_bg)[ $symbol]($style)'
+style = 'fg:color_err bold bg:color_bg'
+symbol = ' ' # ' ❯ '
+disabled = false
+
+[directory]
+format = '[ ](fg:color_seg1 bg:color_bg)[$read_only]($read_only_style)[$repo_root]($repo_root_style)[$path ]($style)'
+style = 'fg:color_seg1 bg:color_bg'
+home_symbol = ' ~'
+read_only = ' ' # ' ' # ' ''
+read_only_style = 'fg:color_seg1 bg:color_bg'
+repo_root_format = '[ ](fg:color_seg1 bg:color_bg)[$read_only]($read_only_style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path ]($style)'
+repo_root_style	= 'fg:color_seg1 bg:color_bg'
+disabled = false
+truncation_length = 0
+truncation_symbol = ""
+truncate_to_repo  = false
+
+[direnv]
+symbol = 'direnv'
+style = 'fg:color_seg5 bold bg:color_bg'
+format = "[❯ $symbol $loaded/$allowed ]($style)"
+allowed_msg = 'a' # 'ok' # '✓'
+not_allowed_msg = '!a' # 'nok' # '!'
+denied_msg = 'x' # '✘'
+loaded_msg = '+' # "\ueabc" # \ueabc  # '->' # 'yo' # '󰗡' # \udb81\udde1 # '󱥸✓' # '󱥸✓' # 
+unloaded_msg = '-' # "\ueabc!" # \ueabc ! # '->!' # 'no' # '󰅚' # '󱥸!' \udb86\udd78
+disabled = false
+
+[php]
+format = "[[ \u3009](fg:color_seg3 bg:color_bg)[$symbol](fg:color_seg3 italic bg:color_bg)($version )]($style)"
+style = 'fg:color_seg3 bg:color_bg)'
+symbol = "php " # \ue73d  # 󰌟
+
+[python]
+format = "[\u3009${symbol}${pyenv_prefix}(${version} )(($virtualenv) )]($style)"
+style = 'fg:color_warn bg:color_bg'
+symbol = "\ue73c " # 
+pyenv_version_name = true
+
+[git_branch]
+format = '[ $symbol $branch(:$remote_branch)]($style)[ ](bg:color_bg)'
+style = 'fg:color_seg2 bg:color_bg'
+symbol = ''
+
+[git_commit]
+format = '[\($hash$tag\)]($style)[ ](bg:color_bg)'
+style = 'fg:color_seg2 bg:color_bg'
+commit_hash_length = 8
+tag_symbol = '  ' # '  ''
+tag_disabled = false
+disabled = false
+
+[git_metrics]
+format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
+added_style = 'fg:color_seg2 bg:color_bg'
+deleted_style = 'fg:color_seg2 bg:color_bg'
+disabled = false
+
+[git_status]
+style  = "bg:color_bg fg:color_seg2"
+format = '([ $all_status$ahead_behind ]($style))'
+conflicted  = "$count "
+ahead       = "$count"
+behind      = "$count"
+diverged    = "$count"
+up_to_date  = ""
+untracked   = "$count "
+stashed     = "$count "
+modified    = "$count "
+staged      = "$count "
+renamed     = "$count "
+deleted     = "$count "
+typechanged = "$count "
+
+#[git_status]
+#format = '([$all_status$ahead_behind]($style))'
+#style = 'fg:color_seg2 bg:color_bg'
+#conflicted = '[${count} ](fg:color_err bg:color_bg)'
+#ahead = '[⇡${count} ](fg:color_warn bg:color_bg)'
+#behind = '[⇣${count} ](fg:color_warn bg:color_bg)'
+#diverged = '[⇕${ahead_count}⇡${behind_count}⇣ ](fg:color_warn bg:color_bg)' # ⇕ ↕ ⇳ 󰹹 󰹺 󰧈
+#up_to_date = '[✓ ](fg:color_ok bg:color_bg)'
+#untracked = '[${count} ](fg:color_err bg:color_bg)' # ' ' # '? '
+#stashed = '[${count} ](fg:color_err bg:color_bg)' # '📦 '# ' ' # ' ' # ' ' # ' '
+#modified = '[󰷉${count} ](fg:color_warn bg:color_bg)' # '📝' # '! ' #  #  # 
+#staged = '[${count} ](fg:color_ok bg:color_bg)' # '+ '
+#renamed = '[ᴂ${count} ](fg:color_warn bg:color_bg)' # ' ' # '﫦' # ᴂ #  #  #  # ﳳ
+#deleted = '[🗑${count} ](fg:color_seg0 bg:color_bg)' # '🗑 ' '- '
+#disabled = false
+
+[fill]
+style = 'fg:color_seg5'
+symbol = "\u2500" # "\u2500" "─" # no line: ' '
+
+[status]
+format = '[$symbol $status $hex_status(  $signal_number-$signal_name)]($style)'
+style = 'fg:color_err bg:color_bg'
+symbol = ' ✘'
+disabled = false
+
+[jobs]
+format = "[  ](fg:color_seg3 bold bg:color_bg)[$symbol $number]($style)"
+style = 'fg:color_seg3 bg:color_bg'
+symbol = "\ueb7b" # \ueb7b  \uef0c 省 # '廒' # '󰜎' # ''
+symbol_threshold = 1
+number_threshold = 2
+disabled = false
+
+[memory_usage]
+format = "[  ](fg:color_seg4 bold bg:color_bg)[$symbol ${ram} ]($style)" # ${swap}
+style = 'fg:color_seg4 bg:color_bg'
+symbol = ""  # nf-fa-microchip (BMP U+F2DB)
+threshold = -1
+disabled = false
+
+[cmd_duration]
+format = "[  \uf017 $duration]($style)" # \ueab5 \uf017   
+style = 'fg:color_warn bg:color_bg'
+disabled = false
+
+[battery]
+format = "[  $symbol$percentage]($style)"
+full_symbol = '󰁹 '
+charging_symbol = '󰂄 '
+discharging_symbol = '󰂃 '
+unknown_symbol = '󰁽? '
+empty_symbol = '󰂎 '
+disabled = true # set to 'false', if you want to see the battery status
+
+[[battery.display]]
+threshold = 100 # show always
+style = 'fg:color_seg5 bg:color_bg'
+
+[time]
+format = "[  ](fg:color_seg5 bg:color_bg)[  $time ]($style)"
+style = 'fg:color_seg5 bg:color_bg'
+disabled = false # set to 'false', if you want to see the time
+
+[localip]
+format = '[$localipv4](fg:color_ok bold)'
+disabled = false
+
+[character]
+disabled       = false
+success_symbol = '[❯](bold blink fg:color_ok)'
+error_symbol   = '[❯](bold blink fg:color_err)'
+vimcmd_symbol  = '[❮](bold fg:color_ok)'

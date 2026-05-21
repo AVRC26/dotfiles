@@ -1,0 +1,17 @@
+# Enforce LF for all text files (scripts, configs, dotfiles, docs)
+* text=auto eol=lf
+*.sh   text eol=lf
+*.bash text eol=lf
+*.toml text eol=lf
+*.lua  text eol=lf
+*.conf text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+
+# Binary — no line-ending translation
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.zip  binary
+*.gz   binary
