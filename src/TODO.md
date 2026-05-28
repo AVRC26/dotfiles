@@ -1,5 +1,6 @@
 # TODO
 
+- [Neovim: Clipboard / copy-paste across SSH, WSL, and Windows](#neovim-clipboard--copy-paste-across-ssh-wsl-and-windows)
 - [Terminal: Alacritty](#terminal-alacritty)
 - [Terminal: Gogh color scheme integration](#terminal-gogh-color-scheme-integration)
 - [Windows Setup Improvements](#windows-setup-improvements)
@@ -12,6 +13,15 @@
 - [Starship: Ensure All Templates Have These Modules](#starship-ensure-all-templates-have-these-modules)
 
 ---
+
+## Neovim: Clipboard / copy-paste across SSH, WSL, and Windows
+
+Current state is a set of workarounds (OSC52 disabled, mouse disabled, manual number/indent toggles before selecting). Needs a proper solution per environment:
+
+- **SSH:** no clipboard bridge over plain SSH without a tool on the server. Options: `xclip`/`xsel` + `ssh -X`, or `win32yank` on WSL-backed servers. Investigate OSC52 paste support per terminal (Windows Terminal, MobaXterm settings).
+- **WSL:** currently uses native Windows clipboard via `unnamedplus` — verify this works correctly after the mouse disable change.
+- **Windows native:** uses native clipboard — confirm right-click paste works in all terminals (Windows Terminal, MobaXterm).
+- **Goal:** right-click paste from host → remote Neovim should just work, with no garbage characters, no timeouts, no manual mode switching.
 
 ## Terminal: Alacritty
 - Evaluate and integrate Alacritty as the default terminal: https://github.com/alacritty/alacritty

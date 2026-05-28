@@ -15,30 +15,10 @@ vim.opt.rtp:prepend(lazypath)
 -- General settings
 -- ============================================================
 vim.opt.backspace   = "indent,eol,start"
-if vim.fn.has("wsl") == 1 then
-  -- root's PATH often omits Windows interop paths; resolve exe locations explicitly
-  local function wsl_exe(name, fallback_dirs)
-    local found = vim.fn.exepath(name)
-    if found ~= "" then return found end
-    for _, dir in ipairs(fallback_dirs) do
-      local p = dir .. "/" .. name
-      if vim.fn.executable(p) == 1 then return p end
-    end
-    return name
-  end
-  local win32 = "/mnt/c/Windows/System32"
-  local clip = wsl_exe("clip.exe", { win32 })
-  local ps   = wsl_exe("powershell.exe", { win32 .. "/WindowsPowerShell/v1.0", win32 })
-  vim.g.clipboard = {
-    name  = "WslClipboard",
-    copy  = { ["+"] = clip, ["*"] = clip },
-    paste = {
-      ["+"] = { ps, "-c", '[Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r`n", "`n"))' },
-      ["*"] = { ps, "-c", '[Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r`n", "`n"))' },
-    },
-  }
-end
-vim.opt.clipboard   = "unnamedplus"
+-- OSC52 disabled: MobaXterm renders a garbage character (+q4D73) when it is active.
+vim.g.termfeatures  = vim.tbl_extend("force", vim.g.termfeatures or {}, { osc52 = false })
+-- Mouse disabled: prevents unintended selection and paste when clicking around the terminal.
+vim.opt.mouse       = ""
 vim.opt.cursorline  = true
 vim.opt.history     = 500
 vim.opt.ruler       = true
@@ -53,7 +33,10 @@ vim.opt.expandtab   = true
 vim.opt.softtabstop = 4
 vim.opt.tabstop     = 4
 vim.opt.shiftwidth  = 4
-vim.opt.number      = false
+-- Line numbers on by default. Toggle with Ctrl+N Ctrl+N.
+-- When mouse-selecting to copy, toggle numbers and indent guides off first (Ctrl+I Ctrl+I)
+-- to avoid including them in the selection. Yank (v + y) never includes either.
+vim.opt.number      = true
 vim.opt.foldenable  = false
 vim.opt.nuw         = 6
 vim.opt.termguicolors = true
@@ -94,6 +77,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufWrite" }, {
 local map = vim.keymap.set
 map("c", "w!!", "w !sudo tee % > /dev/null")
 map("n", "<C-N><C-N>", ":set invnumber<CR>")
+-- Toggle indent guides (Ctrl+I Ctrl+I). Turn off before mouse-selecting to avoid
+-- copying the guide characters (▎) into the clipboard.
+map("n", "<C-I><C-I>", ":IBLToggle<CR>", { silent = true })
 map("n", "<Space>", "zA")
 map("v", "<Space>", "zA")
 map("n", "<C-x>", "za")

@@ -227,24 +227,19 @@ The bootstrap automatically installs both fonts. Set the font in your terminal p
 
 ### Windows Terminal (WSL)
 
+`setup-windows.ps1 install` automatically installs both fonts to the user font store — no admin required. After running the script:
+
 1. Install **Windows Terminal** from the Microsoft Store.
 2. Settings (`Ctrl+,`) → your Ubuntu/WSL profile → **Appearance** → Font face → `FiraCode NFM` → Font size `12` → Save.
 3. To make WSL your default: Settings → Startup → Default profile → pick your distro.
 
-> **Note:** Fonts are installed into the WSL filesystem (`~/.local/share/fonts` or `/usr/local/share/fonts`). Windows Terminal reads fonts from the Windows font store, so you also need to install both `FiraCode.zip` and `NerdFontsSymbolsOnly.zip` **on the Windows host** ([Nerd Fonts releases](https://github.com/ryanoasis/nerd-fonts/releases/latest)) for them to appear in Windows Terminal's font picker.
+### Windows (native — no WSL)
+
+`setup-windows.ps1 install` installs both fonts automatically. Just set the font in your terminal after setup.
 
 ### MobaXterm (Windows)
 
-Both fonts must be installed **for all users** on Windows *and* FiraCode must be set in two places in MobaXterm.
-
-**1. Install both fonts system-wide on Windows:**
-
-From the [Nerd Fonts releases page](https://github.com/ryanoasis/nerd-fonts/releases/latest):
-
-1. Download **`FiraCode.zip`** → extract → select all `.ttf` files → right-click → **Install for all users**.
-2. Download **`NerdFontsSymbolsOnly.zip`** → same steps.
-
-**2. Set MobaXterm to use it (both locations required):**
+`setup-windows.ps1 install` installs both fonts to the user font store. Set FiraCode in two places in MobaXterm after running the script:
 
 - **Global default:** `Settings` → `Configuration` → `Terminal` tab → "Default font" → pick **`FiraCode NFM`** → OK.
 - **Per-session:** right-click your session → `Edit session` → `Terminal settings` tab → "Font" → pick **`FiraCode NFM`** → OK.
@@ -296,6 +291,7 @@ Leader key is `,`.
 | `Space` | Toggle fold (all levels) |
 | `Ctrl+X` | Toggle fold (one level) |
 | `Ctrl+N Ctrl+N` | Toggle line numbers |
+| `Ctrl+I Ctrl+I` | Toggle indent guides |
 | `w!!` *(command mode)* | Write with sudo |
 
 ---
@@ -468,7 +464,7 @@ The config ships minimal — themes, navigation, git, UI. Extend `~/.config/nvim
 ls -la /usr/local/bin/nvim && /usr/local/bin/nvim --version
 ```
 
-**Fonts look wrong (missing icons / `□` boxes)** — your terminal isn't using a Nerd Font, or it isn't set in all required places. For MobaXterm specifically, both fonts must be installed **for all users** on Windows *and* FiraCode must be set in both the global MobaXterm configuration and the per-session settings.
+**Fonts look wrong (missing icons / `□` boxes)** — your terminal isn't using a Nerd Font, or it isn't set in all required places. On Windows, `setup-windows.ps1 install` installs both fonts to the user font store automatically. If glyphs still show as boxes, restart your terminal and verify the font is set to `FiraCode NFM` in all required places (for MobaXterm: both global config and per-session settings).
 
 **Uninstall fails — consumers still registered:**
 
@@ -493,23 +489,6 @@ ls /var/lib/dotfiles/users/
 cat /var/lib/dotfiles/users/alice/files
 ```
 
-**WSL clipboard not working as root** (`'powershell.exe' is not executable`) — root's PATH omits Windows interop directories. The config resolves `powershell.exe` and `clip.exe` via their full Windows paths (`/mnt/c/Windows/System32/…`) automatically, so this should not appear. If it still does, verify WSL interop is enabled:
-
-```bash
-cat /proc/sys/fs/binfmt_misc/WSLInterop   # should print "enabled"
-# or check /etc/wsl.conf:
-grep interop /etc/wsl.conf
-```
-
-If interop is disabled, add to `/etc/wsl.conf`:
-
-```ini
-[interop]
-enabled = true
-appendWindowsPath = false
-```
-
-Then restart the WSL instance (`wsl --shutdown` from PowerShell).
 
 **Git colors not showing** — verify the include is registered:
 

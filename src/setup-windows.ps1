@@ -146,16 +146,16 @@ if ($Command -eq 'uninstall') {
     Write-Host "  Cleared git include.path" -ForegroundColor Gray
 
     if ($All) {
-        $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-        if (-not $isAdmin) {
-            Write-Host "Binary uninstall requires Administrator - re-launching elevated ..." -ForegroundColor Yellow
-            Start-Process powershell -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" uninstall -All"
-            exit 0
+        Write-Host "`nUninstalling binaries ..." -ForegroundColor Yellow
+        # Neovim was installed as a zip to user dir — remove it directly
+        $nvimBinDir = "$env:USERPROFILE\bin\nvim"
+        if (Test-Path $nvimBinDir) {
+            Remove-Item $nvimBinDir -Recurse -Force
+            Write-Host "  Removed: $nvimBinDir" -ForegroundColor Gray
         }
 
-        Write-Host "`nUninstalling binaries ..." -ForegroundColor Yellow
-        foreach ($pkg in @("Neovim.Neovim", "Starship.Starship", "BurntSushi.ripgrep.MSVC", "junegunn.fzf", "zig.zig", "dandavison.delta")) {
-            winget uninstall --id $pkg --silent --force
+        foreach ($pkg in @("Starship.Starship", "BurntSushi.ripgrep.MSVC", "junegunn.fzf", "zig.zig", "dandavison.delta")) {
+            winget uninstall --id $pkg --scope user --silent --force
             if ($LASTEXITCODE -eq 0) {
                 Write-Host "  Uninstalled: $pkg" -ForegroundColor Gray
             } else {
@@ -171,8 +171,38 @@ if ($Command -eq 'uninstall') {
 # ── Install — prerequisites (auto-install via winget if missing) ───────────────
 Write-Host "=== Checking / installing prerequisites ===" -ForegroundColor Cyan
 
+# ── Neovim — zip install to user dir (no admin required) ──────
+$NvimBinDir = "$env:USERPROFILE\bin\nvim"
+if (Get-Command nvim -ErrorAction SilentlyContinue) {
+    Write-Host "  Neovim: already present" -ForegroundColor Gray
+} else {
+    Write-Host "  Installing Neovim (latest, no admin) ..." -ForegroundColor Cyan
+    $nvimRelease = (Invoke-RestMethod "https://api.github.com/repos/neovim/neovim/releases/latest")
+    $nvimAsset   = $nvimRelease.assets | Where-Object { $_.name -eq "nvim-win64.zip" } | Select-Object -First 1
+    if (-not $nvimAsset) {
+        Write-Warning "  Could not find nvim-win64.zip in latest release - install manually from https://github.com/neovim/neovim/releases/latest"
+    } else {
+        $nvimZip = "$env:TEMP\nvim-win64.zip"
+        Invoke-WebRequest -Uri $nvimAsset.browser_download_url -OutFile $nvimZip
+        New-Item -ItemType Directory -Force -Path $NvimBinDir | Out-Null
+        Expand-Archive -Path $nvimZip -DestinationPath $NvimBinDir -Force
+        # The zip extracts into a versioned subfolder e.g. nvim-win64/; find nvim.exe
+        $nvimExe = Get-ChildItem -Path $NvimBinDir -Recurse -Filter "nvim.exe" | Select-Object -First 1
+        $nvimExeDir = $nvimExe.DirectoryName
+        # Add to user PATH if not already there
+        $userPath = [System.Environment]::GetEnvironmentVariable('Path', 'User')
+        if ($userPath -notlike "*$nvimExeDir*") {
+            [System.Environment]::SetEnvironmentVariable('Path', "$userPath;$nvimExeDir", 'User')
+            $env:Path += ";$nvimExeDir"
+        }
+        Remove-Item $nvimZip -Force
+        Write-Host "  Neovim installed -> $nvimExeDir" -ForegroundColor Green
+        $_anyInstalled = $true
+    }
+}
+
+# ── Other tools — winget with user scope, fallback to machine ──
 $_tools = @(
-    @{ Cmd = "nvim";     Id = "Neovim.Neovim";           Label = "Neovim"   },
     @{ Cmd = "starship"; Id = "Starship.Starship";        Label = "Starship" },
     @{ Cmd = "rg";       Id = "BurntSushi.ripgrep.MSVC"; Label = "ripgrep"  },
     @{ Cmd = "fzf";      Id = "junegunn.fzf";            Label = "fzf"      },
@@ -186,11 +216,17 @@ foreach ($t in $_tools) {
         Write-Host "  $($t.Label): already present" -ForegroundColor Gray
     } else {
         Write-Host "  Installing $($t.Label) ($($t.Id)) ..." -ForegroundColor Cyan
-        winget install --id $t.Id --silent --accept-package-agreements --accept-source-agreements
+        winget install --id $t.Id --scope user --silent --accept-package-agreements --accept-source-agreements
         if ($LASTEXITCODE -eq 0) {
             $_anyInstalled = $true
         } else {
-            Write-Warning "  $($t.Label) install failed (exit $LASTEXITCODE) - install manually: winget install $($t.Id)"
+            Write-Host "  --scope user not supported for $($t.Label), retrying without scope ..." -ForegroundColor Gray
+            winget install --id $t.Id --silent --accept-package-agreements --accept-source-agreements
+            if ($LASTEXITCODE -eq 0) {
+                $_anyInstalled = $true
+            } else {
+                Write-Warning "  $($t.Label) install failed (exit $LASTEXITCODE) - install manually: winget install $($t.Id)"
+            }
         }
     }
 }
@@ -201,6 +237,49 @@ if ($_anyInstalled) {
     $userPath    = [System.Environment]::GetEnvironmentVariable('Path', 'User')
     $env:Path    = $machinePath + ';' + $userPath
 }
+
+# ── Fonts — FiraCode Nerd Font + Nerd Fonts Symbols Only (user install, no admin) ──
+$UserFontsDir = "$env:LOCALAPPDATA\Microsoft\Windows\Fonts"
+New-Item -ItemType Directory -Force -Path $UserFontsDir | Out-Null
+
+function Install-NerdFontFromGitHub {
+    param([string]$RepoAssetName, [string]$Label, [string]$FontPattern)
+
+    if (Get-ChildItem -Path $UserFontsDir -Filter $FontPattern -ErrorAction SilentlyContinue) {
+        Write-Host "  $($Label) fonts: already installed" -ForegroundColor Gray
+        return
+    }
+
+    Write-Host "  Installing $Label fonts ..." -ForegroundColor Cyan
+    $release  = Invoke-RestMethod "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"
+    $asset    = $release.assets | Where-Object { $_.name -eq $RepoAssetName } | Select-Object -First 1
+    if (-not $asset) {
+        Write-Warning "  Could not find $RepoAssetName in nerd-fonts latest release"
+        return
+    }
+
+    $zipPath = "$env:TEMP\$RepoAssetName"
+    Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $zipPath
+    $extractDir = "$env:TEMP\$($RepoAssetName -replace '\.zip$', '')"
+    Expand-Archive -Path $zipPath -DestinationPath $extractDir -Force
+
+    $installed = 0
+    $shellApp  = New-Object -ComObject Shell.Application
+    $fontShell = $shellApp.Namespace(0x14)  # 0x14 = CSIDL_FONTS (user fonts folder)
+    Get-ChildItem -Path $extractDir -Filter "*.ttf" -Recurse | ForEach-Object {
+        # CopyHere with flag 0x10 (overwrite silently) installs via Shell API —
+        # this is the only reliable way to register user fonts without admin.
+        $fontShell.CopyHere($_.FullName, 0x10)
+        $installed++
+    }
+
+    Remove-Item $zipPath -Force
+    Remove-Item $extractDir -Recurse -Force
+    Write-Host "  $($Label): $installed font files installed -> $UserFontsDir" -ForegroundColor Green
+}
+
+Install-NerdFontFromGitHub -RepoAssetName "FiraCode.zip"         -Label "FiraCode Nerd Font"        -FontPattern "FiraCode*"
+Install-NerdFontFromGitHub -RepoAssetName "NerdFontsSymbolsOnly.zip" -Label "Nerd Fonts Symbols Only" -FontPattern "SymbolsNerdFont*"
 
 if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
     Write-Warning "  python not found - theme rendering will be skipped. Install manually: winget install Python.Python.3.12"
