@@ -180,6 +180,29 @@ Set-Theme --help
 
 ---
 
+## Windows utilities
+
+### Disk usage — folder breakdown
+
+Total size of a folder recursively (follows junctions/symlinks, includes hidden files):
+
+```powershell
+(Get-ChildItem -Recurse -File -Force C:\Users\avrc26\ | Measure-Object -Property Length -Sum).Sum / 1GB
+```
+
+Top-level folder breakdown ranked by size:
+
+```powershell
+Get-ChildItem -Force C:\Users\avrc26\ | Where-Object { $_.PSIsContainer } | ForEach-Object {
+    $size = (Get-ChildItem -Recurse -File -Force $_.FullName -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
+    [PSCustomObject]@{ Folder = $_.Name; SizeGB = [math]::Round($size / 1GB, 2) }
+} | Sort-Object SizeGB -Descending | Format-Table -AutoSize
+```
+
+> **Note:** Windows Explorer Properties may show a higher number than `Get-ChildItem` without `-Force` because it follows junction points. Always use `-Force` for accurate totals.
+
+---
+
 ## Credits
 
 **Themes** — [Bamboo](https://github.com/ribru17/bamboo.nvim) · [Bearded](https://github.com/Ferouk/bearded-nvim) · [Catppuccin](https://github.com/catppuccin/nvim) · [Flexoki](https://github.com/kepano/flexoki-neovim) · [Gruvbox](https://github.com/ellisonleao/gruvbox.nvim) · [Kanagawa](https://github.com/rebelot/kanagawa.nvim) · [Monokai Pro](https://github.com/loctvl842/monokai-pro.nvim) · [Oasis](https://github.com/uhs-robert/oasis.nvim) · [OneDarkPro](https://github.com/olimorris/onedarkpro.nvim) · [Tokyo Night](https://github.com/folke/tokyonight.nvim)
