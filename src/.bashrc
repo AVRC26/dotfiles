@@ -179,13 +179,17 @@ if [[ -n "$WT_SESSION" ]]; then
 fi
 
 # ── Prompt background streak fix (overflow + scroll) ─────────────────────
-# Injects \e[K] before each \n in PS1 (erases overflow bg at end of line 1)
-# and \e[49m\e[2K] after (resets bg and clears BCE-colored new line).
+# Injects \e[49m\e[K] BEFORE each \n in PS1: resets background to default
+# then erases to EOL, preventing powerline bg-color from bleeding to the
+# right edge on scroll (BCE effect in most terminals).
+# Nothing is injected AFTER \n so the last prompt line starts clean —
+# the previous approach injected \e[2K] there which caused readline to
+# misplace the cursor, eating the first ~5 typed characters.
 # \001..\002 wrap non-printing chars so bash doesn't miscalculate prompt width.
 # Runs after Starship sets PS1 via PROMPT_COMMAND, so appended not prepended.
 _fix_prompt_streak() {
     local rs=$'\001' re=$'\002' nl=$'\n' esc=$'\e'
-    PS1="${PS1//$nl/${rs}${esc}[K${re}${nl}${rs}${esc}[49m${esc}[2K${re}}"
+    PS1="${PS1//$nl/${rs}${esc}[49m${esc}[K${re}${nl}}"
 }
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }_fix_prompt_streak"
 
