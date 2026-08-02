@@ -1,8 +1,13 @@
-﻿# Starship Prompt — seeker layout, colors driven by set-theme.
+# Starship Prompt — seeker layout, colors driven by set-theme.
 # Credit: https://github.com/starship/starship/discussions/1107#discussioncomment-13575853
 
 format = """
-[╭─](bg:none fg:color_seg0)\
+[╭─](bg:none fg:color_seg1)\
+$memory_usage\
+${custom.cpu_load}\
+${custom.disk_usage}\
+$line_break\
+[├─](bg:none fg:color_seg0)\
 $os\
 [ ](bg:color_bg fg:color_seg0)\
 $username\
@@ -197,19 +202,19 @@ format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
 [python]
 symbol = ""
 style  = "bg:color_seg3"
-format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:color_fg bg:color_seg3)]($style)'
+format = '[[ $symbol( $version) (\($virtualenv\)) ](fg:color_fg bg:color_seg3)]($style)'
 
 [docker_context]
 symbol          = ""
-style           = "bg:color_seg4"
+style           = "bg:color_seg3"
 detect_files    = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
 only_with_files = true
-format          = '[[ $symbol( $context) ](fg:color_fg bg:color_seg4)]($style)'
+format          = '[[ $symbol( $context) ](fg:color_fg bg:color_seg3)]($style)'
 disabled        = false
 
 [conda]
 symbol      = " "
-style       = "fg:color_fg bg:color_seg4"
+style       = "fg:color_fg bg:color_seg3"
 format      = '[$symbol$environment ]($style)'
 ignore_base = false
 
@@ -220,6 +225,26 @@ success_symbol = ''
 symbol         = " ✗"
 disabled       = false
 map_symbol     = false
+
+[memory_usage]
+format    = "[ $symbol${ram_pct} ](bg:color_seg1 fg:color_fg)[](bg:color_seg2 fg:color_seg1)"
+symbol    = "󰍛 "
+threshold = -1
+disabled  = false
+
+[custom.cpu_load]
+description = "1-minute load average"
+command = "awk '{print $1}' /proc/loadavg"
+symbol = "󰻠"
+format = "[ $symbol $output ](bg:color_seg2 fg:color_fg)[](bg:color_seg3 fg:color_seg2)"
+when = "true"
+
+[custom.disk_usage]
+description = "Used % of root filesystem"
+command = "df -h / | awk 'NR==2{print $5}'"
+symbol = "󰋊"
+format = "[ $symbol $output ](bg:color_seg3 fg:color_fg)[](bg:none fg:color_seg3)"
+when = "true"
 
 [time]
 format   = "[](fg:color_seg5)[ $time ](bg:color_seg5 fg:color_bg)"

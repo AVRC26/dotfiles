@@ -134,16 +134,19 @@ Defaults only apply on first install. Override with `--theme`, `--flavor`, `--st
 
 Ten prompt layouts are available. All use the same theme color palette — only the visual structure differs. The active template is saved in `~/.config/dotfiles-starship-template` and used by every future `set-theme` call.
 
+All templates carry a stats line (RAM, 1-min CPU load average, disk `/` usage %) above the main
+prompt line — network usage is deferred, not yet shown.
+
 | Template | Description | Best for |
 |----------|-------------|----------|
-| `powerline` | Classic powerline segments, NF icons, left-only | Linux default |
-| `pills` | Pill-shaped modules, box-draw borders, two-line | Windows Terminal |
-| `nerd-font` | Dense single-line, comprehensive NF v3 icons, fill-separated | NF power users |
-| `dracula` | Badge-style pills on a `╭`/`╰─` frame with fill separator | Decorative |
-| `seeker` | Two-line with `╭─`/`╰─` borders and right bracket | Structured |
-| `moir` | Dense powerline left + full right-side module list | Power users |
-| `sanmue` | Two-line flat-bg, fill-split right-side modules, Power10k-inspired | NF v2 users |
-| `sepan` | Powerline left-to-right segments, full module coverage, two-line | Power users |
+| `powerline` | Classic powerline segments, NF icons, left-only, stats line on top | Linux default |
+| `pills` | Pill-shaped modules, box-draw borders, three-line (stats + prompt + cursor) | Windows Terminal |
+| `nerd-font` | Dense NF v3 icons, fill-separated, stats line + prompt + cursor | NF power users |
+| `dracula` | Badge-style pills on a `╭`/`│`/`╰─` frame with fill separator, three-line | Decorative |
+| `seeker` | Three-line with `╭─`/`├─`/`╰─` borders and right bracket | Structured |
+| `moir` | Dense powerline left + full right-side module list, stats line on top | Power users |
+| `sanmue` | Three-line flat-bg, fill-split right-side modules, Power10k-inspired | NF v2 users |
+| `sepan` | Powerline left-to-right segments, full module coverage, three-line | Power users |
 
 > **Note — prompt background streak:** When prompts length is greater than the width of the terminal, the promp may show a colored streak to the right of the overflow line or the second line (`╰─❯`). Two root causes, both fixed automatically:
 >

@@ -30,6 +30,11 @@
 # ╰╴ # \u2570\u2574
 format = """
 [╭╴](fg:color_seg5)\
+$memory_usage\
+${custom.cpu_load}\
+${custom.disk_usage}\
+$line_break\
+[├╴](fg:color_seg5)\
 $os\
 $shell\
 $username\
@@ -38,15 +43,14 @@ $sudo\
 $directory\
 $direnv\
 $php\
-$python\
 $git_branch$git_status$git_commit$git_state$git_metrics\
+$python\
 [ ](fg:color_bg)\
 $fill\
 $fill\
-[ ](fg:color_bg)\
+[](fg:color_bg)\
 $status\
 $jobs\
-$memory_usage\
 $cmd_duration\
 $battery\
 $time\
@@ -192,8 +196,8 @@ style = 'fg:color_seg3 bg:color_bg)'
 symbol = "php " # \ue73d  # 󰌟
 
 [python]
-format = "[\u3009${symbol}${pyenv_prefix}(${version} )(($virtualenv) )]($style)"
-style = 'fg:color_warn bg:color_bg'
+format = "[ ${symbol}(v${version} )(\\($virtualenv\\) )]($style)"
+style = 'fg:color_seg3 bg:color_bg'
 symbol = "\ue73c " # 
 pyenv_version_name = true
 
@@ -267,11 +271,27 @@ number_threshold = 2
 disabled = false
 
 [memory_usage]
-format = "[  ](fg:color_seg4 bold bg:color_bg)[$symbol ${ram} ]($style)" # ${swap}
-style = 'fg:color_seg4 bg:color_bg'
-symbol = ""  # nf-fa-microchip (BMP U+F2DB)
+format = "[](fg:color_bg)[$symbol ${ram_pct} ]($style)" # ${swap}
+style = 'fg:color_seg1 bg:color_bg'
+symbol = "󰍛"
 threshold = -1
 disabled = false
+
+[custom.cpu_load]
+description = "1-minute load average"
+command = "awk '{print $1}' /proc/loadavg"
+symbol = "󰻠"
+format = "[  ](fg:color_seg2 bold bg:color_bg)[$symbol $output ]($style)"
+style = 'fg:color_seg2 bg:color_bg'
+when = "true"
+
+[custom.disk_usage]
+description = "Used % of root filesystem"
+command = "df -h / | awk 'NR==2{print $5}'"
+symbol = "󰋊"
+format = "[  ](fg:color_seg3 bold bg:color_bg)[$symbol $output ]($style)[](fg:color_bg)"
+style = 'fg:color_seg3 bg:color_bg'
+when = "true"
 
 [cmd_duration]
 format = "[  \uf017 $duration]($style)" # \ueab5 \uf017   
@@ -292,7 +312,7 @@ threshold = 100 # show always
 style = 'fg:color_seg5 bg:color_bg'
 
 [time]
-format = "[  ](fg:color_seg5 bg:color_bg)[  $time ]($style)"
+format = "[  ](fg:color_seg5 bg:color_bg)[  $time ]($style)[](fg:color_bg)"
 style = 'fg:color_seg5 bg:color_bg'
 disabled = false # set to 'false', if you want to see the time
 

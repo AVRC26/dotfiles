@@ -5,6 +5,11 @@
 
 format = """
 [╭╴](fg:color_seg5)\
+$memory_usage\
+${custom.cpu_load}\
+${custom.disk_usage}\
+$line_break\
+[├╴](fg:color_seg5)\
 $os\
 $username\
 $hostname\
@@ -13,8 +18,7 @@ $directory\
 $git_status\
 $git_commit\
 $git_metrics\
-[](fg:color_seg2) \
-)\
+[](fg:color_seg2))\
 ($python\
 $nodejs\
 $conda\
@@ -95,20 +99,20 @@ format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
 disabled      = false
 
 [python]
-symbol = ' '
+symbol = ''
 version_format = '${raw}'
 disabled = false
-format = ' [](fg:color_seg4)[$symbol${pyenv_prefix}(${version} )(\($virtualenv\))](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format = ' [](fg:color_seg3)[$symbol${pyenv_prefix}(v${version} )(\($virtualenv\))](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [nodejs]
 version_format = '${raw}'
 disabled = false
-format = ' [](fg:color_seg4)[  $version](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format = ' [](fg:color_seg3)[  $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [conda]
 ignore_base = false
 disabled = false
-format = ' [](fg:color_seg4)[  $environment](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format = ' [](fg:color_seg3)[  $environment](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [cmd_duration]
 min_time = 500
@@ -158,10 +162,27 @@ Ubuntu           = ''
 Unknown          = '󰠥'
 Windows          = '󰍲'
 
+[memory_usage]
+format    = '[](fg:color_seg1)[ 󰍛 ${ram_pct} ](bg:color_seg1 fg:color_fg)[](fg:color_seg1)'
+threshold = -1
+disabled  = false
+
+[custom.cpu_load]
+description = "1-minute load average"
+command = "awk '{print $1}' /proc/loadavg"
+when = "true"
+format = ' [](fg:color_seg2)[ 󰻠 $output](bg:color_seg2 fg:color_fg)[](fg:color_seg2)'
+
+[custom.disk_usage]
+description = "Used % of root filesystem"
+command = "df -h / | awk 'NR==2{print $5}'"
+when = "true"
+format = ' [](fg:color_seg3)[ 󰋊 $output](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
 [time]
 disabled    = false
 style       = "bg:color_seg5 fg:color_fg"
-format      = '[](fg:color_seg5)[ $time ](bg:color_seg5 fg:color_fg)[](fg:color_seg5)'
+format      = ' [](fg:color_seg5)[ $time ](bg:color_seg5 fg:color_fg)[](fg:color_seg5)'
 
 [docker_context]
 disabled = true

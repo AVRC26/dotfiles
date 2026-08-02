@@ -23,6 +23,11 @@ palette = 'theme'
 # =========prompt=========
 
 format = """
+[](bg:none fg:color_seg1)\
+$memory_usage\
+${custom.cpu_load}\
+${custom.disk_usage}\
+$line_break\
 [](bg:none fg:color_seg0)\
 [ ](bg:color_seg0)\
 $os\
@@ -705,9 +710,9 @@ style = "fg:color_fg bg:color_seg3"
 format = '[$symbol $version ]($style)'
 
 [python]
-symbol = " "
+symbol = ""
 style = "fg:color_fg bg:color_seg3"
-format = '[$symbol $version ]($style)'
+format = '[[$symbol $version \($virtualenv\) ](fg:color_fg bg:color_seg3)]($style)'
 
 [quarto]
 symbol = 'QUARTO'
@@ -883,7 +888,24 @@ style = "fg:color_fg bg:color_seg5"
 format="[ $symbol$number]($style)"
 
 [memory_usage]
-disabled=true
-symbol = " "
-style = "fg:color_fg bg:color_seg5"
-format = '[ $symbol ]($style)'
+disabled=false
+threshold=-1
+symbol = "󰍛 "
+style = "fg:color_fg bg:color_seg1"
+format = '[ $symbol${ram_pct} ]($style)[](bg:color_seg2 fg:color_seg1)'
+
+[custom.cpu_load]
+description = "1-minute load average"
+command = "awk '{print $1}' /proc/loadavg"
+symbol = "󰻠 "
+style = "fg:color_fg bg:color_seg2"
+format = '[ $symbol$output ]($style)[](bg:color_seg3 fg:color_seg2)'
+when = "true"
+
+[custom.disk_usage]
+description = "Used % of root filesystem"
+command = "df -h / | awk 'NR==2{print $5}'"
+symbol = "󰋊 "
+style = "fg:color_fg bg:color_seg3"
+format = '[ $symbol$output ]($style)[](bg:none fg:color_seg3)'
+when = "true"

@@ -4,6 +4,14 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
+[](fg:color_seg1)\
+$memory_usage\
+[{{SEP_TRANS}}](bg:color_seg2 fg:color_seg1)\
+${custom.cpu_load}\
+[{{SEP_TRANS}}](bg:color_seg3 fg:color_seg2)\
+${custom.disk_usage}\
+[](fg:color_seg3)\
+$line_break\
 [](fg:color_seg0)\
 $os\
 [{{SEP_TRANS}}](bg:color_bg fg:color_seg0)\
@@ -141,6 +149,7 @@ added_style   = 'bg:color_seg2 fg:color_fg'
 deleted_style = 'bg:color_seg2 fg:color_fg'
 format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
 disabled      = false
+
 [nodejs]
 symbol = ""
 style  = "bg:color_seg3"
@@ -194,22 +203,42 @@ format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
 [python]
 symbol = ""
 style  = "bg:color_seg3"
-format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:color_fg bg:color_seg3)]($style)'
+format = '[[ $symbol( $version) (\($virtualenv\)) ](fg:color_fg bg:color_seg3)]($style)'
 
 [docker_context]
 symbol = ""
-style  = "bg:color_seg4"
-format = '[[ $symbol( $context) ](fg:color_fg bg:color_seg4)]($style)'
+style  = "bg:color_seg3"
+format = '[[ $symbol( $context) ](fg:color_fg bg:color_seg3)]($style)'
 
 [conda]
-style      = "bg:color_seg4"
-format     = '[[ $symbol( $environment) ](fg:color_fg bg:color_seg4)]($style)'
+style      = "bg:color_seg3"
+format     = '[[ $symbol( $environment) ](fg:color_fg bg:color_seg3)]($style)'
 ignore_base = false
 
 [time]
 disabled    = false
 style       = "bg:color_seg5"
 format      = '[[  $time ](fg:color_fg bg:color_seg5)]($style)'
+
+[memory_usage]
+disabled  = false
+threshold = -1
+style     = "bg:color_seg1"
+format    = '[[ 󰍛 ${ram_pct} ](fg:color_fg bg:color_seg1)]($style)'
+
+[custom.cpu_load]
+description = "1-minute load average"
+command = "awk '{print $1}' /proc/loadavg"
+when = "true"
+style = "bg:color_seg2"
+format = '[[ 󰻠 $output ](fg:color_fg bg:color_seg2)]($style)'
+
+[custom.disk_usage]
+description = "Used % of root filesystem"
+command = "df -h / | awk 'NR==2{print $5}'"
+when = "true"
+style = "bg:color_seg3"
+format = '[[ 󰋊 $output ](fg:color_fg bg:color_seg3)]($style)'
 
 [line_break]
 disabled = false

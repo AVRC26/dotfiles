@@ -4,6 +4,10 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
+$memory_usage\
+${custom.cpu_load}\
+${custom.disk_usage}\
+$line_break\
 $os\
 $username\
 $hostname\
@@ -267,7 +271,7 @@ format = '[$symbol($version )]($style)'
 [python]
 symbol = " "
 style  = "fg:color_seg3"
-format = '[$symbol($version )]($style)'
+format = '[ $symbol($version) (\($virtualenv\)) ]($style)'
 
 [ruby]
 symbol = " "
@@ -301,14 +305,34 @@ format = '[$symbol($version )]($style)'
 
 [conda]
 symbol = " "
-style  = "fg:color_seg4"
+style  = "fg:color_seg3"
 format = '[$symbol$environment ]($style)'
 ignore_base = false
 
 [docker_context]
 symbol = " "
-style  = "fg:color_seg4"
+style  = "fg:color_seg3"
 format = '[$symbol$context ]($style)'
+
+[memory_usage]
+disabled  = false
+threshold = -1
+style     = "fg:color_seg1"
+format    = '[ 󰍛 ${ram_pct} ]($style)'
+
+[custom.cpu_load]
+description = "1-minute load average"
+command = "awk '{print $1}' /proc/loadavg"
+when = "true"
+style = "fg:color_seg2"
+format = '[ 󰻠 $output ]($style)'
+
+[custom.disk_usage]
+description = "Used % of root filesystem"
+command = "df -h / | awk 'NR==2{print $5}'"
+when = "true"
+style = "fg:color_seg3"
+format = '[ 󰋊 $output ]($style)'
 
 [fill]
 symbol = " "

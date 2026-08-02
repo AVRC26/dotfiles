@@ -3,6 +3,11 @@
 
 format = """
 [╭](fg:color_seg5)\
+$memory_usage\
+${custom.cpu_load}\
+${custom.disk_usage}\
+$line_break\
+[│](fg:color_seg5)\
 $os\
 $username\
 $hostname\
@@ -20,7 +25,6 @@ $python\
 $java\
 $c\
 $cmd_duration\
-$shell\
 $time\
 $line_break\
 $character\
@@ -138,24 +142,41 @@ format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
 disabled      = false
 
 [nodejs]
-format = '[─](fg:color_seg5)[](fg:color_seg2)[$symbol](fg:color_bg bg:color_seg2)[](fg:color_seg2 bg:color_seg5)[ $version](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
-symbol = '󰎙 Node.js'
+format = '[─](fg:color_seg5)[](fg:color_seg3)[$symbol](fg:color_bg bg:color_seg3)[](fg:color_seg3 bg:color_seg5)[ $version](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+symbol = '󰎙 '
 
 [dotnet]
 format = '[─](fg:color_seg5)[](fg:color_seg3)[$symbol](fg:color_bg bg:color_seg3)[](fg:color_seg3 bg:color_seg5)[ $tfm](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
-symbol = ' .NET'
+symbol = ' '
 
 [python]
-format = '[─](fg:color_seg5)[](fg:color_seg2)[$symbol](fg:color_bg bg:color_seg2)[](fg:color_seg2 bg:color_seg5)[ $version](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
-symbol = ' python'
+format = '[─](fg:color_seg5)[](fg:color_seg3)[$symbol](fg:color_bg bg:color_seg3)[](fg:color_seg3 bg:color_seg5)[ $version \($virtualenv\)](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+symbol = ' '
 
 [java]
-format = '[─](fg:color_seg5)[](fg:color_seg0)[$symbol](fg:color_bg bg:color_seg0)[](fg:color_seg0 bg:color_seg5)[ $version](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
-symbol = ' Java'
+format = '[─](fg:color_seg5)[](fg:color_seg3)[$symbol](fg:color_bg bg:color_seg3)[](fg:color_seg3 bg:color_seg5)[ $version](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+symbol = ' '
 
 [c]
-format = '[─](fg:color_seg5)[](fg:color_seg4)[$symbol](fg:color_bg bg:color_seg4)[](fg:color_seg4 bg:color_seg5)[ $version](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
-symbol = ' C'
+format = '[─](fg:color_seg5)[](fg:color_seg3)[$symbol](fg:color_bg bg:color_seg3)[](fg:color_seg3 bg:color_seg5)[ $version](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+symbol = ' '
+
+[memory_usage]
+format    = '[](fg:color_seg1)[ 󰍛 ](fg:color_bg bg:color_seg1)[](fg:color_seg1 bg:color_seg5)[ ${ram_pct}](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+threshold = -1
+disabled  = false
+
+[custom.cpu_load]
+description = "1-minute load average"
+command = "awk '{print $1}' /proc/loadavg"
+when = "true"
+format = '[─](fg:color_seg5)[](fg:color_seg2)[ 󰻠 ](fg:color_bg bg:color_seg2)[](fg:color_seg2 bg:color_seg5)[ $output](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+
+[custom.disk_usage]
+description = "Used % of root filesystem"
+command = "df -h / | awk 'NR==2{print $5}'"
+when = "true"
+format = '[─](fg:color_seg5)[](fg:color_seg3)[ 󰋊 ](fg:color_bg bg:color_seg3)[](fg:color_seg3 bg:color_seg5)[ $output](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
 
 [fill]
 symbol = '─'
@@ -173,7 +194,7 @@ fish_indicator      = 'fish'
 disabled            = false
 
 [time]
-format      = '[─](fg:color_seg5)[](fg:color_seg3)[󰦖 ](fg:color_bg bg:color_seg3)[](fg:color_seg3 bg:color_seg5)[ $time](fg:color_bg bg:color_seg5)[](fg:color_seg5) '
+format      = '[─](fg:color_seg5)[](fg:color_seg4)[󰦖 ](fg:color_bg bg:color_seg4)[](fg:color_seg4 bg:color_seg5)[ $time](fg:color_bg bg:color_seg5)[](fg:color_seg5) '
 disabled    = false
 
 [username]

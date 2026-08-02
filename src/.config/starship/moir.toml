@@ -2,6 +2,13 @@
 # Credit: https://github.com/starship/starship/discussions/1107#discussioncomment-11890875
 
 format = """
+$memory_usage\
+[{{SEP_TRANS}}](bg:color_seg2 fg:color_seg1)\
+${custom.cpu_load}\
+[{{SEP_TRANS}}](bg:color_seg3 fg:color_seg2)\
+${custom.disk_usage}\
+[{{SEP_TRANS}}](fg:color_seg3)\
+$line_break\
 $os(bg:color_bg)\
 [{{SEP_TRANS}}](bg:color_bg fg:color_seg0)\
 $username\
@@ -88,9 +95,7 @@ $crystal\
 $custom\
 $sudo\
 $fill\
-[](fg:color_seg4)\
-$memory_usage\
-[](fg:color_seg5 bg:color_seg4)\
+[](fg:color_seg5 bg:none)\
 $time\
 $battery\
 $line_break\
@@ -175,8 +180,24 @@ format      = '[ $time ](bg:color_seg5 fg:color_fg)'
 [memory_usage]
 disabled   = false
 threshold  = -1
-style      = "bg:color_seg4 fg:color_fg"
-format     = '[ ${ram} ](bg:color_seg4 fg:color_fg)'
+style      = "bg:color_seg1 fg:color_fg"
+format     = '[ 󰍛 ${ram_pct} ](bg:color_seg1 fg:color_fg)'
+
+[custom.cpu_load]
+description = "1-minute load average"
+command = "awk '{print $1}' /proc/loadavg"
+symbol = "󰻠 "
+style      = "bg:color_seg2 fg:color_fg"
+format     = '[ $symbol$output ](bg:color_seg2 fg:color_fg)'
+when = "true"
+
+[custom.disk_usage]
+description = "Used % of root filesystem"
+command = "df -h / | awk 'NR==2{print $5}'"
+symbol = "󰋊 "
+style      = "bg:color_seg3 fg:color_fg"
+format     = '[ $symbol$output ](bg:color_seg3 fg:color_fg)'
+when = "true"
 
 [battery]
 disabled           = false
