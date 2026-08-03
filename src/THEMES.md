@@ -379,7 +379,7 @@ For themes where accents differ subtly (catppuccin dark flavors), we anchor each
 
 Themes where shared `_roles` gives sufficient differentiation:
 
-- **Monokai** — 7 filters have deliberately distinct backgrounds and accent palettes (machine is electric-blue-tinted, ristretto is warm/desaturated, spectrum is near-black with vivid accents). The `BG` pill carries the identity difference automatically.
+- **Monokai** — 7 filters have deliberately distinct backgrounds and accent palettes (machine is electric-blue-tinted, ristretto is warm/desaturated, spectrum is near-black with vivid accents). The `BG` pill carries the identity difference automatically. Only 6 accents exist (`accent1`–`accent6`), and `accent3` is already claimed by `WARN`/`DC_TEXT`/`GC_TAG`/`GC_META` — so `SEG`'s last slot (time) uses `dimmed1`, a muted neutral, instead of a 7th accent.
 - **Bearded** — 63 flavors with very different palettes per flavor. The shared role names resolve to completely different hex values.
 - **Gruvbox** — dark vs light is structurally different (even without per-flavor roles, the `BG` hex contrast is extreme: `#282828` vs `#fbf1c7`).
 - **Flexoki** — dark `bg` = `#100F0F` (near-black), light `bg` = `#FFFCF0` (warm paper). Same role name, completely different hex.
@@ -391,6 +391,8 @@ Themes where shared `_roles` gives sufficient differentiation:
 3. Set `FG` = same key as `BG` (dark text on bright accent pills works for both dark and light themes)
 4. If flavors share accent hex values → use per-flavor `_roles` with different color name choices
 5. If flavors have genuinely different accent palettes → shared `_roles` is fine, `BG` carries the identity
+
+**Per-flavor `_roles` only needs the keys that differ.** `render-theme.py`/`get-colors.py` deep-merge a flavor's `_roles` on top of its theme's `_roles` (flavor keys win, everything else is inherited) — a flavor override is **not** a full replacement. So when adding a new flavor to an existing theme, don't copy the theme's entire `_roles` block into the flavor and tweak a value; write only the keys that actually differ (usually just `SEG`, plus whichever `DC_*`/`GC_*` roles carry that flavor's identity-anchor color). See `onedarkpro`/`catppuccin`/`tokyonight` in `roles.json` for the pattern — each flavor's `_roles` is a handful of keys, not a 27-key copy.
 
 ### Delta diff colors — the structural / syntax split
 

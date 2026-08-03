@@ -663,7 +663,7 @@ def cmd_matrix(args: argparse.Namespace) -> None:
 
     def resolve(theme_data: dict[str, Any], flavor: str) -> dict[str, str]:
         fdata: dict[str, Any] = theme_data.get(flavor, {})
-        roles_def: dict[str, Any] = fdata.get("_roles") or theme_data.get("_roles", {})
+        roles_def: dict[str, Any] = _merge_roles(theme_data.get("_roles", {}), fdata.get("_roles"))
         palette: dict[str, str] = {k: v for k, v in fdata.items() if not k.startswith("_")}
         out: dict[str, str] = {}
         for i, name in enumerate(roles_def.get("SEG", [])):
@@ -710,6 +710,77 @@ def cmd_matrix(args: argparse.Namespace) -> None:
     if show_colors:
         print_table("DIRCOLORS ROLES  —  DC_*", DC_ROLES)
         print_table("GIT COLOR ROLES  —  GC_*", GC_ROLES)
+
+
+def _merge_roles(
+    theme_roles: dict[str, Any], flavor_roles: dict[str, Any] | None
+) -> dict[str, Any]:
+    """Merge a flavor's role overrides on top of its theme's defaults.
+
+    Args:
+        theme_roles: The theme-level `_roles` dict (may be empty).
+        flavor_roles: The flavor's own `_roles` dict, or None if it has none.
+            Keys present here win; any key it omits falls back to `theme_roles`.
+
+    Returns:
+        The merged roles dict. A flavor with no `_roles` at all yields the
+        theme defaults unchanged.
+    """
+    return {**theme_roles, **(flavor_roles or {})}
+
+
+def _validate_seg_roles(data: dict[str, Any]) -> list[str]:
+    """Detect SEG-role drift between sibling flavors of the same theme.
+
+    Sibling flavors are expected to differ only by *substituting* a color
+    name at a given SEG index (the documented "identity anchor" pattern).
+    A color name that reappears in a sibling's SEG array at a *different*
+    index indicates the array was reordered by mistake, which silently
+    reassigns which prompt segment (dir/git/lang/docker/time) gets which
+    color.
+
+    Args:
+        data: The merged roles/palettes dict, keyed by theme then flavor.
+
+    Returns:
+        Human-readable error strings, one per detected drift. Empty if
+        every theme's flavors are internally consistent.
+    """
+    errors: list[str] = []
+    for theme, flavors in data.items():
+        if theme.startswith("_") or not isinstance(flavors, dict):
+            continue
+        theme_default_roles: dict[str, Any] = flavors.get("_roles", {})
+        segs: dict[str, list[str]] = {}
+        for flavor, fdata in flavors.items():
+            if flavor.startswith("_") or not isinstance(fdata, dict):
+                continue
+            roles_def: dict[str, Any] = _merge_roles(theme_default_roles, fdata.get("_roles"))
+            seg = roles_def.get("SEG")
+            if seg:
+                segs[flavor] = list(seg)
+
+        names = list(segs.keys())
+        if len(names) < 2:
+            continue
+        base_name, base = names[0], segs[names[0]]
+        for other_name in names[1:]:
+            other = segs[other_name]
+            if len(other) != len(base):
+                errors.append(
+                    f"{theme}: SEG length mismatch — {base_name} has {len(base)} "
+                    f"entries, {other_name} has {len(other)}"
+                )
+                continue
+            moved = [
+                (value, i, other.index(value))
+                for i, value in enumerate(base)
+                if value in other and other.index(value) != i
+            ]
+            if moved:
+                detail = ", ".join(f"'{v}' slot {i}→{j}" for v, i, j in moved)
+                errors.append(f"{theme}: SEG drift between {base_name} and {other_name} — {detail}")
+    return errors
 
 
 def cmd_export(args: argparse.Namespace) -> None:
@@ -792,6 +863,12 @@ def cmd_export(args: argparse.Namespace) -> None:
             else:
                 logger.warning(f"  no palette: {theme}/{flavor}")
                 err += 1
+
+    seg_errors = _validate_seg_roles(result)
+    if seg_errors:
+        for msg in seg_errors:
+            logger.error(msg)
+        sys.exit(1)
 
     out_dir = os.path.dirname(os.path.abspath(out_f))
     os.makedirs(out_dir, exist_ok=True)

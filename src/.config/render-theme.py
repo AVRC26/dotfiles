@@ -182,6 +182,23 @@ def _render_template(template_path: str, output_path: str, substitutions: dict[s
 # ── Theme application ──────────────────────────────────────────────────────────
 
 
+def _merge_roles(
+    theme_roles: dict[str, Any], flavor_roles: dict[str, Any] | None
+) -> dict[str, Any]:
+    """Merge a flavor's role overrides on top of its theme's defaults.
+
+    Args:
+        theme_roles: The theme-level `_roles` dict (may be empty).
+        flavor_roles: The flavor's own `_roles` dict, or None if it has none.
+            Keys present here win; any key it omits falls back to `theme_roles`.
+
+    Returns:
+        The merged roles dict. A flavor with no `_roles` at all yields the
+        theme defaults unchanged.
+    """
+    return {**theme_roles, **(flavor_roles or {})}
+
+
 def _apply_templates(
     theme_dict: dict[str, Any],
     flavor_dict: dict[str, Any],
@@ -208,7 +225,7 @@ def _apply_templates(
             )
             return
 
-    roles: dict[str, Any] = flavor_dict.get("_roles") or theme_dict.get("_roles", {})
+    roles: dict[str, Any] = _merge_roles(theme_dict.get("_roles", {}), flavor_dict.get("_roles"))
 
     def color(role_name: str) -> str:
         val = palette.get(role_name, "")

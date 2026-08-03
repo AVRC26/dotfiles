@@ -207,12 +207,12 @@ format = '[[ $symbol( $version) (\($virtualenv\)) ](fg:color_fg bg:color_seg3)](
 
 [docker_context]
 symbol = ""
-style  = "bg:color_seg3"
-format = '[[ $symbol( $context) ](fg:color_fg bg:color_seg3)]($style)'
+style  = "bg:color_seg4"
+format = '[[ $symbol( $context) ](fg:color_fg bg:color_seg4)]($style)'
 
 [conda]
-style      = "bg:color_seg3"
-format     = '[[ $symbol( $environment) ](fg:color_fg bg:color_seg3)]($style)'
+style      = "bg:color_seg4"
+format     = '[[ $symbol( $environment) ](fg:color_fg bg:color_seg4)]($style)'
 ignore_base = false
 
 [time]

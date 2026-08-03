@@ -1091,6 +1091,168 @@ class TestCmdExport(unittest.TestCase):
             gc.cmd_export(args)
         self.assertEqual(cm.exception.code, 2)
 
+    def test_export_exits_on_seg_drift(self) -> None:
+        """cmd_export must hard-fail when a sibling flavor's SEG array reorders a shared color name."""
+        drift_roles: dict[str, Any] = {
+            "onedarkpro": {
+                "_default_flavor": "onedark",
+                "onedark": {
+                    "_roles": {"SEG": ["red", "orange", "yellow", "green", "cyan", "purple"]}
+                },
+                "onedark_vivid": {
+                    "_roles": {"SEG": ["red", "purple", "yellow", "green", "blue", "cyan"]}
+                },
+            }
+        }
+        roles_path = os.path.join(self.tmp, "drift_roles.json")
+        with open(roles_path, "w") as f:
+            json.dump(drift_roles, f)
+        args = argparse.Namespace(
+            themes_dir=self.tmp,
+            roles=roles_path,
+            output=os.path.join(self.tmp, "should_not_be_written.json"),
+            verbose=False,
+        )
+        with self.assertRaises(SystemExit) as cm:
+            gc.cmd_export(args)
+        self.assertEqual(cm.exception.code, 1)
+        self.assertFalse(os.path.exists(args.output))
+
+    def test_export_passes_with_seg_substitution_only(self) -> None:
+        """cmd_export must NOT fail when sibling flavors only substitute a color name at the same SEG slot."""
+        consistent_roles: dict[str, Any] = {
+            "onedarkpro": {
+                "_default_flavor": "onedark",
+                "onedark": {
+                    "_roles": {"SEG": ["red", "orange", "yellow", "green", "cyan", "purple"]}
+                },
+                "onedark_dark": {
+                    "_roles": {"SEG": ["red", "orange", "yellow", "green", "blue", "purple"]}
+                },
+            }
+        }
+        roles_path = os.path.join(self.tmp, "consistent_roles.json")
+        with open(roles_path, "w") as f:
+            json.dump(consistent_roles, f)
+        out_path = os.path.join(self.tmp, "consistent_out.json")
+        args = argparse.Namespace(
+            themes_dir=self.tmp,
+            roles=roles_path,
+            output=out_path,
+            verbose=False,
+        )
+        gc.cmd_export(args)
+        self.assertTrue(os.path.exists(out_path))
+
+
+# ── _validate_seg_roles ─────────────────────────────────────────────────────────
+
+
+class TestValidateSegRoles(unittest.TestCase):
+    def test_no_error_for_single_flavor_theme(self) -> None:
+        """A theme with only one flavor has nothing to compare against."""
+        data = {"solo": {"only": {"_roles": {"SEG": ["red", "green"]}}}}
+        self.assertEqual(gc._validate_seg_roles(data), [])
+
+    def test_no_error_for_same_slot_substitution(self) -> None:
+        """Different color name at the same index across flavors is allowed (identity anchor pattern)."""
+        data = {
+            "tokyonight": {
+                "night": {"_roles": {"SEG": ["red", "green", "cyan"]}},
+                "storm": {"_roles": {"SEG": ["red", "green", "teal"]}},
+            }
+        }
+        self.assertEqual(gc._validate_seg_roles(data), [])
+
+    def test_detects_moved_value_between_slots(self) -> None:
+        """A shared color name appearing at a different index is flagged as drift."""
+        data = {
+            "onedarkpro": {
+                "onedark": {"_roles": {"SEG": ["red", "orange", "cyan", "purple"]}},
+                "onedark_vivid": {"_roles": {"SEG": ["red", "purple", "cyan", "orange"]}},
+            }
+        }
+        errors = gc._validate_seg_roles(data)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("onedarkpro", errors[0])
+        self.assertIn("onedark_vivid", errors[0])
+
+    def test_detects_length_mismatch(self) -> None:
+        """Sibling SEG arrays of different lengths are flagged rather than silently compared."""
+        data = {
+            "sometheme": {
+                "a": {"_roles": {"SEG": ["red", "green"]}},
+                "b": {"_roles": {"SEG": ["red", "green", "blue"]}},
+            }
+        }
+        errors = gc._validate_seg_roles(data)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("length mismatch", errors[0])
+
+    def test_falls_back_to_theme_level_roles(self) -> None:
+        """Flavors without their own _roles inherit the theme-level _roles and are still checked."""
+        data = {
+            "shared": {
+                "_roles": {"SEG": ["red", "green"]},
+                "a": {},
+                "b": {},
+            }
+        }
+        self.assertEqual(gc._validate_seg_roles(data), [])
+
+    def test_ignores_underscore_keys_and_non_dict_values(self) -> None:
+        """Metadata keys like _default_flavor must not be treated as flavors."""
+        data = {
+            "theme": {
+                "_default_flavor": "a",
+                "a": {"_roles": {"SEG": ["red", "green"]}},
+                "b": {"_roles": {"SEG": ["red", "green"]}},
+            }
+        }
+        self.assertEqual(gc._validate_seg_roles(data), [])
+
+
+# ── _merge_roles ─────────────────────────────────────────────────────────────
+
+
+class TestMergeRoles(unittest.TestCase):
+    def test_flavor_with_no_override_inherits_theme_defaults(self) -> None:
+        """A flavor with no _roles at all (None) resolves to the theme defaults unchanged."""
+        theme = {"BG": "bg", "SEG": ["red", "green"]}
+        self.assertEqual(gc._merge_roles(theme, None), theme)
+
+    def test_flavor_fully_overrides_every_key(self) -> None:
+        """A flavor _roles that repeats every theme key still resolves correctly (legacy full-copy style)."""
+        theme = {"BG": "bg", "SEG": ["red", "green"]}
+        flavor = {"BG": "bg2", "SEG": ["blue", "yellow"]}
+        self.assertEqual(gc._merge_roles(theme, flavor), flavor)
+
+    def test_flavor_partial_override_inherits_missing_keys(self) -> None:
+        """A flavor _roles with only one key still inherits every other key from the theme default."""
+        theme = {"BG": "bg", "TEXT": "fg", "SEG": ["red", "green", "blue"]}
+        flavor = {"SEG": ["yellow", "purple", "cyan"]}
+        merged = gc._merge_roles(theme, flavor)
+        self.assertEqual(merged, {"BG": "bg", "TEXT": "fg", "SEG": ["yellow", "purple", "cyan"]})
+
+    def test_empty_theme_and_flavor_roles_yields_empty_dict(self) -> None:
+        """No theme defaults and no flavor override resolves to an empty roles dict."""
+        self.assertEqual(gc._merge_roles({}, None), {})
+
+    def test_real_onedarkpro_flavor_inherits_dc_and_gc_roles_from_theme(self) -> None:
+        """Regression guard: onedarkpro's per-flavor _roles only declares SEG; DC_*/GC_* must still resolve via the theme default after the de-duplication refactor."""
+        roles_path = os.path.join(
+            os.path.dirname(os.path.abspath(gc.__file__)), ".config", "roles.json"
+        )
+        with open(roles_path, encoding="utf-8") as f:
+            roles = json.load(f)
+        theme_roles = roles["onedarkpro"]["_roles"]
+        flavor_roles = roles["onedarkpro"]["onedark"]["_roles"]
+        self.assertEqual(set(flavor_roles.keys()), {"SEG"})
+        merged = gc._merge_roles(theme_roles, flavor_roles)
+        self.assertEqual(merged["DC_DIR"], "cyan")
+        self.assertEqual(merged["GC_BRANCH"], "cyan")
+        self.assertEqual(merged["SEG"], ["red", "orange", "purple", "green", "cyan", "yellow"])
+
 
 # ── cmd_matrix auto-detect ─────────────────────────────────────────────────────
 

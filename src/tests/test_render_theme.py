@@ -357,6 +357,43 @@ class TestApplyTemplates(unittest.TestCase):
         self.assertFalse(Path(args.starship_output).exists())
 
 
+# ── _merge_roles ───────────────────────────────────────────────────────────────
+
+
+class TestMergeRoles(unittest.TestCase):
+    def test_flavor_with_no_override_inherits_theme_defaults(self) -> None:
+        """A flavor with no _roles at all (None) resolves to the theme defaults unchanged."""
+        theme = {"BG": "bg", "SEG": ["red", "green"]}
+        self.assertEqual(rt._merge_roles(theme, None), theme)
+
+    def test_flavor_partial_override_inherits_missing_keys(self) -> None:
+        """A flavor _roles with only one key still inherits every other key from the theme default."""
+        theme = {"BG": "bg", "DC_DIR": "cyan", "SEG": ["red", "green"]}
+        flavor = {"SEG": ["blue", "yellow"]}
+        merged = rt._merge_roles(theme, flavor)
+        self.assertEqual(merged, {"BG": "bg", "DC_DIR": "cyan", "SEG": ["blue", "yellow"]})
+
+    def test_apply_templates_resolves_partial_override_end_to_end(self) -> None:
+        """A flavor whose _roles only declares SEG must still render DC_DIR/GC_ADDED from the theme default."""
+        tmp = tempfile.mkdtemp()
+        make_template(tmp, "starship.tmpl", "seg0={{COLOR_SEG0}}")
+        make_template(tmp, "dircolors.tmpl", "dir={{DC_DIR}}")
+        make_template(tmp, "git.tmpl", "added={{GC_ADDED}}")
+        pal = make_palettes_file(tmp)
+        args = make_render_args(tmp, pal)
+        data = rt._load_palette(args.palette)
+        theme_dict, _, _ = rt._resolve_theme_flavor(data, "monokai", "spectrum")
+        # Flavor override with only SEG set — DC_DIR/GC_ADDED must come from theme_dict["_roles"].
+        partial_flavor_dict = {**theme_dict["spectrum"], "_roles": {"SEG": ["accent2"]}}
+        rt._apply_templates(theme_dict, partial_flavor_dict, ">", args)
+        starship_content = Path(args.starship_output).read_text()
+        dircolors_content = Path(args.dircolors_output).read_text()
+        git_content = Path(args.git_output).read_text()
+        self.assertIn("seg0=#fd9353", starship_content)  # accent2, from the override
+        self.assertIn("38;2;90;212;230", dircolors_content)  # DC_DIR=accent5, from theme default
+        self.assertIn("added=#7bd88f", git_content)  # GC_ADDED=accent4, from theme default
+
+
 # ── cmd_help ───────────────────────────────────────────────────────────────────
 
 

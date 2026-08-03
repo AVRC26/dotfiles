@@ -33,10 +33,10 @@
       "SEG": [
         "red",
         "orange",
-        "yellow",
+        "purple",
         "green",
         "cyan",
-        "purple"
+        "yellow"
       ],
       "TEXT": "fg",
       "WARN": "orange"
@@ -46,40 +46,7 @@
         "syntax_theme": ""
       },
       "_roles": {
-        "BG": "bg0",
-        "DC_ARCHIVE": "orange",
-        "DC_DIMMED": "grey",
-        "DC_DIR": "cyan",
-        "DC_DOC": "blue",
-        "DC_EXEC": "green",
-        "DC_IMAGE": "red",
-        "DC_LINK": "purple",
-        "DC_MEDIA": "purple",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "fg",
-        "GC_ADDED": "green",
-        "GC_BRANCH": "cyan",
-        "GC_CHANGED": "orange",
-        "GC_FRAG": "purple",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "orange",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
-        "SEG": [
-          "red",
-          "orange",
-          "yellow",
-          "green",
-          "cyan",
-          "purple"
-        ],
-        "TEXT": "fg",
-        "WARN": "orange"
+        "FG": "fg"
       },
       "bg0": "#fafae0",
       "bg1": "#eaead0",
@@ -208,15 +175,25 @@
       "SEG": [
         "red",
         "orange",
-        "purple",
+        "primary",
         "green",
         "blue",
-        "primary"
+        "purple"
       ],
       "TEXT": "default",
       "WARN": "warning"
     },
     "altica": {
+      "_roles": {
+        "SEG": [
+          "red",
+          "orange",
+          "yellow",
+          "green",
+          "blue",
+          "purple"
+        ]
+      },
       "blue": "#10bdc9",
       "border": "#0a1217",
       "danger": "#C13838",
@@ -942,6 +919,16 @@
       "yellow": "#b48806"
     },
     "feat-webdevcody": {
+      "_roles": {
+        "SEG": [
+          "red",
+          "turquoize",
+          "primary",
+          "success",
+          "blue",
+          "salmon"
+        ]
+      },
       "blue": "#82f0ff",
       "border": "#000000",
       "danger": "#e61e3f",
@@ -1798,45 +1785,47 @@
       "theme": "catppuccin",
       "variant_key": "catppuccin_flavour"
     },
+    "_roles": {
+      "BG": "base",
+      "DC_DIMMED": "overlay0",
+      "DC_EXEC": "green",
+      "DC_SOURCE": "green",
+      "DC_TEXT": "yellow",
+      "ERR": "red",
+      "FG": "crust",
+      "GC_ADDED": "green",
+      "GC_CHANGED": "peach",
+      "GC_META": "yellow",
+      "GC_NEW": "green",
+      "GC_OLD": "red",
+      "GC_REMOTE": "peach",
+      "GC_TAG": "yellow",
+      "GC_UNTRACKED": "red",
+      "OK": "green",
+      "TEXT": "text",
+      "WARN": "yellow"
+    },
     "frappe": {
       "_delta": {
         "syntax_theme": "Catppuccin Frappe"
       },
       "_roles": {
-        "BG": "base",
         "DC_ARCHIVE": "flamingo",
-        "DC_DIMMED": "overlay0",
         "DC_DIR": "teal",
         "DC_DOC": "sky",
-        "DC_EXEC": "green",
         "DC_IMAGE": "maroon",
         "DC_LINK": "blue",
         "DC_MEDIA": "blue",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "crust",
-        "GC_ADDED": "green",
         "GC_BRANCH": "teal",
-        "GC_CHANGED": "peach",
         "GC_FRAG": "blue",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "peach",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "maroon",
           "peach",
-          "yellow",
+          "blue",
           "green",
           "teal",
-          "blue"
-        ],
-        "TEXT": "text",
-        "WARN": "yellow"
+          "yellow"
+        ]
       },
       "base": "#303446",
       "blue": "#8caaee",
@@ -1870,40 +1859,22 @@
         "syntax_theme": "Catppuccin Latte"
       },
       "_roles": {
-        "BG": "base",
         "DC_ARCHIVE": "peach",
-        "DC_DIMMED": "overlay0",
         "DC_DIR": "sapphire",
         "DC_DOC": "blue",
-        "DC_EXEC": "green",
         "DC_IMAGE": "pink",
         "DC_LINK": "mauve",
         "DC_MEDIA": "mauve",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "crust",
-        "GC_ADDED": "green",
         "GC_BRANCH": "sapphire",
-        "GC_CHANGED": "peach",
         "GC_FRAG": "mauve",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "peach",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "red",
           "peach",
-          "yellow",
+          "lavender",
           "green",
           "sapphire",
-          "lavender"
-        ],
-        "TEXT": "text",
-        "WARN": "yellow"
+          "yellow"
+        ]
       },
       "base": "#eff1f5",
       "blue": "#1e66f5",
@@ -1937,40 +1908,22 @@
         "syntax_theme": "Catppuccin Macchiato"
       },
       "_roles": {
-        "BG": "base",
         "DC_ARCHIVE": "peach",
-        "DC_DIMMED": "overlay0",
         "DC_DIR": "sky",
         "DC_DOC": "sapphire",
-        "DC_EXEC": "green",
         "DC_IMAGE": "flamingo",
         "DC_LINK": "lavender",
         "DC_MEDIA": "lavender",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "crust",
-        "GC_ADDED": "green",
         "GC_BRANCH": "sky",
-        "GC_CHANGED": "peach",
         "GC_FRAG": "lavender",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "peach",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "red",
           "peach",
-          "yellow",
+          "mauve",
           "green",
           "sky",
-          "mauve"
-        ],
-        "TEXT": "text",
-        "WARN": "yellow"
+          "yellow"
+        ]
       },
       "base": "#24273a",
       "blue": "#8aadf4",
@@ -2004,40 +1957,22 @@
         "syntax_theme": "Catppuccin Mocha"
       },
       "_roles": {
-        "BG": "base",
         "DC_ARCHIVE": "peach",
-        "DC_DIMMED": "overlay0",
         "DC_DIR": "sapphire",
         "DC_DOC": "blue",
-        "DC_EXEC": "green",
         "DC_IMAGE": "pink",
         "DC_LINK": "mauve",
         "DC_MEDIA": "mauve",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "crust",
-        "GC_ADDED": "green",
         "GC_BRANCH": "sapphire",
-        "GC_CHANGED": "peach",
         "GC_FRAG": "mauve",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "peach",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "red",
           "peach",
-          "yellow",
+          "lavender",
           "green",
           "sapphire",
-          "lavender"
-        ],
-        "TEXT": "text",
-        "WARN": "yellow"
+          "yellow"
+        ]
       },
       "base": "#1e1e2e",
       "blue": "#89b4fa",
@@ -2387,39 +2322,8 @@
       },
       "_roles": {
         "BG": "light0",
-        "DC_ARCHIVE": "bright_orange",
         "DC_DIMMED": "light3",
-        "DC_DIR": "bright_aqua",
-        "DC_DOC": "bright_blue",
-        "DC_EXEC": "bright_green",
-        "DC_IMAGE": "bright_red",
-        "DC_LINK": "bright_purple",
-        "DC_MEDIA": "bright_purple",
-        "DC_SOURCE": "bright_green",
-        "DC_TEXT": "bright_yellow",
-        "ERR": "bright_red",
-        "FG": "dark0",
-        "GC_ADDED": "bright_green",
-        "GC_BRANCH": "bright_aqua",
-        "GC_CHANGED": "bright_orange",
-        "GC_FRAG": "neutral_purple",
-        "GC_META": "bright_yellow",
-        "GC_NEW": "bright_green",
-        "GC_OLD": "bright_red",
-        "GC_REMOTE": "bright_orange",
-        "GC_TAG": "bright_yellow",
-        "GC_UNTRACKED": "bright_red",
-        "OK": "bright_green",
-        "SEG": [
-          "bright_red",
-          "bright_orange",
-          "neutral_purple",
-          "bright_green",
-          "bright_aqua",
-          "gray"
-        ],
-        "TEXT": "dark1",
-        "WARN": "bright_yellow"
+        "TEXT": "dark1"
       },
       "bright_aqua": "#8ec07c",
       "bright_blue": "#83a598",
@@ -2909,10 +2813,10 @@
       "SEG": [
         "rose",
         "sunrise",
-        "khaki",
+        "lavender",
         "palm",
         "sky",
-        "lavender"
+        "khaki"
       ],
       "TEXT": "fg",
       "WARN": "sunset"
@@ -3283,7 +3187,7 @@
       },
       "aloe": "#A7D3A9",
       "amber": "#E2A76B",
-      "bg": "#070C13",
+      "bg": "#0C0E13",
       "cactus": "#53D390",
       "copper": "#D89A72",
       "coral": "#E58383",
@@ -3323,7 +3227,7 @@
       },
       "aloe": "#A7D3A9",
       "amber": "#E2A76B",
-      "bg": "#050F23",
+      "bg": "#08111C",
       "cactus": "#53D390",
       "copper": "#D89A72",
       "coral": "#E58383",
@@ -3564,45 +3468,47 @@
       "theme": "onedarkpro",
       "variant_key": "onedarkpro_style"
     },
+    "_roles": {
+      "BG": "bg",
+      "DC_ARCHIVE": "orange",
+      "DC_DIMMED": "gray",
+      "DC_DIR": "cyan",
+      "DC_DOC": "blue",
+      "DC_EXEC": "green",
+      "DC_IMAGE": "red",
+      "DC_LINK": "purple",
+      "DC_MEDIA": "purple",
+      "DC_SOURCE": "green",
+      "DC_TEXT": "yellow",
+      "ERR": "red",
+      "FG": "black",
+      "GC_ADDED": "green",
+      "GC_BRANCH": "cyan",
+      "GC_CHANGED": "orange",
+      "GC_FRAG": "purple",
+      "GC_META": "yellow",
+      "GC_NEW": "green",
+      "GC_OLD": "red",
+      "GC_REMOTE": "orange",
+      "GC_TAG": "yellow",
+      "GC_UNTRACKED": "red",
+      "OK": "green",
+      "TEXT": "fg",
+      "WARN": "yellow"
+    },
     "onedark": {
       "_delta": {
         "syntax_theme": ""
       },
       "_roles": {
-        "BG": "bg",
-        "DC_ARCHIVE": "orange",
-        "DC_DIMMED": "gray",
-        "DC_DIR": "cyan",
-        "DC_DOC": "blue",
-        "DC_EXEC": "green",
-        "DC_IMAGE": "red",
-        "DC_LINK": "purple",
-        "DC_MEDIA": "purple",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "black",
-        "GC_ADDED": "green",
-        "GC_BRANCH": "cyan",
-        "GC_CHANGED": "orange",
-        "GC_FRAG": "purple",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "orange",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "red",
           "orange",
-          "yellow",
+          "purple",
           "green",
           "cyan",
-          "purple"
-        ],
-        "TEXT": "fg",
-        "WARN": "yellow"
+          "yellow"
+        ]
       },
       "bg": "#282c34",
       "black": "#282c34",
@@ -3624,40 +3530,14 @@
         "syntax_theme": ""
       },
       "_roles": {
-        "BG": "bg",
-        "DC_ARCHIVE": "orange",
-        "DC_DIMMED": "gray",
-        "DC_DIR": "cyan",
-        "DC_DOC": "blue",
-        "DC_EXEC": "green",
-        "DC_IMAGE": "red",
-        "DC_LINK": "purple",
-        "DC_MEDIA": "purple",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "black",
-        "GC_ADDED": "green",
-        "GC_BRANCH": "cyan",
-        "GC_CHANGED": "orange",
-        "GC_FRAG": "purple",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "orange",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "red",
           "orange",
-          "yellow",
+          "purple",
           "green",
           "blue",
-          "purple"
-        ],
-        "TEXT": "fg",
-        "WARN": "yellow"
+          "yellow"
+        ]
       },
       "bg": "#000000",
       "black": "#000000",
@@ -3679,40 +3559,14 @@
         "syntax_theme": ""
       },
       "_roles": {
-        "BG": "bg",
-        "DC_ARCHIVE": "orange",
-        "DC_DIMMED": "gray",
-        "DC_DIR": "blue",
-        "DC_DOC": "cyan",
-        "DC_EXEC": "green",
-        "DC_IMAGE": "red",
-        "DC_LINK": "purple",
-        "DC_MEDIA": "purple",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "black",
-        "GC_ADDED": "green",
-        "GC_BRANCH": "blue",
-        "GC_CHANGED": "orange",
-        "GC_FRAG": "purple",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "orange",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "red",
+          "orange",
           "purple",
-          "yellow",
           "green",
           "blue",
-          "cyan"
-        ],
-        "TEXT": "fg",
-        "WARN": "yellow"
+          "yellow"
+        ]
       },
       "bg": "#282c34",
       "black": "#282c34",
@@ -3734,40 +3588,14 @@
         "syntax_theme": ""
       },
       "_roles": {
-        "BG": "bg",
-        "DC_ARCHIVE": "orange",
-        "DC_DIMMED": "gray",
-        "DC_DIR": "cyan",
-        "DC_DOC": "blue",
-        "DC_EXEC": "green",
-        "DC_IMAGE": "red",
-        "DC_LINK": "purple",
-        "DC_MEDIA": "purple",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "black",
-        "GC_ADDED": "green",
-        "GC_BRANCH": "cyan",
-        "GC_CHANGED": "orange",
-        "GC_FRAG": "purple",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "orange",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "red",
           "orange",
-          "yellow",
+          "purple",
           "green",
           "cyan",
-          "purple"
-        ],
-        "TEXT": "fg",
-        "WARN": "yellow"
+          "yellow"
+        ]
       },
       "bg": "#fafafa",
       "black": "#6a6a6a",
@@ -3791,6 +3619,28 @@
       "theme": "tokyonight",
       "variant_key": "tokyonight_style"
     },
+    "_roles": {
+      "BG": "bg",
+      "DC_ARCHIVE": "orange",
+      "DC_DIMMED": "dark3",
+      "DC_EXEC": "green",
+      "DC_IMAGE": "red",
+      "DC_SOURCE": "green",
+      "DC_TEXT": "yellow",
+      "ERR": "red",
+      "FG": "bg",
+      "GC_ADDED": "green",
+      "GC_CHANGED": "orange",
+      "GC_META": "yellow",
+      "GC_NEW": "green",
+      "GC_OLD": "red",
+      "GC_REMOTE": "orange",
+      "GC_TAG": "yellow",
+      "GC_UNTRACKED": "red",
+      "OK": "green",
+      "TEXT": "fg",
+      "WARN": "yellow"
+    },
     "day": {
       "_delta": {
         "syntax_theme": "tokyonight_day"
@@ -3802,30 +3652,12 @@
         "syntax_theme": "tokyonight_moon"
       },
       "_roles": {
-        "BG": "bg",
-        "DC_ARCHIVE": "orange",
-        "DC_DIMMED": "dark3",
         "DC_DIR": "cyan",
         "DC_DOC": "blue",
-        "DC_EXEC": "green",
-        "DC_IMAGE": "red",
         "DC_LINK": "magenta",
         "DC_MEDIA": "magenta",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "bg",
-        "GC_ADDED": "green",
         "GC_BRANCH": "cyan",
-        "GC_CHANGED": "orange",
         "GC_FRAG": "magenta",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "orange",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "red",
           "orange",
@@ -3833,9 +3665,7 @@
           "green",
           "blue",
           "fg_dark"
-        ],
-        "TEXT": "fg",
-        "WARN": "yellow"
+        ]
       },
       "add": "#b8db87",
       "bg": "#222436",
@@ -3876,30 +3706,12 @@
         "syntax_theme": "tokyonight_night"
       },
       "_roles": {
-        "BG": "bg",
-        "DC_ARCHIVE": "orange",
-        "DC_DIMMED": "dark3",
         "DC_DIR": "cyan",
         "DC_DOC": "blue",
-        "DC_EXEC": "green",
-        "DC_IMAGE": "red",
         "DC_LINK": "magenta",
         "DC_MEDIA": "magenta",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "bg",
-        "GC_ADDED": "green",
         "GC_BRANCH": "cyan",
-        "GC_CHANGED": "orange",
         "GC_FRAG": "magenta",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "orange",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "red",
           "orange",
@@ -3907,9 +3719,7 @@
           "green",
           "blue",
           "fg_dark"
-        ],
-        "TEXT": "fg",
-        "WARN": "yellow"
+        ]
       },
       "add": "#449dab",
       "bg": "#1a1b26",
@@ -3950,30 +3760,12 @@
         "syntax_theme": "tokyonight_storm"
       },
       "_roles": {
-        "BG": "bg",
-        "DC_ARCHIVE": "orange",
-        "DC_DIMMED": "dark3",
         "DC_DIR": "teal",
         "DC_DOC": "blue1",
-        "DC_EXEC": "green",
-        "DC_IMAGE": "red",
         "DC_LINK": "purple",
         "DC_MEDIA": "purple",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "ERR": "red",
-        "FG": "bg",
-        "GC_ADDED": "green",
         "GC_BRANCH": "teal",
-        "GC_CHANGED": "orange",
         "GC_FRAG": "purple",
-        "GC_META": "yellow",
-        "GC_NEW": "green",
-        "GC_OLD": "red",
-        "GC_REMOTE": "orange",
-        "GC_TAG": "yellow",
-        "GC_UNTRACKED": "red",
-        "OK": "green",
         "SEG": [
           "red",
           "orange",
@@ -3981,9 +3773,7 @@
           "green",
           "blue1",
           "dark5"
-        ],
-        "TEXT": "fg",
-        "WARN": "yellow"
+        ]
       },
       "add": "#449dab",
       "bg": "#24283b",
