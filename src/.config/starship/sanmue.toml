@@ -45,7 +45,7 @@ $direnv\
 $php\
 $git_branch$git_status$git_commit$git_state$git_metrics\
 $python\
-[ ](fg:color_bg)\
+[](fg:color_bg)\
 $fill\
 $fill\
 [](fg:color_bg)\

@@ -99,7 +99,7 @@ format      = '[─](fg:color_seg5)[](fg:color_text)[ ](fg:color_bg bg:col
 
 [directory]
 format = '[─](fg:color_seg5)[](fg:color_seg1)[󰷏 ](fg:color_bg bg:color_seg1)[](fg:color_seg1 bg:color_seg5)[ $read_only$truncation_symbol$path](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
-home_symbol       = " ~/"
+home_symbol       = " ~"
 truncation_symbol = ' '
 truncation_length = 0
 truncate_to_repo  = false
