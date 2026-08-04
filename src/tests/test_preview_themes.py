@@ -235,6 +235,59 @@ class TestMain(unittest.TestCase):
     def test_main_runs_without_error(self) -> None:
         self._run_main()
 
+    def test_main_forwards_conditional_module_flags_to_pty(self) -> None:
+        """Hardcoded status/cmd_duration/jobs/shlvl values should reach _starship_via_pty."""
+        argv = ["preview-themes.py"]
+        cfg = self.tmp_path
+        completed: subprocess.CompletedProcess[bytes] = subprocess.CompletedProcess([], 0)
+
+        with (
+            patch.object(sys, "argv", argv),
+            patch.object(pt, "_find_cfg", return_value=cfg),
+            patch.object(pt, "_active_starship_template", return_value="powerline"),
+            patch.object(pt, "_starship_via_pty", return_value=None) as mock_pty,
+            patch.object(pt, "_show_git_diff", return_value=None),
+            patch.object(pt, "_show_git_status", return_value=None),
+            patch.object(pt, "_show_dir_colors", return_value=None),
+            patch.object(pt, "_show_nvim_theme", return_value=None),
+            patch("subprocess.run", return_value=completed),
+            patch.object(pt, "_HAS_PTY", True),
+        ):
+            pt.main()
+
+        self.assertGreater(mock_pty.call_count, 0)
+        _, kwargs = mock_pty.call_args
+        self.assertEqual(
+            kwargs["extra_args"],
+            ["--status", "1", "--cmd-duration", "2500", "--jobs", "2", "--shlvl", "5"],
+        )
+
+    def test_main_forwards_conditional_module_flags_to_subprocess_fallback(self) -> None:
+        """Same hardcoded values should reach the non-PTY subprocess.run fallback path."""
+        argv = ["preview-themes.py"]
+        cfg = self.tmp_path
+        completed: subprocess.CompletedProcess[bytes] = subprocess.CompletedProcess([], 0)
+
+        with (
+            patch.object(sys, "argv", argv),
+            patch.object(pt, "_find_cfg", return_value=cfg),
+            patch.object(pt, "_active_starship_template", return_value="powerline"),
+            patch.object(pt, "_show_git_diff", return_value=None),
+            patch.object(pt, "_show_git_status", return_value=None),
+            patch.object(pt, "_show_dir_colors", return_value=None),
+            patch.object(pt, "_show_nvim_theme", return_value=None),
+            patch("subprocess.run", return_value=completed) as mock_run,
+            patch.object(pt, "_HAS_PTY", False),
+        ):
+            pt.main()
+
+        starship_calls = [
+            call.args[0] for call in mock_run.call_args_list if call.args[0][0] == "starship"
+        ]
+        self.assertTrue(starship_calls)
+        self.assertIn("--status", starship_calls[0])
+        self.assertIn("--jobs", starship_calls[0])
+
     def test_main_exits_when_template_not_found(self) -> None:
         """main() should exit if the starship template file does not exist."""
         argv = ["preview-themes.py", "--starship-template", "nonexistent"]

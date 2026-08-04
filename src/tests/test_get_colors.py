@@ -1063,15 +1063,20 @@ class TestCmdExport(unittest.TestCase):
         """When roles=None and roles.json exists next to the script, it is found."""
         out_path = os.path.join(self.tmp, "autodet.json")
         self._make_catppuccin()
-        # The module auto-detects src/.config/roles.json (committed to repo) —
-        # pass roles=None and a real output path so the function runs end-to-end.
+        # The module auto-detects src/.config/roles.json (committed to repo). That
+        # real roles.json also drives _write_colors_md's destination path, so it
+        # must be patched away here — otherwise this test overwrites the repo's
+        # real src/COLORS.md with empty tables (themes_dir is a fake temp dir with
+        # no plugins installed, so every theme in the real roles.json fails
+        # extraction).
         args = argparse.Namespace(
             themes_dir=self.tmp,
             roles=None,
             output=out_path,
             verbose=False,
         )
-        gc.cmd_export(args)
+        with patch.object(gc, "_write_colors_md", return_value=None):
+            gc.cmd_export(args)
         self.assertTrue(os.path.exists(out_path))
 
     def test_export_write_failure_exits(self) -> None:

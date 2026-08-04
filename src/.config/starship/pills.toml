@@ -5,9 +5,17 @@
 
 format = """
 [╭╴](fg:color_seg5)\
+$shell\
+$sudo\
+$shlvl\
+$env_var\
 $memory_usage\
 ${custom.cpu_load}\
 ${custom.disk_usage}\
+$cmd_duration\
+$battery\
+$status\
+$jobs\
 $line_break\
 [├╴](fg:color_seg5)\
 $os\
@@ -19,12 +27,76 @@ $git_status\
 $git_commit\
 $git_metrics\
 [](fg:color_seg2))\
-($python\
-$nodejs\
+$buf\
+$bun\
+$c\
+$cmake\
+$cobol\
 $conda\
-)\
-$time\
-$cmd_duration
+$crystal\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$fortran\
+$gleam\
+$golang\
+$gradle\
+$haxe\
+$helm\
+$haskell\
+$java\
+$julia\
+$kotlin\
+$lua\
+$maven\
+$meson\
+$mise\
+$mojo\
+$nats\
+$nim\
+$nix_shell\
+$nodejs\
+$ocaml\
+$odin\
+$opa\
+$package\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$red\
+$rlang\
+$ruby\
+$scala\
+$rust\
+$spack\
+$swift\
+$typst\
+$vagrant\
+$vlang\
+$xmake\
+$zig\
+$aws\
+$azure\
+$container\
+$docker_context\
+$gcloud\
+$guix_shell\
+$kubernetes\
+$terraform\
+$netns\
+$openstack\
+$pixi\
+$singularity\
+$time
 [╰─](fg:color_seg5)$character\
 """
 
@@ -54,7 +126,7 @@ format = '[](fg:color_bg)[ $user ](bg:color_bg fg:color_text)'
 [hostname]
 ssh_only = false
 style = 'bg:color_bg fg:color_text'
-format = '[  $hostname ]($style)[](fg:color_bg) '
+format = '[ $hostname ]($style)[](fg:color_bg) '
 
 [directory]
 style = 'fg:color_fg bg:color_seg1'
@@ -65,7 +137,7 @@ truncate_to_repo = false
 read_only = '  '
 
 [git_branch]
-symbol = ' '
+symbol = ''
 format = '[](fg:color_seg2)[  $branch ](bg:color_seg2 fg:color_fg)'
 
 [git_status]
@@ -98,25 +170,403 @@ deleted_style = 'bg:color_seg2 fg:color_fg'
 format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
 disabled      = false
 
-[python]
-symbol = ''
-version_format = '${raw}'
+[cmd_duration]
+format = ' [](fg:color_seg4)[  $duration](bg:color_seg4 fg:color_fg)[](fg:color_seg4) '
 disabled = false
-format = ' [](fg:color_seg3)[$symbol${pyenv_prefix}(v${version} )(\($virtualenv\))](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
-[nodejs]
-version_format = '${raw}'
+[shell]
 disabled = false
-format = ' [](fg:color_seg3)[  $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+bash_indicator = ''
+fish_indicator='󰈺'
+zsh_indicator="󰰶"
+powershell_indicator = ''
+cmd_indicator = ''
+ion_indicator = ''
+elvish_indicator = "󰘧"
+tcsh_indicator = "󰰤"
+nu_indicator = "❯"
+xonsh_indicator = ""
+unknown_indicator = ''
+format   = '[](fg:color_seg0)[ $indicator ](bg:color_seg0 fg:color_fg)[](fg:color_seg0) '
+
+[sudo]
+symbol = ''
+disabled = false
+format   = '[](fg:color_seg0)[ $symbol ](bg:color_seg0 fg:color_fg)[](fg:color_seg0) '
+
+[shlvl]
+symbol = ''
+disabled = false
+format   = '[](fg:color_seg0)[ $symbol $shlvl ](bg:color_seg0 fg:color_fg)[](fg:color_seg0) '
+
+[battery]
+disabled = true
+format   = '[](fg:color_seg5)[ $symbol $percentage ](bg:color_seg5 fg:color_fg)[](fg:color_seg5) '
+
+full_symbol = "󰁹"
+charging_symbol = "󰂄"
+discharging_symbol = "󰁽"
+empty_symbol = "󰂎"
+[[battery.display]]
+threshold = 100
+style     = 'bg:color_seg5 fg:color_fg'
+
+[status]
+disabled = false
+format   = '[](fg:color_seg5)[ $status:$common_meaning ](bg:color_seg5 fg:color_err)[](fg:color_seg5) '
+
+[jobs]
+symbol = ''
+number_threshold = 1
+symbol_threshold = 1
+disabled = false
+format           = '[](fg:color_seg5)[ $symbol $number ](bg:color_seg5 fg:color_fg)[](fg:color_seg5) '
+
+
+[buf]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[bun]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[c]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[cmake]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[cobol]
+symbol = '⚙️'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [conda]
-ignore_base = false
+symbol = ''
 disabled = false
-format = ' [](fg:color_seg3)[  $environment](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
-[cmd_duration]
-min_time = 500
-format = ' [](fg:color_warn)[ $duration](bg:color_warn fg:color_fg)[](fg:color_warn)'
+[crystal]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[daml]
+symbol = '𝜦'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[dart]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[deno]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[dotnet]
+symbol = '󰪮'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[elixir]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[elm]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[erlang]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[fennel]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[fortran]
+symbol = '󱈚'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[gleam]
+symbol = 'GLEAM'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[golang]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[gradle]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[haxe]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[helm]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[haskell]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[java]
+symbol = '☕'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[julia]
+symbol = 'ஃ'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[kotlin]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[lua]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[maven]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[meson]
+symbol = '󰔷'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[mise]
+symbol = '󰰏'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[mojo]
+symbol = 'MOJO'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[nats]
+symbol = '󰰒'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[nim]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[nix_shell]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[nodejs]
+symbol = '󰎙'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[ocaml]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[odin]
+symbol = 'ODIN'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[opa]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[package]
+symbol = '󰏗'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[perl]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[php]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[pulumi]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[purescript]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[python]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[quarto]
+symbol = 'QUARTO'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[raku]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[red]
+symbol = 'RED'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[rlang]
+symbol = '󰟔'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[ruby]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[scala]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[rust]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[spack]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[swift]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[typst]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[vagrant]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[vlang]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[xmake]
+symbol = '󰰰'
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[zig]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+
+[aws]
+symbol = '󰸏'
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $profile](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[azure]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $subscription](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[container]
+symbol = '󰡨'
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[docker_context]
+symbol = '󰡨'
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[gcloud]
+symbol = '󱇶'
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $account](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[guix_shell]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[kubernetes]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[terraform]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $version](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[netns]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $name](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[openstack]
+symbol = ''
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $name](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[pixi]
+symbol = '󰰘'
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+
+[singularity]
+symbol = '󰯭'
+disabled = false
+format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [character]
 success_symbol = '[❯](bold blink fg:color_ok)'
@@ -129,38 +579,63 @@ format = '[](fg:color_seg0)[ $symbol ]($style)[](fg:color_seg0) '
 disabled = false
 
 [os.symbols]
-Alpine           = '󰌓'
-Amazon           = '󰌓'
-Android          = '󰀲'
-Arch             = '󰄇'
-CentOS           = '󰕗'
-Debian           = '󰍺'
-EndeavourOS      = '󰌓'
-Fedora           = '󰍻'
-FreeBSD          = '󰌓'
-Garuda           = '󰌓'
-Gentoo           = '󰏨'
-Linux            = '󰌓'
-Macos            = '󰅵'
-Manjaro          = '󰏷'
-Mariner          = '󰌓'
-Mint             = '󰍨'
-NetBSD           = '󰌓'
-NixOS            = '󱄅'
-OpenBSD          = '󰌓'
-OpenCloudOS      = '󰌓'
-openEuler        = '󰌓'
-openSUSE         = '󰮂'
-OracleLinux      = '⊂⊃'
-Pop              = '󰪠'
-Raspbian         = '󰃿'
-Redhat           = '󱄛'
-RedHatEnterprise = '󱄛'
-Solus            = '󰌓'
-SUSE             = '󰮂'
-Ubuntu           = ''
-Unknown          = '󰠥'
-Windows          = '󰍲'
+AIX = '➿'
+Alpaquita = ''
+Alpine = ''
+AlmaLinux = ''
+ALTLinux = 'Ⓐ'
+Amazon = ''
+Android = ''
+AOSC = '🐱'
+Arch = ''
+Artix = ''
+Bluefin = '🐟'
+CachyOS = ''
+CentOS = ''
+Debian = ''
+DragonFly = ''
+Elementary = '🍏'
+Emscripten = ''
+EndeavourOS = ''
+Fedora = ''
+FreeBSD = ''
+Garuda = '󰛓'
+Gentoo = ''
+HardenedBSD = '󰞌'
+Illumos = ''
+Ios = '📱'
+InstantOS = '⏲️'
+Kali = ''
+Linux = ''
+Mabox = ''
+Macos = ''
+Manjaro = ''
+Mariner = ''
+MidnightBSD = ''
+Mint = ''
+NetBSD = ''
+NixOS = ''
+Nobara = ''
+OpenBSD = ''
+OpenCloudOS = ''
+openEuler = ''
+openSUSE = ''
+OracleLinux = ''
+PikaOS = '🐤'
+Pop = ''
+Raspbian = ''
+Redhat = ''
+RedHatEnterprise = ''
+Redox = '󰀘'
+RockyLinux = ''
+Solus = '󰠳'
+SUSE = ''
+Ubuntu = ''
+Ultramarine = '󰼮'
+Unknown = ''
+Void = ''
+Windows = ''
+Zorin = '🔹'
 
 [memory_usage]
 format    = '[](fg:color_seg1)[ 󰍛 ${ram_pct} ](bg:color_seg1 fg:color_fg)[](fg:color_seg1)'
@@ -171,21 +646,15 @@ disabled  = false
 description = "1-minute load average"
 command = "awk '{print $1}' /proc/loadavg"
 when = "true"
-format = ' [](fg:color_seg2)[ 󰻠 $output](bg:color_seg2 fg:color_fg)[](fg:color_seg2)'
+format = ' [](fg:color_seg2)[ 󰻠 $output ](bg:color_seg2 fg:color_fg)[](fg:color_seg2)'
 
 [custom.disk_usage]
 description = "Used % of root filesystem"
 command = "df -h / | awk 'NR==2{print $5}'"
 when = "true"
-format = ' [](fg:color_seg3)[ 󰋊 $output](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format = ' [](fg:color_seg3)[ 󰋊 $output ](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [time]
 disabled    = false
-style       = "bg:color_seg5 fg:color_fg"
-format      = ' [](fg:color_seg5)[ $time ](bg:color_seg5 fg:color_fg)[](fg:color_seg5)'
-
-[docker_context]
-disabled = true
-
-[package]
-disabled = true
+style       = "bg:color_seg0 fg:color_fg"
+format      = ' [](fg:color_seg0)[ $time ](bg:color_seg0 fg:color_fg)[](fg:color_seg0)'

@@ -39,6 +39,10 @@ Usage:
   # Combine as needed
   python3 /usr/local/share/dotfiles/src/preview-themes.py --prompt --git-diff
   python3 /usr/local/share/dotfiles/src/preview-themes.py --theme gruvbox --git-diff --dir-colors
+
+  # $status/$cmd_duration/$jobs/$shlvl are forced to render automatically —
+  # starship only shows these when real shell state warrants it, so a bare
+  # preview would never exercise them otherwise.
 """
 
 from __future__ import annotations
@@ -70,11 +74,21 @@ _HAS_PTY: bool = _check_pty()
 # ── PTY helper ────────────────────────────────────────────────────────────────
 
 
-def _starship_via_pty(starship_toml: Path, width: int = 120) -> None:  # pragma: no cover
-    """Run starship in a PTY so it outputs ANSI colors; strip readline wrappers."""
+def _starship_via_pty(
+    starship_toml: Path, width: int = 120, extra_args: list[str] | None = None
+) -> None:  # pragma: no cover
+    """Run starship in a PTY so it outputs ANSI colors; strip readline wrappers.
+
+    Args:
+        starship_toml: Path to the rendered starship config to preview.
+        width: Terminal width to report to starship for layout purposes.
+        extra_args: Additional CLI args forwarded to `starship prompt` verbatim
+            (e.g. `["--status", "1"]`) — used to force conditional modules like
+            `$status`/`$cmd_duration`/`$jobs`/`$shlvl` to render in the preview.
+    """
     import pty as _pty  # pragma: no cover
 
-    cmd = ["starship", "prompt", "--terminal-width", str(width)]
+    cmd = ["starship", "prompt", "--terminal-width", str(width), *(extra_args or [])]
     _set = {"STARSHIP_CONFIG": str(starship_toml), "COLORTERM": "truecolor"}
     _prev = {k: os.environ.get(k) for k in _set}
     os.environ.update(_set)
@@ -740,6 +754,23 @@ def main() -> None:
 
     args = parser.parse_args()
 
+    # Conditional-module forcing — forwarded verbatim to `starship prompt`.
+    # Without these, $status/$cmd_duration/$jobs/$shlvl never render in a preview
+    # since starship only shows them when real shell state (a failing command, a
+    # slow command, background jobs, deep nesting) actually warrants it. Hardcoded
+    # rather than exposed as flags — every preview should show them by default.
+    # cmd_duration must exceed starship's default min_time (2000ms) or it's suppressed.
+    prompt_extra_args: list[str] = [
+        "--status",
+        "1",
+        "--cmd-duration",
+        "2500",
+        "--jobs",
+        "2",
+        "--shlvl",
+        "5",
+    ]
+
     # --nvim is selective (like --prompt): alone it shows only nvim.
     # --include-nvim is additive: adds nvim to whatever is active, including defaults.
     any_output_flag = (
@@ -890,10 +921,18 @@ def main() -> None:
                         )
                         _section_header(hdr)
                         if _HAS_PTY:
-                            _starship_via_pty(starship_out, width=cols)
+                            _starship_via_pty(
+                                starship_out, width=cols, extra_args=prompt_extra_args
+                            )
                         else:
                             subprocess.run(
-                                ["starship", "prompt", "--terminal-width", str(cols)],
+                                [
+                                    "starship",
+                                    "prompt",
+                                    "--terminal-width",
+                                    str(cols),
+                                    *prompt_extra_args,
+                                ],
                                 env={
                                     **os.environ,
                                     "STARSHIP_CONFIG": str(starship_out),
