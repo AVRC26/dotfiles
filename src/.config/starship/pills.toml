@@ -130,11 +130,12 @@ format = '[ $hostname ]($style)[](fg:color_bg) '
 
 [directory]
 style = 'fg:color_fg bg:color_seg1'
-format = '[](fg:color_seg1)[ $path ]($style)[$read_only]($style)[](fg:color_seg1) '
+format = '[](fg:color_seg1)[ $read_only$path ]($style)[](fg:color_seg1) '
+read_only = '󰌾 '
+home_symbol=" "
 truncation_length = 0
-truncation_symbol = ''
-truncate_to_repo = false
-read_only = '  '
+truncation_symbol = ""
+truncate_to_repo  = false
 
 [git_branch]
 symbol = ''
@@ -436,7 +437,7 @@ format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[�
 [python]
 symbol = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format = ' [](fg:color_seg3)[ $symbol $version \($virtualenv\)](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [quarto]
 symbol = 'QUARTO'

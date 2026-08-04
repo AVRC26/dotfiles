@@ -182,22 +182,23 @@ Zorin = "🔹"
 
 [username]
 show_always = true
-style_user  = "fg:color_text"
+style_user  = "fg:color_bg"
 style_root  = "fg:color_err bold"
 format      = '[ $user ]($style)'
 
 [hostname]
 ssh_only = false
-style    = "fg:color_text"
+style    = "fg:color_bg"
 format   = '[ $hostname ]($style)'
 
 [directory]
 style         = "fg:color_seg1"
-format        = "[ $path ]($style)"
+format = "[ $read_only$path ]($style)"
+read_only = '󰌾 '
+home_symbol=" "
 truncation_length = 0
 truncation_symbol = ""
 truncate_to_repo  = false
-read_only     = " 󰌾"
 
 [directory.substitutions]
 "Documents" = "󰈘 "
@@ -458,7 +459,7 @@ format = '[ $symbol $version]($style)'
 [python]
 symbol = ""
 style  = "fg:color_seg3"
-format = '[ $symbol $version]($style)'
+format = '[ $symbol $version \($virtualenv\)]($style)'
 
 [quarto]
 symbol = "QUARTO"
@@ -661,16 +662,14 @@ format   = '[ $symbol $shlvl ]($style)'
 
 [battery]
 disabled = true
-style    = "fg:color_seg5"
-format   = '[ $symbol $percentage ]($style)'
-
+format   = '[ $symbol $percentage ](fg:color_seg5)'
 full_symbol = "󰁹"
 charging_symbol = "󰂄"
 discharging_symbol = "󰁽"
 empty_symbol = "󰂎"
+
 [[battery.display]]
 threshold = 100
-style     = "fg:color_seg5"
 
 [status]
 disabled = false

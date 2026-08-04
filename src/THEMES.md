@@ -132,10 +132,11 @@ Defaults only apply on first install. Override with `--theme`, `--flavor`, `--st
 
 ## Starship prompt templates
 
-Ten prompt layouts are available. All use the same theme color palette — only the visual structure differs. The active template is saved in `~/.config/dotfiles-starship-template` and used by every future `set-theme` call.
+Eight prompt layouts are available. All use the same theme color palette — only the visual structure differs. The active template is saved in `~/.config/dotfiles-starship-template` and used by every future `set-theme` call.
 
-All templates carry a stats line (RAM, 1-min CPU load average, disk `/` usage %) above the main
-prompt line — network usage is deferred, not yet shown.
+All templates carry a stats line above the main prompt line: `$shell`/`$sudo`/`$shlvl`/`$env_var`
+first, then RAM / 1-min CPU load average / disk `/` usage % / `$cmd_duration`, then
+`$battery`/`$status`/`$jobs` last — network usage is deferred, not yet shown.
 
 | Template | Description | Best for |
 |----------|-------------|----------|
@@ -223,6 +224,9 @@ The separator glyph (`{{SEP_TRANS}}`, U+E0B0) and prompt character (`{{PROMPT_CH
 repo/
 └── src/
     ├── get-colors.py              ← palette viewer + JSON exporter
+    ├── COLORS.md                  ← human-browsable color reference (generated, committed)
+    ├── .assets/
+    │   └── swatches/               ← per-hex PNG swatches for COLORS.md (generated, committed)
     └── .config/
         ├── roles.json             ← role→colorname mappings (hand-edited)
         ├── palettes.json          ← all hex values (generated, committed)
@@ -279,23 +283,24 @@ Each role key lives under `"_roles"` in `roles.json`. `render-theme.py` resolves
 
 ### Starship prompt roles → `{{COLOR_*}}`
 
-The prompt is laid out as a chain of pills:
-
-```
-[BG pill: user@host (TEXT on BG)] → [SEG1: dir (FG on SEG1)] → [SEG2: git] → [SEG3: lang] → ...
-```
-
-`SEG0` uses `BG`/`TEXT` exclusively — `SEG[0]` exists in the array for completeness but is not applied to the user/host pill.
+The user/host pill uses `BG`/`TEXT` exclusively, colored separately from the `SEG` array. `SEG0`–`SEG5` color the rest of the prompt, and — because every template's stats line (row 1: shell/memory/cpu/disk/duration/battery cluster) and main line (row 2: os/dir/git/lang/tools/time) both draw from the same six-slot palette — each `SEG` index carries **two** meanings depending which line it's rendering:
 
 | Role | Placeholder | What it colors |
 |------|-------------|----------------|
 | `BG` | `{{COLOR_BG}}` | User/host pill background — **the theme identity anchor** |
 | `TEXT` | `{{COLOR_TEXT}}` | Text inside the user/host pill (contrasts with `BG`) |
-| `SEG` (array of 6) | `{{COLOR_SEG0}}`–`{{COLOR_SEG5}}` | Segment backgrounds left→right: user/host · dir · git · lang · docker · time |
-| `FG` | `{{COLOR_FG}}` | Foreground text on SEG1–SEG5 pills |
+| `SEG0` | `{{COLOR_SEG0}}` | Main line: `os` · Stats line: `shell`/`sudo`/`shlvl`/`env_var` |
+| `SEG1` | `{{COLOR_SEG1}}` | Main line: `dir` · Stats line: `memory` |
+| `SEG2` | `{{COLOR_SEG2}}` | Main line: `git` · Stats line: `cpu` |
+| `SEG3` | `{{COLOR_SEG3}}` | Main line: `lang` · Stats line: `disk` |
+| `SEG4` | `{{COLOR_SEG4}}` | Main line: `tools` (docker/terraform/conda/gcloud/aws) · Stats line: `duration` (`cmd_duration`) |
+| `SEG5` | `{{COLOR_SEG5}}` | Main line: `time` · Stats line: `battery`/`status`/`jobs` |
+| `FG` | `{{COLOR_FG}}` | Foreground text on SEG0–SEG5 pills |
 | `OK` | `{{COLOR_OK}}` | `❯` prompt character — last command succeeded |
 | `ERR` | `{{COLOR_ERR}}` | `❯` prompt character — last command failed |
 | `WARN` | `{{COLOR_WARN}}` | `❯` prompt character — vim replace/visual mode |
+
+For the actual resolved hex per theme/flavor, see `COLORS.md` — its Elements table carries these same two legend rows (`*(main line)*` / `*(stats line)*`) directly above each flavor's swatches.
 
 ### Dircolors roles → `{{DC_*}}`
 
@@ -465,6 +470,8 @@ If you want to colorize a new terminal component (e.g. tmux status line, fzf col
 
 `palettes.json` is committed to the repo. It is **not** regenerated at install time — users just get the version the repo owner committed. This guarantees consistency across all installs.
 
+`--export` also (re)generates two other committed files in the same run: `COLORS.md` (a human-browsable per-theme/flavor color reference — see the [Color roles reference](#color-roles-reference) section above for what each `SEG` slot means) and `.assets/swatches/*.png` (one small solid-color PNG per unique hex value, self-generated so `COLORS.md` shows real color swatches — GitHub's inline color-dot Markdown only renders inside issues/PRs/discussions, never inside repo files, so an image is the only way to show actual color there).
+
 ### When to regenerate
 
 - You added a new theme or flavor to `roles.json`
@@ -482,18 +489,20 @@ nvim --headless "+Lazy! sync" +qa
 Then run:
 
 ```bash
-# From the repo root — writes to src/.config/palettes.json automatically
+# From the repo root — writes src/.config/palettes.json, src/COLORS.md,
+# and src/.assets/swatches/*.png automatically
 python3 src/get-colors.py --export
 
-# Or to a custom path
+# Or to a custom palettes.json path (COLORS.md/.assets/swatches still write
+# next to that output path)
 python3 src/get-colors.py --export --output /tmp/palettes-preview.json
 ```
 
 Inspect the output, then commit:
 
 ```bash
-git add src/.config/palettes.json
-git commit -m "chore: refresh palettes.json"
+git add src/.config/palettes.json src/COLORS.md src/.assets/swatches
+git commit -m "chore: refresh palettes.json and COLORS.md"
 ```
 
 ### Verifying extraction accuracy

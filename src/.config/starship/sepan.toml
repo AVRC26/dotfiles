@@ -277,7 +277,7 @@ style = "fg:color_fg bg:color_seg5"
 # ==========status========
 
 [cmd_duration] #    
-format='[  $duration]($style)'
+format='[  $duration ]($style)'
 style='fg:color_fg bg:color_seg4'
 
 [character]
@@ -325,9 +325,9 @@ disabled = true
 
 [directory]
 style = "fg:color_fg bg:color_seg1"
-format = "[$read_only$path]($style)"
-read_only = '󰌾 ' #🔒
-home_symbol=" " #🏠
+format = "[$read_only$path ]($style)"
+read_only = '󰌾 '
+home_symbol=" "
 truncation_length = 0
 truncation_symbol = ""
 truncate_to_repo  = false

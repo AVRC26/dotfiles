@@ -24,7 +24,7 @@ $os\
 $username\
 $hostname\
 [](bg:color_seg1 fg:color_bg)\
-[  ](bg:color_seg1 fg:color_fg)\
+[ ](bg:color_seg1 fg:color_fg)\
 $directory\
 [ ](bg:color_seg1)\
 [](bg:color_seg2 fg:color_seg1)\
@@ -209,11 +209,12 @@ style  = 'bold fg:color_seg5'
 
 [directory]
 style             = "bg:color_seg1 fg:color_fg"
-format            = '[$path]($style)[$read_only]($read_only_style)'
-truncation_length = 3
-truncation_symbol = "~/"
-read_only         = ' 🔒'
-read_only_style   = 'bg:color_seg1'
+format            = '[$read_only$path]($style)'
+read_only = '󰌾 '
+home_symbol=" "
+truncation_length = 0
+truncation_symbol = ""
+truncate_to_repo  = false
 
 [git_branch]
 symbol = ""
@@ -469,7 +470,7 @@ format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
 [python]
 symbol = ""
 style  = "bg:color_seg3"
-format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+format = '[[ $symbol( $version) \($virtualenv\) ](fg:color_fg bg:color_seg3)]($style)'
 
 [quarto]
 symbol = "QUARTO"

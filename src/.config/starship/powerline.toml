@@ -206,7 +206,9 @@ format = '[ $hostname ]($style)'
 
 [directory]
 style = "fg:color_fg bg:color_seg1"
-format = "[ $path ]($style)"
+format = "[ $read_only$path ]($style)"
+read_only = '󰌾 '
+home_symbol=" "
 truncation_length = 0
 truncation_symbol = ""
 truncate_to_repo  = false
@@ -476,7 +478,7 @@ format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
 [python]
 symbol = ""
 style  = "bg:color_seg3"
-format = '[[ $symbol( $version) ](fg:color_fg bg:color_seg3)]($style)'
+format = '[[ $symbol( $version) \($virtualenv\) ](fg:color_fg bg:color_seg3)]($style)'
 
 [quarto]
 symbol = "QUARTO"
@@ -674,13 +676,12 @@ format   = '[[ $symbol $shlvl ](fg:color_fg bg:color_seg0)]($style)'
 
 [battery]
 disabled = true
-style    = "bg:color_seg5"
-format   = '[[ $symbol $percentage ](fg:color_fg bg:color_seg5)]($style)'
-
+format   = '[[ $symbol $percentage ](fg:color_fg bg:color_seg5)](bg:color_seg5)'
 full_symbol = "󰁹 "
 charging_symbol = "󰂄 "
 discharging_symbol = "󰁽 "
 empty_symbol = "󰂎 "
+
 [[battery.display]]
 threshold = 100
 style     = "bg:color_seg5"

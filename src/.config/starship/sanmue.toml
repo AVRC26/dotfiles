@@ -259,14 +259,10 @@ style    = 'fg:color_seg0 bg:color_bg'
 
 
 [directory]
-format = '[ ](fg:color_seg1 bg:color_bg)[$read_only]($read_only_style)[$repo_root]($repo_root_style)[$path ]($style)'
+format = '[ ](fg:color_seg1 bg:color_bg)[$read_only$path ]($style)'
 style = 'fg:color_seg1 bg:color_bg'
-home_symbol = ' ~'
-read_only = ' ' # ' ' # ' ''
-read_only_style = 'fg:color_seg1 bg:color_bg'
-repo_root_format = '[ ](fg:color_seg1 bg:color_bg)[$read_only]($read_only_style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path ]($style)'
-repo_root_style	= 'fg:color_seg1 bg:color_bg'
-disabled = false
+read_only = '󰌾 '
+home_symbol=" "
 truncation_length = 0
 truncation_symbol = ""
 truncate_to_repo  = false
@@ -548,7 +544,7 @@ style = 'fg:color_seg3 bg:color_bg'
 symbol = ''
 
 [python]
-format = '[ $symbol( $version )]($style)'
+format = '[ $symbol( $version ) \($virtualenv\)]($style)'
 style = 'fg:color_seg3 bg:color_bg'
 symbol = ''
 
@@ -724,8 +720,7 @@ style = 'fg:color_seg4 bg:color_bg'
 disabled = false
 
 [battery]
-format = "[ $symbol $percentage ]($style)"
-style = 'fg:color_seg5 bg:color_bg'
+format = "[ $symbol $percentage ](fg:color_seg5 bg:color_bg)"
 full_symbol = "󰁹"
 charging_symbol = "󰂄"
 discharging_symbol = "󰁽"
@@ -734,7 +729,6 @@ disabled = true
 
 [[battery.display]]
 threshold = 100
-style = 'fg:color_seg5 bg:color_bg'
 
 [time]
 format = "[  ](fg:color_seg0 bg:color_bg)[  $time ]($style)[](fg:color_bg)"

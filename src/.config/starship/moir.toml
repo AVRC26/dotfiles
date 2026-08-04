@@ -182,10 +182,13 @@ format   = "[ $hostname ](bg:color_bg fg:color_text)"
 
 [directory]
 style             = "bg:color_seg1 fg:color_fg"
-format            = "[ $path ]($style)"
+format = "[ $read_only$path ]($style)"
+read_only = '󰌾 '
+home_symbol=" "
 truncation_length = 0
 truncation_symbol = ""
 truncate_to_repo  = false
+
 [time]
 disabled    = false
 style       = "bg:color_seg0 fg:color_fg"
@@ -436,7 +439,7 @@ format = '[ $symbol $version ](bg:none fg:color_seg3)'
 [python]
 symbol = ""
 style  = "bg:none fg:color_seg3"
-format = '[ $symbol $version ](bg:none fg:color_seg3)'
+format = '[ $symbol $version \($virtualenv\) ](bg:none fg:color_seg3)'
 
 [quarto]
 symbol = "QUARTO"
