@@ -310,6 +310,22 @@ EXEC   01;{{DC_EXEC}}
 .snap  0;{{DC_ARCHIVE}}
 
 # ── Unimportant ───────────────────────────────────────────────
+.bash_history                 03;{{DC_DIMMED}}
+.dircolors                    03;{{DC_DIMMED}}
+.minttyrc                     03;{{DC_DIMMED}}
+.bashrc                       03;{{DC_DIMMED}}
+.gitconfig                    03;{{DC_DIMMED}}
+.sudo_as_admin_successful     03;{{DC_DIMMED}}
+.profile                      03;{{DC_DIMMED}}
+.bash_logout                  03;{{DC_DIMMED}}
+.bash_profile                 03;{{DC_DIMMED}}
+.inputrc                      03;{{DC_DIMMED}}
+.wget-hsts                    03;{{DC_DIMMED}}
+.lesshst                      03;{{DC_DIMMED}}
+.python_history                 03;{{DC_DIMMED}}
+.Xauthority                   03;{{DC_DIMMED}}
+.selected_editor                03;{{DC_DIMMED}}
+.netrc                        03;{{DC_DIMMED}}
 *#     0;{{DC_DIMMED}}
 *~     0;{{DC_DIMMED}}
 .log   0;{{DC_DIMMED}}

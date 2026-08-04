@@ -514,6 +514,11 @@ _LS_FILES: list[tuple[str, int | None]] = [
     ("model.parquet", None),
     # keys / certs
     ("server.pem", None),
+    # unknown
+    (".bashrc", None),
+    (".gitconfig", None),
+    (".minttyrc", None),
+    (".anything.skip", None),
 ]
 
 

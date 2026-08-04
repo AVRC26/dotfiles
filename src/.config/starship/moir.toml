@@ -113,7 +113,7 @@ $solidity\
 $direnv\
 $custom\
 $fill\
-[](fg:color_seg0 bg:none)\
+[](fg:color_seg5 bg:none)\
 $time\
 $line_break\
 [ ╰─](fg:color_seg5)\
@@ -141,8 +141,8 @@ style  = "bg:color_seg2 fg:color_fg"
 format = '[[ $symbol$branch ](bg:color_seg2 fg:color_fg)]($style)'
 
 [git_status]
-style  = "bg:color_seg2 fg:color_fg"
-format = '([ $all_status$ahead_behind ](bg:color_seg2 fg:color_fg))'
+style       = "bg:color_seg2 fg:color_fg"
+format      = '([ $all_status$ahead_behind ](bg:color_seg2 fg:color_fg))'
 conflicted  = "$count "
 ahead       = "$count"
 behind      = "$count"
@@ -169,6 +169,7 @@ added_style   = 'bg:color_seg2 fg:color_fg'
 deleted_style = 'bg:color_seg2 fg:color_fg'
 format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
 disabled      = false
+
 [username]
 show_always = true
 style_user  = "bg:color_bg fg:color_text"
@@ -182,43 +183,43 @@ format   = "[ $hostname ](bg:color_bg fg:color_text)"
 
 [directory]
 style             = "bg:color_seg1 fg:color_fg"
-format = "[ $read_only$path ]($style)"
-read_only = '󰌾 '
-home_symbol=" "
+format            = "[ $read_only$path ]($style)"
+read_only         = '󰌾 '
+home_symbol       = " "
 truncation_length = 0
 truncation_symbol = ""
 truncate_to_repo  = false
 
 [time]
-disabled    = false
-style       = "bg:color_seg0 fg:color_fg"
-format      = '[ $time ](bg:color_seg0 fg:color_fg)'
+disabled = false
+style    = "bg:color_seg5 fg:color_fg"
+format   = '[ $time ](bg:color_seg5 fg:color_fg)'
 
 [memory_usage]
-disabled   = false
-threshold  = -1
-style      = "bg:color_seg1 fg:color_fg"
-format     = '[ 󰍛 ${ram_pct} ](bg:color_seg1 fg:color_fg)'
+disabled  = false
+threshold = -1
+style     = "bg:color_seg1 fg:color_fg"
+format    = '[ 󰍛 ${ram_pct} ](bg:color_seg1 fg:color_fg)'
 
 [custom.cpu_load]
 description = "1-minute load average"
-command = "awk '{print $1}' /proc/loadavg"
-symbol = "󰻠"
-style      = "bg:color_seg2 fg:color_fg"
-format     = '[ $symbol $output ](bg:color_seg2 fg:color_fg)'
-when = "true"
+command     = "awk '{print $1}' /proc/loadavg"
+symbol      = "󰻠"
+style       = "bg:color_seg2 fg:color_fg"
+format      = '[ $symbol $output ](bg:color_seg2 fg:color_fg)'
+when        = "true"
 
 [custom.disk_usage]
 description = "Used % of root filesystem"
-command = "df -h / | awk 'NR==2{print $5}'"
-symbol = "󰋊"
-style      = "bg:color_seg3 fg:color_fg"
-format     = '[ $symbol $output ](bg:color_seg3 fg:color_fg)'
-when = "true"
+command     = "df -h / | awk 'NR==2{print $5}'"
+symbol      = "󰋊"
+style       = "bg:color_seg3 fg:color_fg"
+format      = '[ $symbol $output ](bg:color_seg3 fg:color_fg)'
+when        = "true"
 
 [cmd_duration]
-style  = "bg:color_seg4 fg:color_fg"
-format = '[  $duration ](bg:color_seg4 fg:color_fg)'
+style    = "bg:color_seg4 fg:color_fg"
+format   = '[  $duration ](bg:color_seg4 fg:color_fg)'
 disabled = false
 
 [cpp]
@@ -572,11 +573,11 @@ style  = "bg:none fg:color_seg4"
 format = '[ $symbol $context ](bg:none fg:color_seg4)'
 
 [battery]
-disabled = true
-full_symbol = "󰁹"
-charging_symbol = "󰂄"
+disabled           = true
+full_symbol        = "󰁹"
+charging_symbol    = "󰂄"
 discharging_symbol = "󰁽"
-empty_symbol = "󰂎"
+empty_symbol       = "󰂎"
 format             = '[ $symbol $percentage ](bg:color_seg5 fg:color_fg) '
 
 [[battery.display]]
@@ -586,91 +587,91 @@ style     = "bg:color_seg5 fg:color_fg"
 [os]
 disabled = false
 style    = "bg:color_seg0 fg:color_bg"
-format = "[ $symbol ]($style)"
+format   = "[ $symbol ]($style)"
 
 [os.symbols]
-AIX = "➿"
-Alpaquita = ""
-Alpine = ""
-AlmaLinux = ""
-ALTLinux = "Ⓐ"
-Amazon = ""
-Android = ""
-AOSC = "🐱"
-Arch = ""
-Artix = ""
-Bluefin = "🐟"
-CachyOS = ""
-CentOS = ""
-Debian = ""
-DragonFly = ""
-Elementary = "🍏"
-Emscripten = ""
-EndeavourOS = ""
-Fedora = ""
-FreeBSD = ""
-Garuda = "󰛓"
-Gentoo = ""
-HardenedBSD = "󰞌"
-Illumos = ""
-Ios = "📱"
-InstantOS = "⏲️"
-Kali = ""
-Linux = ""
-Mabox = ""
-Macos = ""
-Manjaro = ""
-Mariner = ""
-MidnightBSD = ""
-Mint = ""
-NetBSD = ""
-NixOS = ""
-Nobara = ""
-OpenBSD = ""
-OpenCloudOS = ""
-openEuler = ""
-openSUSE = ""
-OracleLinux = ""
-PikaOS = "🐤"
-Pop = ""
-Raspbian = ""
-Redhat = ""
+AIX              = "➿"
+Alpaquita        = ""
+Alpine           = ""
+AlmaLinux        = ""
+ALTLinux         = "Ⓐ"
+Amazon           = ""
+Android          = ""
+AOSC             = "🐱"
+Arch             = ""
+Artix            = ""
+Bluefin          = "🐟"
+CachyOS          = ""
+CentOS           = ""
+Debian           = ""
+DragonFly        = ""
+Elementary       = "🍏"
+Emscripten       = ""
+EndeavourOS      = ""
+Fedora           = ""
+FreeBSD          = ""
+Garuda           = "󰛓"
+Gentoo           = ""
+HardenedBSD      = "󰞌"
+Illumos          = ""
+Ios              = "📱"
+InstantOS        = "⏲️"
+Kali             = ""
+Linux            = ""
+Mabox            = ""
+Macos            = ""
+Manjaro          = ""
+Mariner          = ""
+MidnightBSD      = ""
+Mint             = ""
+NetBSD           = ""
+NixOS            = ""
+Nobara           = ""
+OpenBSD          = ""
+OpenCloudOS      = ""
+openEuler        = ""
+openSUSE         = ""
+OracleLinux      = ""
+PikaOS           = "🐤"
+Pop              = ""
+Raspbian         = ""
+Redhat           = ""
 RedHatEnterprise = ""
-Redox = "󰀘"
-RockyLinux = ""
-Solus = "󰠳"
-SUSE = ""
-Ubuntu = ""
-Ultramarine = "󰼮"
-Unknown = ""
-Void = ""
-Windows = ""
-Zorin = "🔹"
+Redox            = "󰀘"
+RockyLinux       = ""
+Solus            = "󰠳"
+SUSE             = ""
+Ubuntu           = ""
+Ultramarine      = "󰼮"
+Unknown          = ""
+Void             = ""
+Windows          = ""
+Zorin            = "🔹"
 
 [shell]
-disabled = false
-bash_indicator = ''
-fish_indicator='󰈺'
-zsh_indicator="󰰶"
+disabled             = false
+bash_indicator       = ''
+fish_indicator       = '󰈺'
+zsh_indicator        = "󰰶"
 powershell_indicator = ''
-cmd_indicator = ''
-ion_indicator = ''
-elvish_indicator = "󰘧"
-tcsh_indicator = "󰰤"
-nu_indicator = "❯"
-xonsh_indicator = ""
-unknown_indicator = ''
-style    = "bg:color_seg0 fg:color_fg"
-format   = '[ $indicator ](bg:color_seg0 fg:color_fg)'
+cmd_indicator        = ''
+ion_indicator        = ''
+elvish_indicator     = "󰘧"
+tcsh_indicator       = "󰰤"
+nu_indicator         = "❯"
+xonsh_indicator      = ""
+unknown_indicator    = ''
+style                = "bg:color_seg0 fg:color_fg"
+format               = '[ $indicator ](bg:color_seg0 fg:color_fg)'
 
 [sudo]
-symbol = ''
+symbol   = ''
 style    = "bg:color_seg0 fg:color_fg"
 format   = '[ $symbol ](bg:color_seg0 fg:color_fg)'
 disabled = false
 
 [shlvl]
-symbol = ''
+symbol   = ''
 style    = "bg:color_seg0 fg:color_fg"
 format   = '[ $symbol $shlvl ](bg:color_seg0 fg:color_fg)'
 disabled = false
@@ -680,12 +681,12 @@ disabled = false
 format   = '[ $status:$common_meaning ](bg:color_seg5 fg:color_err)'
 
 [jobs]
-symbol = ''
+symbol           = ''
 number_threshold = 1
 symbol_threshold = 1
 style            = "bg:color_seg5 fg:color_fg"
 format           = '[ $symbol $number ](bg:color_seg5 fg:color_fg)'
-disabled = false
+disabled         = false
 
 [fill]
 symbol = '·'
@@ -694,4 +695,4 @@ style  = 'fg:color_seg5'
 [character]
 success_symbol = '[❯](bold blink fg:color_ok)'
 error_symbol   = '[❯](bold blink fg:color_err)'
-vimcmd_symbol  = '[❯](bold fg:color_ok)' 
+vimcmd_symbol  = '[❯](bold fg:color_ok)'

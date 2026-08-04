@@ -1,4 +1,4 @@
-﻿# Starship Prompt — dracula layout, colors driven by set-theme.
+# Starship Prompt — dracula layout, colors driven by set-theme.
 # Credit: https://github.com/starship/starship/discussions/1107#discussioncomment-11130385
 
 format = """
@@ -102,7 +102,7 @@ $line_break\
 $character\
 """
 
-palette = 'theme'
+palette     = 'theme'
 add_newline = true
 
 [palettes.theme]
@@ -127,77 +127,77 @@ color_warn = "{{COLOR_WARN}}"
 #   [](fg:color_seg5)                            — close
 
 [os]
-format = '[](fg:color_seg0)[ $symbol ](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
+format   = '[](fg:color_seg0)[ $symbol ](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
 disabled = false
 
 [os.symbols]
-AIX = '➿'
-Alpaquita = ''
-Alpine = ''
-AlmaLinux = ''
-ALTLinux = 'Ⓐ'
-Amazon = ''
-Android = ''
-AOSC = '🐱'
-Arch = ''
-Artix = ''
-Bluefin = '🐟'
-CachyOS = ''
-CentOS = ''
-Debian = ''
-DragonFly = ''
-Elementary = '🍏'
-Emscripten = ''
-EndeavourOS = ''
-Fedora = ''
-FreeBSD = ''
-Garuda = '󰛓'
-Gentoo = ''
-HardenedBSD = '󰞌'
-Illumos = ''
-Ios = '📱'
-InstantOS = '⏲️'
-Kali = ''
-Linux = ''
-Mabox = ''
-Macos = ''
-Manjaro = ''
-Mariner = ''
-MidnightBSD = ''
-Mint = ''
-NetBSD = ''
-NixOS = ''
-Nobara = ''
-OpenBSD = ''
-OpenCloudOS = ''
-openEuler = ''
-openSUSE = ''
-OracleLinux = ''
-PikaOS = '🐤'
-Pop = ''
-Raspbian = ''
-Redhat = ''
+AIX              = '➿'
+Alpaquita        = ''
+Alpine           = ''
+AlmaLinux        = ''
+ALTLinux         = 'Ⓐ'
+Amazon           = ''
+Android          = ''
+AOSC             = '🐱'
+Arch             = ''
+Artix            = ''
+Bluefin          = '🐟'
+CachyOS          = ''
+CentOS           = ''
+Debian           = ''
+DragonFly        = ''
+Elementary       = '🍏'
+Emscripten       = ''
+EndeavourOS      = ''
+Fedora           = ''
+FreeBSD          = ''
+Garuda           = '󰛓'
+Gentoo           = ''
+HardenedBSD      = '󰞌'
+Illumos          = ''
+Ios              = '📱'
+InstantOS        = '⏲️'
+Kali             = ''
+Linux            = ''
+Mabox            = ''
+Macos            = ''
+Manjaro          = ''
+Mariner          = ''
+MidnightBSD      = ''
+Mint             = ''
+NetBSD           = ''
+NixOS            = ''
+Nobara           = ''
+OpenBSD          = ''
+OpenCloudOS      = ''
+openEuler        = ''
+openSUSE         = ''
+OracleLinux      = ''
+PikaOS           = '🐤'
+Pop              = ''
+Raspbian         = ''
+Redhat           = ''
 RedHatEnterprise = ''
-Redox = '󰀘'
-RockyLinux = ''
-Solus = '󰠳'
-SUSE = ''
-Ubuntu = ''
-Ultramarine = '󰼮'
-Unknown = ''
-Void = ''
-Windows = ''
-Zorin = '🔹'
+Redox            = '󰀘'
+RockyLinux       = ''
+Solus            = '󰠳'
+SUSE             = ''
+Ubuntu           = ''
+Ultramarine      = '󰼮'
+Unknown          = ''
+Void             = ''
+Windows          = ''
+Zorin            = '🔹'
 
 [hostname]
 ssh_only = false
 style    = "fg:color_bg bg:color_seg0"
-format      = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_bg)[ $hostname](fg:color_text bg:color_bg)[](fg:color_bg)'
+format   = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_bg)[ $hostname](fg:color_text bg:color_bg)[](fg:color_bg)'
 
 [directory]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰷏 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg1)[ $read_only$path](fg:color_bg bg:color_seg1)[](fg:color_seg1)'
-read_only = '󰌾 '
-home_symbol=" "
+format            = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰷏 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg1)[ $read_only$path](fg:color_bg bg:color_seg1)[](fg:color_seg1)'
+read_only         = '󰌾 '
+home_symbol       = " "
 truncation_length = 0
 truncation_symbol = ""
 truncate_to_repo  = false
@@ -207,8 +207,8 @@ format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_s
 symbol = ''
 
 [git_status]
-style  = 'bg:color_seg2 fg:color_bg'
-format = '([ $all_status$ahead_behind ]($style))'
+style       = 'bg:color_seg2 fg:color_bg'
+format      = '([ $all_status$ahead_behind ]($style))'
 conflicted  = "$count "
 ahead       = "$count"
 behind      = "$count"
@@ -444,22 +444,22 @@ format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰰘 ](fg:color_bg bg:color_
 format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰯭 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [sudo]
-symbol = ''
+symbol   = ''
 format   = '[─](fg:color_seg5)[](fg:color_seg5)[ $symbol ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg0)[](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
 disabled = false
 
 [shlvl]
-symbol = ''
+symbol   = ''
 format   = '[─](fg:color_seg5)[](fg:color_seg5)[ $symbol ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg0)[ $shlvl ](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
 disabled = false
 
 [battery]
-full_symbol = "󰁹"
-charging_symbol = "󰂄"
+full_symbol        = "󰁹"
+charging_symbol    = "󰂄"
 discharging_symbol = "󰁽"
-empty_symbol = "󰂎"
-format   = '[─](fg:color_seg5)[](fg:color_seg5)[ $symbol ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg5)[ $percentage ](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
-disabled = true
+empty_symbol       = "󰂎"
+format             = '[─](fg:color_seg5)[](fg:color_seg5)[ $symbol ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg5)[ $percentage ](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+disabled           = true
 
 [[battery.display]]
 threshold = 100
@@ -470,11 +470,11 @@ disabled = false
 format   = '[─](fg:color_seg5)[](fg:color_seg5)[ $status ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg5)[ $common_meaning ](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
 
 [jobs]
-symbol = ''
+symbol           = ''
 number_threshold = 1
 symbol_threshold = 1
-format   = '[─](fg:color_seg5)[](fg:color_seg5)[ $symbol ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg5)[ $number ](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
-disabled = false
+format           = '[─](fg:color_seg5)[](fg:color_seg5)[ $symbol ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg5)[ $number ](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+disabled         = false
 
 
 [memory_usage]
@@ -484,15 +484,15 @@ disabled  = false
 
 [custom.cpu_load]
 description = "1-minute load average"
-command = "awk '{print $1}' /proc/loadavg"
-when = "true"
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰻠 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg2)[ $output ](fg:color_bg bg:color_seg2)[](fg:color_seg2)'
+command     = "awk '{print $1}' /proc/loadavg"
+when        = "true"
+format      = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰻠 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg2)[ $output ](fg:color_bg bg:color_seg2)[](fg:color_seg2)'
 
 [custom.disk_usage]
 description = "Used % of root filesystem"
-command = "df -h / | awk 'NR==2{print $5}'"
-when = "true"
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  󰋊 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $output ](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+command     = "df -h / | awk 'NR==2{print $5}'"
+when        = "true"
+format      = '[─](fg:color_seg5)[](fg:color_seg5)[  󰋊 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $output ](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [fill]
 symbol = '─'
@@ -503,23 +503,23 @@ format   = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color
 disabled = false
 
 [shell]
-format              = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg0)[ $indicator ](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
-disabled=false
-bash_indicator = ''
-fish_indicator='󰈺'
-zsh_indicator="󰰶"
+format               = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg0)[ $indicator ](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
+disabled             = false
+bash_indicator       = ''
+fish_indicator       = '󰈺'
+zsh_indicator        = "󰰶"
 powershell_indicator = ''
-cmd_indicator = ''
-ion_indicator = ''
-elvish_indicator = "󰘧"
-tcsh_indicator = "󰰤"
-nu_indicator = "❯"
-xonsh_indicator = ""
-unknown_indicator = ''
+cmd_indicator        = ''
+ion_indicator        = ''
+elvish_indicator     = "󰘧"
+tcsh_indicator       = "󰰤"
+nu_indicator         = "❯"
+xonsh_indicator      = ""
+unknown_indicator    = ''
 
 [time]
-format      = '[─](fg:color_seg5)[](fg:color_seg5)[󰦖 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg0)[ $time](fg:color_bg bg:color_seg0)[](fg:color_seg0) '
-disabled    = false
+format   = '[─](fg:color_seg5)[](fg:color_seg5)[󰦖 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg5)[ $time](fg:color_bg bg:color_seg5)[](fg:color_seg5) '
+disabled = false
 
 [username]
 format      = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰀄 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_bg)[ $user](fg:color_text bg:color_bg)[](fg:color_bg)'

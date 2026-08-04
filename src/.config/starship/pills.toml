@@ -1,4 +1,4 @@
-﻿# Starship Prompt — pills layout, colors driven by set-theme.
+# Starship Prompt — pills layout, colors driven by set-theme.
 # Credit: https://github.com/TaouMou/starship-presets
 
 "$schema" = 'https://starship.rs/config-schema.json'
@@ -101,7 +101,7 @@ $time
 """
 
 add_newline = true
-palette = 'theme'
+palette     = 'theme'
 
 [palettes.theme]
 color_seg0 = "{{COLOR_SEG0}}"
@@ -119,20 +119,20 @@ color_warn = "{{COLOR_WARN}}"
 
 [username]
 show_always = true
-style_user = 'bg:color_bg fg:color_text'
-style_root = 'bg:color_err fg:color_text'
-format = '[](fg:color_bg)[ $user ](bg:color_bg fg:color_text)'
+style_user  = 'bg:color_bg fg:color_text'
+style_root  = 'bg:color_err fg:color_text'
+format      = '[](fg:color_bg)[ $user ](bg:color_bg fg:color_text)'
 
 [hostname]
 ssh_only = false
-style = 'bg:color_bg fg:color_text'
-format = '[ $hostname ]($style)[](fg:color_bg) '
+style    = 'bg:color_bg fg:color_text'
+format   = '[ $hostname ]($style)[](fg:color_bg) '
 
 [directory]
-style = 'fg:color_fg bg:color_seg1'
-format = '[](fg:color_seg1)[ $read_only$path ]($style)[](fg:color_seg1) '
-read_only = '󰌾 '
-home_symbol=" "
+style             = 'fg:color_fg bg:color_seg1'
+format            = '[](fg:color_seg1)[ $read_only$path ]($style)[](fg:color_seg1) '
+read_only         = '󰌾 '
+home_symbol       = " "
 truncation_length = 0
 truncation_symbol = ""
 truncate_to_repo  = false
@@ -142,8 +142,8 @@ symbol = ''
 format = '[](fg:color_seg2)[  $branch ](bg:color_seg2 fg:color_fg)'
 
 [git_status]
-style  = 'bg:color_seg2 fg:color_fg'
-format = '([$all_status$ahead_behind ]($style))'
+style       = 'bg:color_seg2 fg:color_fg'
+format      = '([$all_status$ahead_behind ]($style))'
 conflicted  = "$count "
 ahead       = "$count"
 behind      = "$count"
@@ -172,31 +172,31 @@ format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
 disabled      = false
 
 [cmd_duration]
-format = ' [](fg:color_seg4)[  $duration](bg:color_seg4 fg:color_fg)[](fg:color_seg4) '
+format   = ' [](fg:color_seg4)[  $duration](bg:color_seg4 fg:color_fg)[](fg:color_seg4) '
 disabled = false
 
 [shell]
-disabled = false
-bash_indicator = ''
-fish_indicator='󰈺'
-zsh_indicator="󰰶"
+disabled             = false
+bash_indicator       = ''
+fish_indicator       = '󰈺'
+zsh_indicator        = "󰰶"
 powershell_indicator = ''
-cmd_indicator = ''
-ion_indicator = ''
-elvish_indicator = "󰘧"
-tcsh_indicator = "󰰤"
-nu_indicator = "❯"
-xonsh_indicator = ""
-unknown_indicator = ''
-format   = '[](fg:color_seg0)[ $indicator ](bg:color_seg0 fg:color_fg)[](fg:color_seg0) '
+cmd_indicator        = ''
+ion_indicator        = ''
+elvish_indicator     = "󰘧"
+tcsh_indicator       = "󰰤"
+nu_indicator         = "❯"
+xonsh_indicator      = ""
+unknown_indicator    = ''
+format               = '[](fg:color_seg0)[ $indicator ](bg:color_seg0 fg:color_fg)[](fg:color_seg0) '
 
 [sudo]
-symbol = ''
+symbol   = ''
 disabled = false
 format   = '[](fg:color_seg0)[ $symbol ](bg:color_seg0 fg:color_fg)[](fg:color_seg0) '
 
 [shlvl]
-symbol = ''
+symbol   = ''
 disabled = false
 format   = '[](fg:color_seg0)[ $symbol $shlvl ](bg:color_seg0 fg:color_fg)[](fg:color_seg0) '
 
@@ -204,10 +204,11 @@ format   = '[](fg:color_seg0)[ $symbol $shlvl ](bg:color_seg0 fg:color_fg)[�
 disabled = true
 format   = '[](fg:color_seg5)[ $symbol $percentage ](bg:color_seg5 fg:color_fg)[](fg:color_seg5) '
 
-full_symbol = "󰁹"
-charging_symbol = "󰂄"
+full_symbol        = "󰁹"
+charging_symbol    = "󰂄"
 discharging_symbol = "󰁽"
-empty_symbol = "󰂎"
+empty_symbol       = "󰂎"
+
 [[battery.display]]
 threshold = 100
 style     = 'bg:color_seg5 fg:color_fg'
@@ -217,357 +218,357 @@ disabled = false
 format   = '[](fg:color_seg5)[ $status:$common_meaning ](bg:color_seg5 fg:color_err)[](fg:color_seg5) '
 
 [jobs]
-symbol = ''
+symbol           = ''
 number_threshold = 1
 symbol_threshold = 1
-disabled = false
+disabled         = false
 format           = '[](fg:color_seg5)[ $symbol $number ](bg:color_seg5 fg:color_fg)[](fg:color_seg5) '
 
 
 [buf]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [bun]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [c]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [cmake]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [cobol]
-symbol = '⚙️'
+symbol   = '⚙️'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [conda]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [crystal]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [daml]
-symbol = '𝜦'
+symbol   = '𝜦'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [dart]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [deno]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [dotnet]
-symbol = '󰪮'
+symbol   = '󰪮'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [elixir]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [elm]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [erlang]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [fennel]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [fortran]
-symbol = '󱈚'
+symbol   = '󱈚'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [gleam]
-symbol = 'GLEAM'
+symbol   = 'GLEAM'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [golang]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [gradle]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [haxe]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [helm]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [haskell]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [java]
-symbol = '☕'
+symbol   = '☕'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [julia]
-symbol = 'ஃ'
+symbol   = 'ஃ'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [kotlin]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [lua]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [maven]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [meson]
-symbol = '󰔷'
+symbol   = '󰔷'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [mise]
-symbol = '󰰏'
+symbol   = '󰰏'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [mojo]
-symbol = 'MOJO'
+symbol   = 'MOJO'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [nats]
-symbol = '󰰒'
+symbol   = '󰰒'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [nim]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [nix_shell]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [nodejs]
-symbol = '󰎙'
+symbol   = '󰎙'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [ocaml]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [odin]
-symbol = 'ODIN'
+symbol   = 'ODIN'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [opa]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [package]
-symbol = '󰏗'
+symbol   = '󰏗'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [perl]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [php]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [pulumi]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [purescript]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [python]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version \($virtualenv\)](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version \($virtualenv\)](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [quarto]
-symbol = 'QUARTO'
+symbol   = 'QUARTO'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [raku]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [red]
-symbol = 'RED'
+symbol   = 'RED'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [rlang]
-symbol = '󰟔'
+symbol   = '󰟔'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [ruby]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [scala]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [rust]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [spack]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [swift]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [typst]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [vagrant]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [vlang]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [xmake]
-symbol = '󰰰'
+symbol   = '󰰰'
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [zig]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+format   = ' [](fg:color_seg3)[ $symbol $version](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [aws]
-symbol = '󰸏'
+symbol   = '󰸏'
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $profile](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $profile](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [azure]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $subscription](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $subscription](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [container]
-symbol = '󰡨'
+symbol   = '󰡨'
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [docker_context]
-symbol = '󰡨'
+symbol   = '󰡨'
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [gcloud]
-symbol = '󱇶'
+symbol   = '󱇶'
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $account](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $account](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [guix_shell]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [kubernetes]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [terraform]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $version](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $version](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [netns]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $name](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $name](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [openstack]
-symbol = ''
+symbol   = ''
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $name](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $name](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [pixi]
-symbol = '󰰘'
+symbol   = '󰰘'
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [singularity]
-symbol = '󰯭'
+symbol   = '󰯭'
 disabled = false
-format = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
+format   = ' [](fg:color_seg4)[ $symbol $context](bg:color_seg4 fg:color_fg)[](fg:color_seg4)'
 
 [character]
 success_symbol = '[❯](bold blink fg:color_ok)'
@@ -575,68 +576,68 @@ error_symbol   = '[❯](bold blink fg:color_err)'
 vimcmd_symbol  = '[❮](bold fg:color_ok)'
 
 [os]
-style = 'fg:color_fg bg:color_seg0'
-format = '[](fg:color_seg0)[ $symbol ]($style)[](fg:color_seg0) '
+style    = 'fg:color_fg bg:color_seg0'
+format   = '[](fg:color_seg0)[ $symbol ]($style)[](fg:color_seg0) '
 disabled = false
 
 [os.symbols]
-AIX = '➿'
-Alpaquita = ''
-Alpine = ''
-AlmaLinux = ''
-ALTLinux = 'Ⓐ'
-Amazon = ''
-Android = ''
-AOSC = '🐱'
-Arch = ''
-Artix = ''
-Bluefin = '🐟'
-CachyOS = ''
-CentOS = ''
-Debian = ''
-DragonFly = ''
-Elementary = '🍏'
-Emscripten = ''
-EndeavourOS = ''
-Fedora = ''
-FreeBSD = ''
-Garuda = '󰛓'
-Gentoo = ''
-HardenedBSD = '󰞌'
-Illumos = ''
-Ios = '📱'
-InstantOS = '⏲️'
-Kali = ''
-Linux = ''
-Mabox = ''
-Macos = ''
-Manjaro = ''
-Mariner = ''
-MidnightBSD = ''
-Mint = ''
-NetBSD = ''
-NixOS = ''
-Nobara = ''
-OpenBSD = ''
-OpenCloudOS = ''
-openEuler = ''
-openSUSE = ''
-OracleLinux = ''
-PikaOS = '🐤'
-Pop = ''
-Raspbian = ''
-Redhat = ''
+AIX              = '➿'
+Alpaquita        = ''
+Alpine           = ''
+AlmaLinux        = ''
+ALTLinux         = 'Ⓐ'
+Amazon           = ''
+Android          = ''
+AOSC             = '🐱'
+Arch             = ''
+Artix            = ''
+Bluefin          = '🐟'
+CachyOS          = ''
+CentOS           = ''
+Debian           = ''
+DragonFly        = ''
+Elementary       = '🍏'
+Emscripten       = ''
+EndeavourOS      = ''
+Fedora           = ''
+FreeBSD          = ''
+Garuda           = '󰛓'
+Gentoo           = ''
+HardenedBSD      = '󰞌'
+Illumos          = ''
+Ios              = '📱'
+InstantOS        = '⏲️'
+Kali             = ''
+Linux            = ''
+Mabox            = ''
+Macos            = ''
+Manjaro          = ''
+Mariner          = ''
+MidnightBSD      = ''
+Mint             = ''
+NetBSD           = ''
+NixOS            = ''
+Nobara           = ''
+OpenBSD          = ''
+OpenCloudOS      = ''
+openEuler        = ''
+openSUSE         = ''
+OracleLinux      = ''
+PikaOS           = '🐤'
+Pop              = ''
+Raspbian         = ''
+Redhat           = ''
 RedHatEnterprise = ''
-Redox = '󰀘'
-RockyLinux = ''
-Solus = '󰠳'
-SUSE = ''
-Ubuntu = ''
-Ultramarine = '󰼮'
-Unknown = ''
-Void = ''
-Windows = ''
-Zorin = '🔹'
+Redox            = '󰀘'
+RockyLinux       = ''
+Solus            = '󰠳'
+SUSE             = ''
+Ubuntu           = ''
+Ultramarine      = '󰼮'
+Unknown          = ''
+Void             = ''
+Windows          = ''
+Zorin            = '🔹'
 
 [memory_usage]
 format    = '[](fg:color_seg1)[ 󰍛 ${ram_pct} ](bg:color_seg1 fg:color_fg)[](fg:color_seg1)'
@@ -645,17 +646,17 @@ disabled  = false
 
 [custom.cpu_load]
 description = "1-minute load average"
-command = "awk '{print $1}' /proc/loadavg"
-when = "true"
-format = ' [](fg:color_seg2)[ 󰻠 $output ](bg:color_seg2 fg:color_fg)[](fg:color_seg2)'
+command     = "awk '{print $1}' /proc/loadavg"
+when        = "true"
+format      = ' [](fg:color_seg2)[ 󰻠 $output ](bg:color_seg2 fg:color_fg)[](fg:color_seg2)'
 
 [custom.disk_usage]
 description = "Used % of root filesystem"
-command = "df -h / | awk 'NR==2{print $5}'"
-when = "true"
-format = ' [](fg:color_seg3)[ 󰋊 $output ](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
+command     = "df -h / | awk 'NR==2{print $5}'"
+when        = "true"
+format      = ' [](fg:color_seg3)[ 󰋊 $output ](bg:color_seg3 fg:color_fg)[](fg:color_seg3)'
 
 [time]
-disabled    = false
-style       = "bg:color_seg0 fg:color_fg"
-format      = ' [](fg:color_seg0)[ $time ](bg:color_seg0 fg:color_fg)[](fg:color_seg0)'
+disabled = false
+style    = "bg:color_seg5 fg:color_fg"
+format   = ' [](fg:color_seg5)[ $time ](bg:color_seg5 fg:color_fg)[](fg:color_seg5)'
