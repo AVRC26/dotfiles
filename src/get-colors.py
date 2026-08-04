@@ -46,8 +46,10 @@ import json
 import logging
 import os
 import re
+import struct
 import sys
 import tempfile
+import zlib
 from typing import Any, cast
 
 logger = logging.getLogger("get-colors")
@@ -783,30 +785,105 @@ def _validate_seg_roles(data: dict[str, Any]) -> list[str]:
     return errors
 
 
-_ELEMENT_SLOTS: list[tuple[str, str]] = [
-    ("os", "seg0"),
-    ("dir", "seg1"),
-    ("git", "seg2"),
-    ("lang", "seg3"),
-    ("tools", "seg4"),
-    ("time", "seg5"),
+# Two legend rows for the Elements table: what each color_segN slot means on the
+# prompt's main line vs. its stats line (both lines reuse the same seg0-seg5 palette
+# for different module clusters — see any src/.config/starship/*.toml format string).
+_MAIN_LINE_LEGEND = ["os", "dir", "git", "lang", "tools", "time", "user/host"]
+_STATS_LINE_LEGEND = [
+    "shell<br/>sudo<br/>shlvl<br/>env_var",
+    "memory",
+    "cpu",
+    "disk",
+    "duration",
+    "battery<br/>status<br/>jobs",
+    "-",
 ]
+_SEG_COUNT = 6  # color_seg0 .. color_seg5
 
 
-def _swatch(hex_color: str) -> str:
-    """Wrap a hex color for GitHub's inline color-swatch Markdown convention.
+_HEX_RE = re.compile(r"^#[0-9a-fA-F]{6}$")
+
+
+_SWATCH_WIDTH = 60
+_SWATCH_HEIGHT = 15
+
+
+def _make_swatch_png(
+    hex_color: str, width: int = _SWATCH_WIDTH, height: int = _SWATCH_HEIGHT
+) -> bytes:
+    """Render a solid-color rectangle as PNG bytes, using only the stdlib.
 
     Args:
-        hex_color: A `#rrggbb` color string. Returned unchanged (unwrapped)
-            if empty or not a recognizable hex color.
+        hex_color: A validated `#rrggbb` color string.
+        width: Image width in pixels.
+        height: Image height in pixels.
 
     Returns:
-        The color wrapped in backticks (renders a swatch on github.com), or
-        an em dash if no color was resolved.
+        Raw PNG file bytes (8-bit truecolor, no alpha).
     """
-    if not hex_color:
+    r, g, b = (int(hex_color[i : i + 2], 16) for i in (1, 3, 5))
+
+    def chunk(tag: bytes, body: bytes) -> bytes:
+        return (
+            struct.pack(">I", len(body))
+            + tag
+            + body
+            + struct.pack(">I", zlib.crc32(tag + body) & 0xFFFFFFFF)
+        )
+
+    sig = b"\x89PNG\r\n\x1a\n"
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)  # 8-bit depth, RGB
+    row = bytes([r, g, b]) * width
+    raw = b"".join(b"\x00" + row for _ in range(height))  # filter-type 0 per scanline
+    idat = zlib.compress(raw, 9)
+    return sig + chunk(b"IHDR", ihdr) + chunk(b"IDAT", idat) + chunk(b"IEND", b"")
+
+
+def _ensure_swatch_png(hex_color: str, swatch_dir: str) -> str | None:
+    """Write a swatch PNG for `hex_color` under `swatch_dir` if not already present.
+
+    Args:
+        hex_color: A `#rrggbb` color string (case-insensitive), or empty/invalid.
+        swatch_dir: Directory (created if missing) to hold `{hex}.png` files.
+
+    Returns:
+        The swatch's filename (e.g. `"c72a3c.png"`), or None if `hex_color` isn't
+        a valid 6-digit hex color.
+    """
+    if not hex_color or not _HEX_RE.match(hex_color):
+        return None
+    name = hex_color[1:].lower() + ".png"
+    path = os.path.join(swatch_dir, name)
+    if not os.path.exists(path):
+        os.makedirs(swatch_dir, exist_ok=True)
+        with open(path, "wb") as f:
+            f.write(_make_swatch_png(hex_color))
+    return name
+
+
+def _swatch(hex_color: str, swatch_dir: str) -> str:
+    """Render a hex color as an inline PNG swatch image plus its hex text.
+
+    GitHub's backtick color-dot annotation only works in issues/PRs/discussions,
+    never in repository Markdown files, so a self-generated image is the only way
+    to show real color in COLORS.md.
+
+    Args:
+        hex_color: A `#rrggbb` color string, or empty if unresolved.
+        swatch_dir: Directory holding (or to receive) the generated PNG files.
+
+    Returns:
+        `<img>`, a `<br/>`, then backtick-hex Markdown, or an em dash if no color
+        was resolved.
+    """
+    name = _ensure_swatch_png(hex_color, swatch_dir)
+    if not name:
         return "—"
-    return f"`{hex_color}`"
+    rel = f".assets/swatches/{name}"
+    return (
+        f'<img src="{rel}" width="{_SWATCH_WIDTH}" height="{_SWATCH_HEIGHT}" '
+        f'alt="{hex_color}"><br/>`{hex_color}`'
+    )
 
 
 def _flavor_names(theme_body: dict[str, Any]) -> list[str]:
@@ -819,26 +896,43 @@ def _flavor_names(theme_body: dict[str, Any]) -> list[str]:
 def _write_colors_md(data: dict[str, Any], out_path: str) -> None:
     """Generate COLORS.md: per-theme Elements, Dircolors/git, and unused-accent tables.
 
+    Colors are shown as self-generated PNG swatches (`.assets/swatches/{hex}.png`,
+    written alongside `out_path`) plus their hex text — GitHub's backtick color-dot
+    annotation only works in issues/PRs/discussions, never in repository Markdown
+    files, so an image is the only way to show real color here.
+
     Args:
         data: The full exported palette dict (theme -> flavor -> {color_name: hex}),
             with each theme/flavor carrying its resolved `_roles`.
         out_path: File path to write the Markdown to (overwritten each run).
     """
+    swatch_dir = os.path.join(os.path.dirname(os.path.abspath(out_path)), ".assets", "swatches")
+
+    themes_with_content = [
+        theme
+        for theme in sorted(data)
+        if not theme.startswith("_")
+        and isinstance(data[theme], dict)
+        and _flavor_names(data[theme])
+    ]
+
     lines: list[str] = [
         "# Theme colors",
         "",
         "Generated by `get-colors.py --export` — do not edit by hand.",
         "",
+        "## Contents",
+        "",
     ]
+    lines += [f"- [{theme}](#{theme})" for theme in themes_with_content]
+    lines.append("")
 
-    for theme in sorted(data):
+    seg_cols = [f"seg{i}" for i in range(_SEG_COUNT)]
+
+    for theme in themes_with_content:
         theme_body = data[theme]
-        if theme.startswith("_") or not isinstance(theme_body, dict):
-            continue
         theme_roles = theme_body.get("_roles", {})
         flavors = _flavor_names(theme_body)
-        if not flavors:
-            continue
 
         lines.append(f"## {theme}")
         lines.append("")
@@ -846,11 +940,11 @@ def _write_colors_md(data: dict[str, Any], out_path: str) -> None:
         # --- Elements table ---
         lines.append("### Elements")
         lines.append("")
-        header = ["Flavor"] + [f"{name} ({slot})" for name, slot in _ELEMENT_SLOTS] + ["bg / text"]
+        header = ["Flavor"] + seg_cols + ["user/host"]
         lines.append("| " + " | ".join(header) + " |")
         lines.append("|" + "---|" * len(header))
-        slot_legend = ["*(slot)*"] + [f"`{slot}`" for _, slot in _ELEMENT_SLOTS] + ["`bg` / `text`"]
-        lines.append("| " + " | ".join(slot_legend) + " |")
+        lines.append("| *(main line)* | " + " | ".join(_MAIN_LINE_LEGEND) + " |")
+        lines.append("| *(stats line)* | " + " | ".join(_STATS_LINE_LEGEND) + " |")
 
         any_elements = False
         for flavor in flavors:
@@ -861,12 +955,12 @@ def _write_colors_md(data: dict[str, Any], out_path: str) -> None:
             roles = _merge_roles(theme_roles, fdata.get("_roles"))
             seg = roles.get("SEG", [])
             row = [flavor]
-            for i, _slot in enumerate(_ELEMENT_SLOTS):
+            for i in range(_SEG_COUNT):
                 name = seg[i] if i < len(seg) else ""
-                row.append(_swatch(palette.get(name, "")))
+                row.append(_swatch(palette.get(name, ""), swatch_dir))
             bg_hex = palette.get(roles.get("BG", ""), "")
             text_hex = palette.get(roles.get("TEXT", ""), "")
-            row.append(f"{_swatch(bg_hex)} / {_swatch(text_hex)}")
+            row.append(f"{_swatch(bg_hex, swatch_dir)}<br/>{_swatch(text_hex, swatch_dir)}")
             lines.append("| " + " | ".join(row) + " |")
             any_elements = True
         if not any_elements:
@@ -898,7 +992,9 @@ def _write_colors_md(data: dict[str, Any], out_path: str) -> None:
                 if not palette:
                     continue
                 roles = _merge_roles(theme_roles, fdata.get("_roles"))
-                row = [flavor] + [_swatch(palette.get(roles.get(k, ""), "")) for k in dc_gc_keys]
+                row = [flavor] + [
+                    _swatch(palette.get(roles.get(k, ""), ""), swatch_dir) for k in dc_gc_keys
+                ]
                 lines.append("| " + " | ".join(row) + " |")
             lines.append("")
 
@@ -919,7 +1015,7 @@ def _write_colors_md(data: dict[str, Any], out_path: str) -> None:
             }
             unused = sorted(set(palette) - referenced)
             cell = (
-                ", ".join(f"`{name}` {_swatch(palette[name])}" for name in unused)
+                ", ".join(f"{name}: {_swatch(palette[name], swatch_dir)}" for name in unused)
                 if unused
                 else "—"
             )
