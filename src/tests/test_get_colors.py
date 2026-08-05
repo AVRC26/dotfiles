@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import colorsys
 import importlib.util
 import json
 import os
@@ -1149,6 +1150,447 @@ class TestCmdExport(unittest.TestCase):
         gc.cmd_export(args)
         self.assertTrue(os.path.exists(out_path))
 
+    def test_export_blend_differentiates_flavors(self) -> None:
+        """--blend should give affected flavors distinct SEG0 hex, DC_EXEC untouched."""
+        blend_roles: dict[str, Any] = {
+            "blendtheme": {
+                "_default_flavor": "a",
+                "_roles": {
+                    "BG": "bg",
+                    "TEXT": "bg",
+                    "SEG": ["red", "orange", "yellow", "green", "cyan", "purple"],
+                    "OK": "green",
+                    "ERR": "red",
+                    "WARN": "yellow",
+                    "DC_EXEC": "green",
+                },
+                "a": {
+                    "red": "#ff0000",
+                    "orange": "#ff8800",
+                    "yellow": "#ffff00",
+                    "green": "#00ff00",
+                    "cyan": "#00ffff",
+                    "purple": "#8800ff",
+                    # Distinct *lightness* between a/b — the mechanism ranks
+                    # by BG lightness relative to the theme's flavors, hue is
+                    # irrelevant now.
+                    "bg": "#000000",
+                },
+                "b": {
+                    "red": "#ff0000",
+                    "orange": "#ff8800",
+                    "yellow": "#ffff00",
+                    "green": "#00ff00",
+                    "cyan": "#00ffff",
+                    "purple": "#8800ff",
+                    "bg": "#ffffff",
+                },
+            }
+        }
+        roles_path = os.path.join(self.tmp, "blend_roles.json")
+        with open(roles_path, "w") as f:
+            json.dump(blend_roles, f)
+        out_path = os.path.join(self.tmp, "blend_out.json")
+        args = argparse.Namespace(
+            themes_dir=self.tmp,
+            roles=roles_path,
+            output=out_path,
+            verbose=False,
+            blend=True,
+        )
+        gc.cmd_export(args)
+        data = json.loads(Path(out_path).read_text())
+        theme = data["blendtheme"]
+        # "a" is the first (sorted-order) holder of the shared color, so it
+        # stays canonical/untouched — only "b" (the duplicate) gets reshaded.
+        self.assertNotIn("_roles", theme["a"])
+        seg0_b = theme["b"]["_roles"]["SEG"][0]
+        self.assertNotEqual(theme["a"]["red"], theme["b"][seg0_b])
+        # The original color name must be untouched (DC_EXEC shares "green" with OK).
+        self.assertEqual(theme["a"]["green"], "#00ff00")
+        self.assertEqual(theme["b"]["green"], "#00ff00")
+
+    def test_export_no_blend_flag_leaves_values_unchanged(self) -> None:
+        """Without --blend, an affected theme's flavors keep identical accent values."""
+        blend_roles: dict[str, Any] = {
+            "blendtheme": {
+                "_default_flavor": "a",
+                "_roles": {
+                    "BG": "bg",
+                    "TEXT": "bg",
+                    "SEG": ["red1", "red2", "red3", "red4", "red5", "red6"],
+                    "OK": "green",
+                    "ERR": "red1",
+                    "WARN": "red1",
+                },
+                "a": {
+                    "red1": "#ff0000",
+                    "red2": "#ff0000",
+                    "red3": "#ff0000",
+                    "red4": "#ff0000",
+                    "red5": "#ff0000",
+                    "red6": "#ff0000",
+                    "green": "#00ff00",
+                    "bg": "#000000",
+                },
+                "b": {
+                    "red1": "#ff0000",
+                    "red2": "#ff0000",
+                    "red3": "#ff0000",
+                    "red4": "#ff0000",
+                    "red5": "#ff0000",
+                    "red6": "#ff0000",
+                    "green": "#00ff00",
+                    "bg": "#ffffff",
+                },
+            }
+        }
+        roles_path = os.path.join(self.tmp, "blend_roles2.json")
+        with open(roles_path, "w") as f:
+            json.dump(blend_roles, f)
+        out_path = os.path.join(self.tmp, "blend_out2.json")
+        args = argparse.Namespace(
+            themes_dir=self.tmp,
+            roles=roles_path,
+            output=out_path,
+            verbose=False,
+            blend=False,
+        )
+        gc.cmd_export(args)
+        data = json.loads(Path(out_path).read_text())
+        theme = data["blendtheme"]
+        self.assertNotIn("_roles", theme["a"])
+        self.assertNotIn("_roles", theme["b"])
+        self.assertEqual(theme["a"]["red1"], theme["b"]["red1"])
+
+    def test_export_warns_when_affected_and_no_blend(self) -> None:
+        """Without --blend, cmd_export logs a warning naming the affected theme."""
+        blend_roles: dict[str, Any] = {
+            "blendtheme": {
+                "_default_flavor": "a",
+                "_roles": {
+                    "BG": "bg",
+                    "TEXT": "bg",
+                    "SEG": ["red1", "red2", "red3", "red4", "red5", "red6"],
+                    "OK": "green",
+                    "ERR": "red1",
+                    "WARN": "red1",
+                },
+                "a": {
+                    "red1": "#ff0000",
+                    "red2": "#ff0000",
+                    "red3": "#ff0000",
+                    "red4": "#ff0000",
+                    "red5": "#ff0000",
+                    "red6": "#ff0000",
+                    "green": "#00ff00",
+                    "bg": "#000000",
+                },
+                "b": {
+                    "red1": "#ff0000",
+                    "red2": "#ff0000",
+                    "red3": "#ff0000",
+                    "red4": "#ff0000",
+                    "red5": "#ff0000",
+                    "red6": "#ff0000",
+                    "green": "#00ff00",
+                    "bg": "#ffffff",
+                },
+            }
+        }
+        roles_path = os.path.join(self.tmp, "blend_roles3.json")
+        with open(roles_path, "w") as f:
+            json.dump(blend_roles, f)
+        args = argparse.Namespace(
+            themes_dir=self.tmp,
+            roles=roles_path,
+            output=os.path.join(self.tmp, "blend_out3.json"),
+            verbose=False,
+            blend=False,
+        )
+        with self.assertLogs(gc.logger, level="WARNING") as cm:
+            gc.cmd_export(args)
+        self.assertTrue(any("blendtheme" in msg for msg in cm.output))
+
+    def test_export_blend_unaffected_theme_untouched(self) -> None:
+        """--blend must be a no-op for a theme whose flavors already differ."""
+        self._make_catppuccin()
+        out_path = os.path.join(self.tmp, "unaffected_out.json")
+        args = argparse.Namespace(
+            themes_dir=self.tmp,
+            roles=self.roles_path,
+            output=out_path,
+            verbose=False,
+            blend=True,
+        )
+        gc.cmd_export(args)
+        data = json.loads(Path(out_path).read_text())
+        self.assertNotIn("_roles", data["catppuccin"].get("frappe", {}))
+
+
+# ── _find_identical_accent_themes / _apply_accent_blend ────────────────────────
+
+
+class TestAccentBlendDetection(unittest.TestCase):
+    def _theme(self, accent_a: str, accent_b: str) -> dict[str, Any]:
+        return {
+            "blendtheme": {
+                "_roles": {
+                    "BG": "bg",
+                    "TEXT": "bg",
+                    "SEG": ["accent1"] * 6,
+                    "OK": "accent1",
+                    "ERR": "accent1",
+                    "WARN": "accent1",
+                },
+                "a": {"accent1": accent_a, "bg": "#000000"},
+                "b": {"accent1": accent_b, "bg": "#ffffff"},
+            }
+        }
+
+    def test_detects_identical_accents_across_flavors(self) -> None:
+        # "a" is the first (sorted-order) holder of the shared color and is
+        # left as the canonical, untouched one — only "b" is the duplicate.
+        data = self._theme("#ff0000", "#ff0000")
+        affected = gc._find_identical_accent_themes(data)
+        self.assertEqual(affected, {"blendtheme": ["b"]})
+
+    def test_does_not_flag_theme_with_differing_accents(self) -> None:
+        data = self._theme("#ff0000", "#00ff00")
+        affected = gc._find_identical_accent_themes(data)
+        self.assertNotIn("blendtheme", affected)
+
+    def test_flags_theme_when_only_seg0_matches(self) -> None:
+        """SEG0 matching is the trigger — SEG1+ don't need to match too."""
+        data: dict[str, Any] = {
+            "blendtheme": {
+                "_roles": {
+                    "BG": "bg",
+                    "TEXT": "bg",
+                    "SEG": ["red", "orange", "yellow", "green", "cyan", "purple"],
+                    "OK": "green",
+                    "ERR": "red",
+                    "WARN": "yellow",
+                },
+                "a": {
+                    "red": "#ff0000",
+                    "orange": "#ff8800",  # differs from b below
+                    "yellow": "#ffff00",
+                    "green": "#00ff00",
+                    "cyan": "#00ffff",
+                    "purple": "#8800ff",
+                    "bg": "#000000",
+                },
+                "b": {
+                    "red": "#ff0000",  # SEG0 matches a
+                    "orange": "#112233",  # SEG1 does NOT match a
+                    "yellow": "#ffff00",
+                    "green": "#00ff00",
+                    "cyan": "#00ffff",
+                    "purple": "#8800ff",
+                    "bg": "#ffffff",
+                },
+            }
+        }
+        affected = gc._find_identical_accent_themes(data)
+        self.assertEqual(affected, {"blendtheme": ["b"]})
+
+    def test_does_not_flag_when_seg0_itself_differs(self) -> None:
+        """Even if SEG1-5/OK/ERR/WARN all match, differing SEG0 must not trigger."""
+        data: dict[str, Any] = {
+            "blendtheme": {
+                "_roles": {
+                    "BG": "bg",
+                    "TEXT": "bg",
+                    "SEG": ["red", "orange", "yellow", "green", "cyan", "purple"],
+                    "OK": "green",
+                    "ERR": "red",
+                    "WARN": "yellow",
+                },
+                "a": {
+                    "red": "#ff0000",
+                    "orange": "#ff8800",
+                    "yellow": "#ffff00",
+                    "green": "#00ff00",
+                    "cyan": "#00ffff",
+                    "purple": "#8800ff",
+                    "bg": "#000000",
+                },
+                "b": {
+                    "red": "#123456",  # SEG0 differs
+                    "orange": "#ff8800",
+                    "yellow": "#ffff00",
+                    "green": "#00ff00",
+                    "cyan": "#00ffff",
+                    "purple": "#8800ff",
+                    "bg": "#ffffff",
+                },
+            }
+        }
+        affected = gc._find_identical_accent_themes(data)
+        self.assertNotIn("blendtheme", affected)
+
+    def test_skips_single_flavor_theme(self) -> None:
+        data = self._theme("#ff0000", "#ff0000")
+        del data["blendtheme"]["b"]
+        affected = gc._find_identical_accent_themes(data)
+        self.assertNotIn("blendtheme", affected)
+
+    def test_skips_theme_with_missing_accent_hex(self) -> None:
+        data = self._theme("#ff0000", "#ff0000")
+        del data["blendtheme"]["a"]["accent1"]
+        affected = gc._find_identical_accent_themes(data)
+        self.assertNotIn("blendtheme", affected)
+
+    def test_apply_accent_blend_mutates_toward_bg(self) -> None:
+        # "a" is the first (sorted-order) holder of the shared color, left
+        # completely untouched. Only "b" (the duplicate) gets reshaded, at
+        # the high end of _ACCENT_LIGHTNESS_RANGE since its BG is the
+        # lighter of the two.
+        data = self._theme("#ff0000", "#ff0000")
+        data["blendtheme"]["a"]["bg"] = "#101010"  # dark
+        data["blendtheme"]["b"]["bg"] = "#e0e0e0"  # light
+        gc._apply_accent_blend(data)
+        self.assertNotIn("_roles", data["blendtheme"]["a"])
+        self.assertFalse(data["blendtheme"]["a"]["_blended"])
+        self.assertTrue(data["blendtheme"]["b"]["_blended"])
+        seg0_b = data["blendtheme"]["b"]["_roles"]["SEG"][0]
+        lo, hi = gc._ACCENT_LIGHTNESS_RANGE
+        expected_b = gc._lightness_rank_blend("#ff0000", 1.0, lo, hi)
+        self.assertEqual(data["blendtheme"]["b"][seg0_b], expected_b)
+        self.assertEqual(data["blendtheme"]["a"]["accent1"], "#ff0000")
+        self.assertNotEqual(data["blendtheme"]["b"][seg0_b], "#ff0000")
+        # Hue/saturation preserved — still pure red (hue=0, full saturation).
+        r, g, b = (int(expected_b[i : i + 2], 16) / 255 for i in (1, 3, 5))
+        h, _l, s = colorsys.rgb_to_hls(r, g, b)
+        self.assertAlmostEqual(h, 0.0, places=2)
+        self.assertAlmostEqual(s, 1.0, places=2)
+
+    def test_apply_accent_blend_shared_color_name_not_double_blended(self) -> None:
+        """Every SEG slot pointing at the same name should blend once, not per-slot."""
+        # _theme()'s SEG is ["accent1"] * 6 — all six slots share one name.
+        # "a" stays canonical/untouched; "b" is the duplicate that gets reshaded.
+        data = self._theme("#ff0000", "#ff0000")
+        data["blendtheme"]["a"]["bg"] = "#101010"
+        data["blendtheme"]["b"]["bg"] = "#e0e0e0"
+        gc._apply_accent_blend(data)
+        roles_b = data["blendtheme"]["b"]["_roles"]
+        # All six SEG entries must resolve to the same blended entry, not six
+        # separately-named (or compounded) ones.
+        self.assertEqual(len(set(roles_b["SEG"])), 1)
+        lo, hi = gc._ACCENT_LIGHTNESS_RANGE
+        expected = gc._lightness_rank_blend("#ff0000", 1.0, lo, hi)
+        self.assertEqual(data["blendtheme"]["b"][roles_b["SEG"][0]], expected)
+
+    def test_apply_accent_blend_reshades_ok_err_warn_too(self) -> None:
+        """OK/ERR/WARN are reshaded like SEG — safe since only lightness moves, hue stays put."""
+        data = self._theme("#ff0000", "#ff0000")
+        data["blendtheme"]["a"]["bg"] = "#101010"
+        data["blendtheme"]["b"]["bg"] = "#e0e0e0"
+        gc._apply_accent_blend(data)
+        self.assertNotIn("_roles", data["blendtheme"]["a"])
+        roles_b = data["blendtheme"]["b"]["_roles"]
+        # OK/ERR/WARN and every SEG slot all originally pointed at "accent1"
+        # — must all resolve to the same blended entry.
+        self.assertIn("OK", roles_b)
+        self.assertIn("ERR", roles_b)
+        self.assertIn("WARN", roles_b)
+        self.assertEqual(roles_b["OK"], roles_b["SEG"][0])
+        self.assertEqual(roles_b["ERR"], roles_b["SEG"][0])
+        self.assertEqual(roles_b["WARN"], roles_b["SEG"][0])
+        # Hue/saturation preserved — still pure red.
+        hexval = data["blendtheme"]["b"][roles_b["OK"]]
+        r, g, b = (int(hexval[i : i + 2], 16) / 255 for i in (1, 3, 5))
+        h, _l, s = colorsys.rgb_to_hls(r, g, b)
+        self.assertAlmostEqual(h, 0.0, places=2)
+        self.assertAlmostEqual(s, 1.0, places=2)
+
+    def test_apply_accent_blend_reshades_dc_gc_roles_sharing_a_blended_name(self) -> None:
+        """DC_*/GC_* roles that share a name with OK/SEG must land on the same
+        blended entry — mirrors monokai's OK/DC_EXEC/GC_ADDED all -> accent4."""
+        data = self._theme("#ff0000", "#ff0000")
+        data["blendtheme"]["_roles"]["DC_EXEC"] = "accent1"
+        data["blendtheme"]["_roles"]["GC_ADDED"] = "accent1"
+        data["blendtheme"]["a"]["bg"] = "#101010"
+        data["blendtheme"]["b"]["bg"] = "#e0e0e0"
+        gc._apply_accent_blend(data)
+        self.assertNotIn("_roles", data["blendtheme"]["a"])
+        roles_b = data["blendtheme"]["b"]["_roles"]
+        self.assertIn("DC_EXEC", roles_b)
+        self.assertIn("GC_ADDED", roles_b)
+        self.assertEqual(roles_b["DC_EXEC"], roles_b["SEG"][0])
+        self.assertEqual(roles_b["GC_ADDED"], roles_b["SEG"][0])
+        # Original "accent1" entry itself is never mutated in place.
+        self.assertEqual(data["blendtheme"]["b"]["accent1"], "#ff0000")
+
+    def test_apply_accent_blend_reshades_dc_gc_role_with_its_own_name(self) -> None:
+        """A DC_*/GC_* role backed by a color name no SEG/OK/ERR/WARN role uses
+        must still get its own blended entry, not be left stale."""
+        data = self._theme("#ff0000", "#ff0000")
+        data["blendtheme"]["_roles"]["DC_DIR"] = "dironly"
+        data["blendtheme"]["a"]["dironly"] = "#0000ff"
+        data["blendtheme"]["b"]["dironly"] = "#0000ff"
+        data["blendtheme"]["a"]["bg"] = "#101010"
+        data["blendtheme"]["b"]["bg"] = "#e0e0e0"
+        gc._apply_accent_blend(data)
+        roles_b = data["blendtheme"]["b"]["_roles"]
+        self.assertIn("DC_DIR", roles_b)
+        dc_name = roles_b["DC_DIR"]
+        self.assertNotEqual(dc_name, "dironly")
+        self.assertEqual(data["blendtheme"]["b"]["dironly"], "#0000ff")  # untouched
+        lo, hi = gc._ACCENT_LIGHTNESS_RANGE
+        expected = gc._lightness_rank_blend("#0000ff", 1.0, lo, hi)
+        self.assertEqual(data["blendtheme"]["b"][dc_name], expected)
+
+    def test_apply_accent_blend_logs_each_flavor_as_blended(self) -> None:
+        """Each blended flavor gets its own log line as it happens — no
+        grouped/summarized rollup line."""
+        data = self._theme("#ff0000", "#ff0000")
+        data["blendtheme"]["a"]["bg"] = "#101010"
+        data["blendtheme"]["b"]["bg"] = "#e0e0e0"
+        with self.assertLogs(gc.logger, level="INFO") as cm:
+            gc._apply_accent_blend(data)
+        self.assertEqual(cm.output, ["INFO:get-colors:blended: blendtheme/b"])
+
+    def test_apply_accent_blend_catches_chain_collision(self) -> None:
+        """A blend result that coincidentally matches a later flavor's original
+        color must flag that later flavor too — not just the first duplicate."""
+        data: dict[str, Any] = {
+            "blendtheme": {
+                "_roles": {
+                    "BG": "bg",
+                    "TEXT": "bg",
+                    "SEG": ["accent1"] * 6,
+                    "OK": "accent1",
+                    "ERR": "accent1",
+                    "WARN": "accent1",
+                },
+                "a": {"accent1": "#ff0000", "bg": "#000000"},
+                "b": {"accent1": "#ff0000", "bg": "#e0e0e0"},
+                # c's original color is engineered to equal exactly what b's
+                # blend result becomes — must still get flagged/reshaded even
+                # though c's raw value never collided with a's original.
+                "c": {"accent1": None, "bg": "#808080"},  # placeholder, set below
+            }
+        }
+        lo, hi = gc._ACCENT_LIGHTNESS_RANGE
+        # b is the lightest bg among a/b/c so far when b is processed (only a
+        # is "seen" then) — compute what b will actually become once a/b/c's
+        # bg range is known, then plant that exact value on c.
+        bgs = {"a": "#000000", "b": "#e0e0e0", "c": "#808080"}
+        b_l, lo_bg, hi_bg = (
+            gc._hex_lightness(bgs["b"]),
+            min(gc._hex_lightness(v) for v in bgs.values()),
+            max(gc._hex_lightness(v) for v in bgs.values()),
+        )
+        b_normalized = (b_l - lo_bg) / (hi_bg - lo_bg)
+        planted = gc._lightness_rank_blend("#ff0000", b_normalized, lo, hi)
+        data["blendtheme"]["c"]["accent1"] = planted
+
+        blended = gc._apply_accent_blend(data)
+        self.assertEqual(blended, {"blendtheme": ["b", "c"]})
+        self.assertNotIn("_roles", data["blendtheme"]["a"])
+
 
 # ── _make_swatch_png / _ensure_swatch_png ──────────────────────────────────────
 
@@ -1240,16 +1682,24 @@ class TestWriteColorsMd(unittest.TestCase):
         }
 
     def test_elements_table_has_seg_columns_and_two_legend_rows(self) -> None:
-        """Header is plain seg0..seg5 + user/host; main-line and stats-line legend rows follow."""
+        """Header is seg0..seg5 plus single-purpose bg/text/fg/ok/err/warn columns
+        (each one swatch, same as seg0-5 — no combined/side-by-side cell); main-line
+        and stats-line legend rows follow."""
         gc._write_colors_md(self.data, self.out_path)
         content = Path(self.out_path).read_text(encoding="utf-8")
-        self.assertIn("| Flavor | seg0 | seg1 | seg2 | seg3 | seg4 | seg5 | user/host |", content)
         self.assertIn(
-            "| *(main line)* | os | dir | git | lang | tools | time | user/host |", content
+            "| Flavor | seg0 | seg1 | seg2 | seg3 | seg4 | seg5 | bg | text | fg | ok | err "
+            "| warn |",
+            content,
+        )
+        self.assertIn(
+            "| *(main line)* | os | dir | git | lang | tools | time | user/hostname "
+            "| user/hostname | pill text | ❯ ok | ❯ err | ❯ warn |",
+            content,
         )
         self.assertIn(
             "| *(stats line)* | shell<br/>sudo<br/>shlvl<br/>env_var | memory | cpu | disk "
-            "| duration | battery<br/>status<br/>jobs | - |",
+            "| duration | battery<br/>status<br/>jobs | - | - | pill text | - | - | - |",
             content,
         )
         self.assertNotIn("*(slot)*", content)
@@ -1262,19 +1712,138 @@ class TestWriteColorsMd(unittest.TestCase):
         # swatch PNGs actually written to disk next to COLORS.md
         self.assertTrue(os.path.exists(os.path.join(self.tmp, ".assets/swatches/fc618d.png")))
 
-    def test_dircolors_git_section_embeds_swatches(self) -> None:
+    def test_elements_bg_text_are_separate_single_swatch_columns(self) -> None:
+        """bg and text are independent columns, each a plain single swatch
+        (same shape as seg0-5) — no combined/flex-wrapped cell."""
         gc._write_colors_md(self.data, self.out_path)
         content = Path(self.out_path).read_text(encoding="utf-8")
-        self.assertIn("### Dircolors / git", content)
-        self.assertIn('src=".assets/swatches/5ad4e6.png"', content)  # DC_DIR -> cyan
+        self.assertNotIn("display: inline-flex", content)
+        self.assertIn(
+            '<img src=".assets/swatches/222222.png" width="60" height="15" alt="#222222">'
+            "<br/>`#222222`",
+            content,
+        )
+        self.assertIn(
+            '<img src=".assets/swatches/f7f1ff.png" width="60" height="15" alt="#f7f1ff">'
+            "<br/>`#f7f1ff`",
+            content,
+        )
 
-    def test_unused_accents_lists_unreferenced_colors(self) -> None:
-        """A palette color not referenced by any SEG/DC_*/GC_* role should appear as unused."""
+    def test_elements_fg_ok_err_warn_columns_present(self) -> None:
+        """fg/ok/err/warn each get their own Elements column; unresolved ones
+        (not set in this fixture's _roles) render as em-dash, not an error."""
         gc._write_colors_md(self.data, self.out_path)
         content = Path(self.out_path).read_text(encoding="utf-8")
-        self.assertIn("### Unused accents", content)
-        self.assertIn("unused1:", content)
-        self.assertIn('src=".assets/swatches/abcdef.png"', content)
+        self.assertIn("| bg | text | fg | ok | err | warn |", content)
+        # This fixture's _roles has no FG/OK/ERR/WARN — those columns should
+        # gracefully show "—", not raise or leave the row short.
+        self.assertIn("`#f7f1ff` | — | — | — | — |", content)
+
+    def test_dircolors_and_gitcolors_are_separate_tables(self) -> None:
+        """DirColors (DC_*) and GitColors (GC_*) render as two independent
+        tables/sections, not one combined table."""
+        gc._write_colors_md(self.data, self.out_path)
+        content = Path(self.out_path).read_text(encoding="utf-8")
+        self.assertIn("### DirColors", content)
+        self.assertIn("### GitColors", content)
+        self.assertIn("| Flavor | DC_DIR |", content)
+        self.assertIn("| Flavor | GC_ADDED |", content)
+        self.assertNotIn("DC_DIR | GC_ADDED", content)  # never in the same table header
+        self.assertIn('src=".assets/swatches/5ad4e6.png"', content)  # DC_DIR -> cyan
+        self.assertIn('src=".assets/swatches/7bd88f.png"', content)  # GC_ADDED -> green
+        self.assertIn("[DirColors](#monokai-dircolors)", content)
+        self.assertIn("[GitColors](#monokai-gitcolors)", content)
+
+    def test_accent_ranking_skipped_without_nvim_metadata(self) -> None:
+        """No `_nvim` metadata on the theme (this fixture's case) — section still
+        prints, with an explicit skipped note instead of a table."""
+        gc._write_colors_md(self.data, self.out_path)
+        content = Path(self.out_path).read_text(encoding="utf-8")
+        self.assertIn("### Accent Ranking", content)
+        self.assertIn("nvim not available or no `_nvim` metadata", content)
+
+    @patch.object(gc, "_find_nvim_init", return_value="/fake/init.lua")
+    @patch.object(gc, "_capture_flavor_highlights")
+    def test_accent_ranking_orders_by_rank_and_marks_used(
+        self, mock_capture: Any, mock_find_init: Any
+    ) -> None:
+        """Colors are ranked by captured highlight-group weight; Used reflects
+        whether SEG/DC_*/GC_* roles reference that color name."""
+        self.data["monokai"]["_nvim"] = {"theme": "monokai-pro", "variant_key": "monokai_filter"}
+        # "unused1" (a Tier 1 group) outranks "red" (a Tier 3 group) despite
+        # "red" being referenced by SEG/roles — rank is purely usage-derived.
+        mock_capture.return_value = {
+            "Normal": {"fg": 0xABCDEF, "bg": None, "sp": None},
+            "SomePluginGroup": {"fg": 0xFC618D, "bg": None, "sp": None},
+        }
+        gc._write_colors_md(self.data, self.out_path)
+        content = Path(self.out_path).read_text(encoding="utf-8")
+        self.assertIn('<summary><span style="font-size: 1.1em', content)
+        self.assertIn("Accent Ranking (1 flavors)</span></summary>", content)
+        self.assertIn(
+            '<details style="margin-left: 1.25rem">\n<summary><span style="font-size: 1.02em',
+            content,
+        )
+        self.assertIn("spectrum</span></summary>", content)
+        self.assertIn("<summary>Used (8 colors)</summary>", content)
+        self.assertIn("<summary>Unused (1 colors)</summary>", content)
+        # "unused1" (a Tier 1 group) outranks "red" (a Tier 3 group) despite
+        # "red" being referenced by SEG/roles — rank is purely usage-derived,
+        # but "unused1" still lands in the Unused table since roles don't
+        # reference it. Used table gets the extra "Used" category column;
+        # "red" is referenced only via SEG.
+        # Unused table has no Blended/Original columns — a `__blend` entry only
+        # exists because a role got repointed at it, so it's always Used.
+        self.assertIn("| 1 | Tier 1 | unused1 | `#abcdef` |", content)
+        self.assertIn("| 2 | Tier 3 | red | no | `#fc618d` |", content)
+        # No blockquote markers — nesting comes from inline margin-left, not `>`.
+        ranking_section = content.rsplit("Accent Ranking (1 flavors)</span></summary>", 1)[1]
+        self.assertFalse(any(line.startswith(">") for line in ranking_section.splitlines()))
+        self.assertIn(
+            "| Rank | Group Tier | Color | Blended | Hex | Swatch | Original | Og Hex | Used |",
+            content,
+        )
+        self.assertIn("| Rank | Group Tier | Color | Hex | Swatch |", content)
+        self.assertIn("| — | SEG0 |", content)  # "red": not blended (Original "—"), via SEG0
+        # Swatch column has no hex text below the image (already its own column).
+        self.assertNotIn("<br/>`#fc618d`", ranking_section)
+        mock_capture.assert_called_with(self.data["monokai"]["_nvim"], "spectrum", "/fake/init.lua")
+
+    @patch.object(gc, "_find_nvim_init", return_value="/fake/init.lua")
+    @patch.object(gc, "_capture_flavor_highlights")
+    def test_accent_ranking_marks_blend_generated_entries(
+        self, mock_capture: Any, mock_find_init: Any
+    ) -> None:
+        """A `{name}__blend` palette entry displays as its base name, Blended=yes,
+        Hex/Swatch showing the blended value, and Original a swatch plus the
+        raw "Og Hex" of the pre-blend hex (still present in palettes.json under
+        the base name — `_blend_color_name` never deletes or mutates it). Since
+        a role always gets repointed at the new `__blend` entry, it's Used, not
+        Unused — the original "red" entry itself is what ends up Unused
+        (Blended/Original/Og Hex columns don't apply there)."""
+        self.data["monokai"]["_nvim"] = {"theme": "monokai-pro", "variant_key": "monokai_filter"}
+        self.data["monokai"]["spectrum"]["red__blend"] = "#123456"
+        # Point SEG's "red" slot at the new blended entry, mirroring what
+        # _apply_accent_blend's override actually does.
+        self.data["monokai"]["spectrum"]["_roles"] = {
+            "SEG": ["red__blend", "orange", "purple", "green", "cyan", "yellow"]
+        }
+        mock_capture.return_value = {}
+        gc._write_colors_md(self.data, self.out_path)
+        content = Path(self.out_path).read_text(encoding="utf-8")
+        # Displayed as "red" (not "red__blend"), Blended=yes, Hex=blended value.
+        self.assertIn("| red | yes | `#123456` |", content)
+        # Original column: a swatch of the pre-blend hex (#fc618d), not its name;
+        # Og Hex column: the raw pre-blend hex text, backtick-wrapped.
+        self.assertIn(
+            'alt="#123456"> | <img src=".assets/swatches/fc618d.png" width="60" height="15" '
+            'alt="#fc618d"> | `#fc618d` |',
+            content,
+        )
+        self.assertNotIn("red__blend", content)
+        # The un-blended "red" entry itself now lands in Unused, with no
+        # Blended/Original columns.
+        self.assertIn("Unused (2 colors)", content)
 
     def test_flavor_with_no_palette_shows_no_colors_message(self) -> None:
         """An nvim-only flavor (no terminal palette) should produce the fallback message."""
@@ -1287,6 +1856,17 @@ class TestWriteColorsMd(unittest.TestCase):
         gc._write_colors_md(data, self.out_path)
         content = Path(self.out_path).read_text(encoding="utf-8")
         self.assertIn("*(no terminal colors for any flavor of this theme)*", content)
+
+    def test_stale_swatches_removed_on_regeneration(self) -> None:
+        """A swatch left over from a color no longer in use must not survive a rerun."""
+        swatch_dir = os.path.join(self.tmp, ".assets", "swatches")
+        os.makedirs(swatch_dir, exist_ok=True)
+        stale_path = os.path.join(swatch_dir, "deadbee.png")
+        Path(stale_path).write_bytes(b"stale")
+        gc._write_colors_md(self.data, self.out_path)
+        self.assertFalse(os.path.exists(stale_path))
+        # A swatch actually referenced by self.data must still be regenerated.
+        self.assertTrue(os.path.exists(os.path.join(swatch_dir, "fc618d.png")))
 
 
 # ── _validate_seg_roles ─────────────────────────────────────────────────────────
