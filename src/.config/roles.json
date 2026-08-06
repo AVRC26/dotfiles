@@ -1,541 +1,1148 @@
 {
-  "monokai": {
-    "_default_flavor": "spectrum",
-    "_delta": { "syntax_theme": "Monokai Extended" },
-    "_nvim": { "theme": "monokai-pro", "variant_key": "monokai_filter" },
-    "_roles": {
-      "BG": "background",
-      "TEXT": "text",
-      "SEG": ["accent1", "accent2", "accent6", "accent4", "accent5", "accent3", "dimmed1"],
-      "FG": "dark2",
-      "OK": "accent4",
-      "ERR": "accent1",
-      "WARN": "accent3",
-      "DC_DIR": "accent5",
-      "DC_LINK": "accent6",
-      "DC_EXEC": "accent4",
-      "DC_SOURCE": "accent4",
-      "DC_TEXT": "accent3",
-      "DC_IMAGE": "accent1",
-      "DC_MEDIA": "accent6",
-      "DC_ARCHIVE": "accent2",
-      "DC_DOC": "accent5",
-      "DC_DIMMED": "dimmed3",
-      "GC_ADDED": "accent4",
-      "GC_CHANGED": "accent2",
-      "GC_UNTRACKED": "accent1",
-      "GC_BRANCH": "accent5",
-      "GC_REMOTE": "accent2",
-      "GC_TAG": "accent3",
-      "GC_OLD": "accent1",
-      "GC_NEW": "accent4",
-      "GC_META": "accent3",
-      "GC_FRAG": "accent6"
+    "monokai": {
+        "_default_flavor": "spectrum",
+        "_delta": { "syntax_theme": "Monokai Extended" },
+        "_nvim": { "theme": "monokai-pro", "variant_key": "monokai_filter" },
+        "_roles": {
+            "BG": "background",
+            "TEXT": "text",
+            "SEG": [
+                "accent1",
+                "accent2",
+                "accent6",
+                "accent4",
+                "accent5",
+                "accent3",
+                "dimmed1"
+            ],
+            "FG": "dark2",
+            "OK": "accent4",
+            "ERR": "accent1",
+            "WARN": "accent3",
+            "DC_DIR": "accent5",
+            "DC_LINK": "accent6",
+            "DC_EXEC": "accent4",
+            "DC_SOURCE": "accent4",
+            "DC_TEXT": "accent3",
+            "DC_IMAGE": "accent1",
+            "DC_MEDIA": "accent6",
+            "DC_ARCHIVE": "accent2",
+            "DC_DOC": "accent5",
+            "DC_DIMMED": "dimmed3",
+            "GC_ADDED": "accent4",
+            "GC_CHANGED": "accent2",
+            "GC_UNTRACKED": "accent1",
+            "GC_BRANCH": "accent5",
+            "GC_REMOTE": "accent2",
+            "GC_TAG": "accent3",
+            "GC_OLD": "accent1",
+            "GC_NEW": "accent4",
+            "GC_META": "accent3",
+            "GC_FRAG": "accent6"
+        }
+    },
+    "catppuccin": {
+        "_default_flavor": "mocha",
+        "_nvim": { "theme": "catppuccin", "variant_key": "catppuccin_flavour" },
+        "_roles": {
+            "BG": "base",
+            "TEXT": "text",
+            "FG": "crust",
+            "OK": "green",
+            "ERR": "red",
+            "WARN": "yellow",
+            "DC_EXEC": "teal",
+            "DC_SOURCE": "teal",
+            "DC_TEXT": "rosewater",
+            "DC_DIMMED": "overlay0",
+            "GC_ADDED": "teal",
+            "GC_CHANGED": "maroon",
+            "GC_UNTRACKED": "maroon",
+            "GC_REMOTE": "maroon",
+            "GC_TAG": "rosewater",
+            "GC_OLD": "maroon",
+            "GC_NEW": "teal",
+            "GC_META": "rosewater",
+            "DC_LINK": "mauve",
+            "DC_MEDIA": "mauve",
+            "GC_BRANCH": "sky",
+            "DC_DOC": "blue",
+            "GC_FRAG": "mauve",
+            "DC_IMAGE": "pink",
+            "DC_ARCHIVE": "maroon",
+            "DC_DIR": "sky"
+        },
+        "frappe": {
+            "_delta": { "syntax_theme": "Catppuccin Frappe" },
+            "_roles": {
+                "SEG": [
+                    "maroon",
+                    "peach",
+                    "blue",
+                    "green",
+                    "teal",
+                    "yellow",
+                    "surface0"
+                ],
+                "DC_EXEC": "subtext0",
+                "DC_SOURCE": "subtext1",
+                "DC_TEXT": "mauve",
+                "GC_ADDED": "subtext0",
+                "GC_CHANGED": "lavender",
+                "GC_UNTRACKED": "red",
+                "GC_REMOTE": "rosewater",
+                "GC_TAG": "lavender",
+                "GC_OLD": "red",
+                "GC_NEW": "subtext1",
+                "GC_META": "pink",
+                "DC_DIR": "sapphire",
+                "DC_LINK": "overlay1",
+                "DC_IMAGE": "rosewater",
+                "DC_MEDIA": "overlay1",
+                "DC_ARCHIVE": "flamingo",
+                "DC_DOC": "sky",
+                "GC_BRANCH": "sapphire",
+                "GC_FRAG": "overlay1"
+            }
+        },
+        "latte": {
+            "_delta": { "syntax_theme": "Catppuccin Latte" },
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "peach",
+                    "lavender",
+                    "green",
+                    "sapphire",
+                    "yellow",
+                    "surface0"
+                ],
+                "GC_CHANGED": "flamingo",
+                "GC_REMOTE": "flamingo",
+                "DC_ARCHIVE": "flamingo"
+            }
+        },
+        "macchiato": {
+            "_delta": { "syntax_theme": "Catppuccin Macchiato" },
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "peach",
+                    "mauve",
+                    "green",
+                    "sky",
+                    "yellow",
+                    "flamingo"
+                ],
+                "DC_TEXT": "pink",
+                "GC_CHANGED": "rosewater",
+                "GC_REMOTE": "rosewater",
+                "GC_META": "pink",
+                "DC_DIR": "blue",
+                "DC_LINK": "lavender",
+                "DC_IMAGE": "maroon",
+                "DC_MEDIA": "lavender",
+                "DC_ARCHIVE": "rosewater",
+                "DC_DOC": "sapphire",
+                "GC_BRANCH": "blue",
+                "GC_FRAG": "lavender"
+            }
+        },
+        "mocha": {
+            "_delta": { "syntax_theme": "Catppuccin Mocha" },
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "peach",
+                    "lavender",
+                    "green",
+                    "sapphire",
+                    "yellow",
+                    "flamingo"
+                ]
+            }
+        }
+    },
+    "kanagawa": {
+        "_default_flavor": "wave",
+        "_nvim": { "theme": "kanagawa", "variant_key": "kanagawa_variant" },
+        "wave": {
+            "_delta": { "syntax_theme": "kanagawa-wave" },
+            "_roles": {
+                "BG": "sumiInk0",
+                "TEXT": "fujiWhite",
+                "SEG": [
+                    "surimiOrange",
+                    "springBlue",
+                    "oniViolet",
+                    "springGreen",
+                    "waveAqua2",
+                    "oldWhite",
+                    "sumiInk4"
+                ],
+                "FG": "sumiInk3",
+                "OK": "springGreen",
+                "ERR": "autumnRed",
+                "WARN": "carpYellow"
+            }
+        },
+        "dragon": {
+            "_delta": { "syntax_theme": "kanagawa-dragon" },
+            "_roles": {
+                "BG": "black3",
+                "TEXT": "white",
+                "SEG": [
+                    "orange",
+                    "blue2",
+                    "pink",
+                    "green",
+                    "teal",
+                    "yellow",
+                    "gray"
+                ],
+                "FG": "black2",
+                "OK": "green",
+                "ERR": "red",
+                "WARN": "yellow",
+                "DC_DIR": "aqua",
+                "DC_LINK": "black4",
+                "DC_EXEC": "green2",
+                "DC_SOURCE": "ash",
+                "DC_TEXT": "orange2",
+                "DC_IMAGE": "black4",
+                "DC_MEDIA": "blue",
+                "DC_ARCHIVE": "orange2",
+                "DC_DOC": "blue",
+                "DC_DIMMED": "black6",
+                "GC_ADDED": "green2",
+                "GC_CHANGED": "orange2",
+                "GC_UNTRACKED": "red",
+                "GC_BRANCH": "violet",
+                "GC_REMOTE": "orange2",
+                "GC_TAG": "orange2",
+                "GC_OLD": "red",
+                "GC_NEW": "ash",
+                "GC_META": "orange2",
+                "GC_FRAG": "black4"
+            }
+        },
+        "lotus": {
+            "_delta": { "syntax_theme": "kanagawa-lotus" },
+            "_roles": {
+                "BG": "white3",
+                "TEXT": "ink1",
+                "SEG": [
+                    "orange",
+                    "teal1",
+                    "violet1",
+                    "green",
+                    "blue3",
+                    "yellow",
+                    "gray3"
+                ],
+                "FG": "ink2",
+                "OK": "green",
+                "ERR": "red",
+                "WARN": "yellow",
+                "DC_DIR": "teal3",
+                "DC_LINK": "violet2",
+                "DC_EXEC": "green2",
+                "DC_SOURCE": "green2",
+                "DC_TEXT": "yellow3",
+                "DC_IMAGE": "pink",
+                "DC_MEDIA": "violet2",
+                "DC_ARCHIVE": "orange2",
+                "DC_DOC": "teal2",
+                "DC_DIMMED": "gray2",
+                "GC_ADDED": "green2",
+                "GC_CHANGED": "orange2",
+                "GC_UNTRACKED": "red",
+                "GC_BRANCH": "teal3",
+                "GC_REMOTE": "orange2",
+                "GC_TAG": "yellow3",
+                "GC_OLD": "red",
+                "GC_NEW": "green2",
+                "GC_META": "yellow3",
+                "GC_FRAG": "violet2"
+            }
+        }
+    },
+    "gruvbox": {
+        "_default_flavor": "dark",
+        "_delta": { "syntax_theme": "gruvbox-dark" },
+        "_nvim": { "theme": "gruvbox", "variant_key": "gruvbox_flavor" },
+        "_roles": {
+            "BG": "dark0",
+            "TEXT": "light1",
+            "SEG": [
+                "bright_red",
+                "bright_orange",
+                "neutral_purple",
+                "bright_green",
+                "bright_aqua",
+                "",
+                "gray"
+            ],
+            "FG": "dark0",
+            "OK": "bright_green",
+            "ERR": "bright_red",
+            "WARN": "bright_yellow",
+            "DC_DIR": "bright_blue",
+            "DC_LINK": "bright_purple",
+            "DC_EXEC": "light0",
+            "DC_SOURCE": "light0",
+            "DC_TEXT": "light4",
+            "DC_IMAGE": "dark_red",
+            "DC_MEDIA": "bright_purple",
+            "DC_ARCHIVE": "light4",
+            "DC_DOC": "bright_blue",
+            "DC_DIMMED": "dark3",
+            "GC_ADDED": "light0",
+            "GC_CHANGED": "light4",
+            "GC_UNTRACKED": "dark_red",
+            "GC_BRANCH": "bright_blue",
+            "GC_REMOTE": "light4",
+            "GC_TAG": "light4",
+            "GC_OLD": "dark_red",
+            "GC_NEW": "light0",
+            "GC_META": "light4",
+            "GC_FRAG": "bright_purple"
+        },
+        "dark": {
+            "_roles": {
+                "SEG": [
+                    "bright_red",
+                    "bright_orange",
+                    "neutral_purple",
+                    "bright_green",
+                    "bright_aqua",
+                    "bright_yellow",
+                    "gray"
+                ]
+            }
+        },
+        "dark-hard": {
+            "_roles": {
+                "SEG": [
+                    "bright_red",
+                    "bright_orange",
+                    "neutral_purple",
+                    "bright_green",
+                    "bright_aqua",
+                    "bright_yellow",
+                    "gray"
+                ],
+                "DC_IMAGE": "dark_red_hard",
+                "GC_UNTRACKED": "dark_red_hard",
+                "GC_OLD": "dark_red_hard"
+            }
+        },
+        "dark-soft": {
+            "_roles": {
+                "SEG": [
+                    "bright_red",
+                    "bright_orange",
+                    "neutral_purple",
+                    "bright_green",
+                    "bright_aqua",
+                    "neutral_yellow",
+                    "gray"
+                ],
+                "DC_TEXT": "bright_yellow",
+                "DC_IMAGE": "dark_red_soft",
+                "DC_ARCHIVE": "bright_yellow",
+                "GC_CHANGED": "bright_yellow",
+                "GC_UNTRACKED": "dark_red_soft",
+                "GC_REMOTE": "bright_yellow",
+                "GC_TAG": "bright_yellow",
+                "GC_OLD": "dark_red_soft",
+                "GC_META": "bright_yellow"
+            }
+        },
+        "light": {
+            "_delta": { "syntax_theme": "gruvbox-light" },
+            "_roles": {
+                "BG": "light0",
+                "TEXT": "dark1",
+                "SEG": [
+                    "bright_red",
+                    "bright_orange",
+                    "neutral_purple",
+                    "bright_green",
+                    "bright_aqua",
+                    "faded_yellow",
+                    "gray"
+                ],
+                "DC_DIR": "faded_aqua",
+                "DC_EXEC": "faded_green",
+                "DC_SOURCE": "faded_green",
+                "DC_TEXT": "bright_yellow",
+                "DC_IMAGE": "faded_red",
+                "DC_ARCHIVE": "light1",
+                "DC_DIMMED": "light3",
+                "GC_ADDED": "faded_green",
+                "GC_CHANGED": "light1",
+                "GC_UNTRACKED": "faded_red",
+                "GC_BRANCH": "faded_aqua",
+                "GC_REMOTE": "light1",
+                "GC_TAG": "bright_yellow",
+                "GC_OLD": "faded_red",
+                "GC_NEW": "faded_green",
+                "GC_META": "bright_yellow",
+                "GC_FRAG": "faded_purple"
+            }
+        }
+    },
+    "bearded": {
+        "_default_flavor": "arc",
+        "_delta": { "syntax_theme": "" },
+        "_nvim": { "theme": "bearded", "variant_key": "bearded_flavor" },
+        "_roles": {
+            "BG": "uibackground",
+            "TEXT": "default",
+            "SEG": [
+                "red",
+                "orange",
+                "purple",
+                "green",
+                "blue",
+                "yellow",
+                "primaryalt"
+            ],
+            "FG": "border",
+            "OK": "success",
+            "ERR": "danger",
+            "WARN": "warning",
+            "DC_DIR": "turquoize",
+            "DC_LINK": "purple",
+            "DC_EXEC": "green",
+            "DC_SOURCE": "green",
+            "DC_TEXT": "yellow",
+            "DC_IMAGE": "pink",
+            "DC_MEDIA": "purple",
+            "DC_ARCHIVE": "orange",
+            "DC_DOC": "blue",
+            "DC_DIMMED": "primary",
+            "GC_ADDED": "green",
+            "GC_CHANGED": "orange",
+            "GC_UNTRACKED": "red",
+            "GC_BRANCH": "turquoize",
+            "GC_REMOTE": "orange",
+            "GC_TAG": "yellow",
+            "GC_OLD": "red",
+            "GC_NEW": "green",
+            "GC_META": "yellow",
+            "GC_FRAG": "purple"
+        },
+        "void": {
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "salmon",
+                    "primary",
+                    "greenAlt",
+                    "orange",
+                    "warning",
+                    "primaryalt"
+                ],
+                "DC_ARCHIVE": "blue",
+                "DC_DIMMED": "blue",
+                "GC_CHANGED": "blue",
+                "GC_UNTRACKED": "danger",
+                "GC_REMOTE": "blue",
+                "GC_OLD": "danger"
+            }
+        },
+        "surprising-watermelon": {
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "salmon",
+                    "orange",
+                    "green",
+                    "blue",
+                    "warning",
+                    "primaryalt"
+                ],
+                "DC_EXEC": "success",
+                "DC_SOURCE": "success",
+                "DC_ARCHIVE": "defaultalt",
+                "DC_DOC": "defaultalt",
+                "GC_ADDED": "success",
+                "GC_CHANGED": "info",
+                "GC_UNTRACKED": "turquoize",
+                "GC_REMOTE": "defaultalt",
+                "GC_OLD": "turquoize",
+                "GC_NEW": "success"
+            }
+        },
+        "surprising-eggplant": {
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "salmon",
+                    "defaultalt",
+                    "green",
+                    "blue",
+                    "warning",
+                    "primaryalt"
+                ],
+                "DC_EXEC": "success",
+                "DC_SOURCE": "success",
+                "DC_DOC": "info",
+                "GC_ADDED": "success",
+                "GC_UNTRACKED": "turquoize",
+                "GC_OLD": "turquoize",
+                "GC_NEW": "success"
+            }
+        },
+        "surprising-blueberry": {
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "salmon",
+                    "primary",
+                    "green",
+                    "blue",
+                    "warning",
+                    "primaryalt"
+                ],
+                "DC_EXEC": "success",
+                "DC_SOURCE": "success",
+                "DC_DOC": "info",
+                "DC_DIMMED": "turquoize",
+                "GC_ADDED": "success",
+                "GC_UNTRACKED": "danger",
+                "GC_OLD": "danger",
+                "GC_NEW": "success"
+            }
+        },
+        "themanopia": {
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "orange",
+                    "primary",
+                    "green",
+                    "blue",
+                    "yellow",
+                    "primaryalt"
+                ],
+                "DC_EXEC": "success",
+                "DC_SOURCE": "success",
+                "DC_TEXT": "warning",
+                "DC_ARCHIVE": "warning",
+                "DC_DOC": "defaultalt",
+                "DC_DIMMED": "defaultalt",
+                "GC_ADDED": "success",
+                "GC_CHANGED": "warning",
+                "GC_UNTRACKED": "danger",
+                "GC_REMOTE": "warning",
+                "GC_TAG": "warning",
+                "GC_OLD": "danger",
+                "GC_NEW": "success",
+                "GC_META": "warning"
+            }
+        },
+        "earth": {
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "orange",
+                    "primary",
+                    "green",
+                    "blue",
+                    "yellow",
+                    "primaryalt"
+                ],
+                "DC_EXEC": "success",
+                "DC_SOURCE": "success",
+                "DC_TEXT": "warning",
+                "DC_ARCHIVE": "warning",
+                "DC_DOC": "warning",
+                "DC_DIMMED": "pink",
+                "GC_ADDED": "success",
+                "GC_CHANGED": "warning",
+                "GC_UNTRACKED": "defaultalt",
+                "GC_REMOTE": "warning",
+                "GC_TAG": "warning",
+                "GC_OLD": "defaultalt",
+                "GC_NEW": "success",
+                "GC_META": "warning"
+            }
+        },
+        "feat-webdevcody": {
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "turquoize",
+                    "primary",
+                    "success",
+                    "blue",
+                    "info",
+                    "primaryalt"
+                ],
+                "DC_DIR": "yellow",
+                "DC_DOC": "defaultalt",
+                "DC_DIMMED": "danger",
+                "GC_UNTRACKED": "danger",
+                "GC_BRANCH": "yellow",
+                "GC_OLD": "danger"
+            }
+        }
+    },
+    "tokyonight": {
+        "_default_flavor": "night",
+        "_nvim": { "theme": "tokyonight", "variant_key": "tokyonight_style" },
+        "_roles": {
+            "BG": "bg",
+            "TEXT": "fg",
+            "FG": "bg",
+            "OK": "green",
+            "ERR": "red",
+            "WARN": "yellow",
+            "DC_EXEC": "teal",
+            "DC_SOURCE": "teal",
+            "DC_TEXT": "red1",
+            "DC_IMAGE": "delete",
+            "DC_ARCHIVE": "red1",
+            "DC_DIMMED": "dark3",
+            "GC_ADDED": "teal",
+            "GC_CHANGED": "red1",
+            "GC_UNTRACKED": "delete",
+            "GC_REMOTE": "red1",
+            "GC_TAG": "red1",
+            "GC_OLD": "delete",
+            "GC_NEW": "teal",
+            "GC_META": "red1",
+            "DC_LINK": "purple",
+            "DC_MEDIA": "purple",
+            "GC_BRANCH": "cyan",
+            "DC_DOC": "blue7",
+            "GC_FRAG": "purple",
+            "DC_DIR": "cyan"
+        },
+        "day": {
+            "_delta": { "syntax_theme": "tokyonight_day" },
+            "_terminal_fallback": "storm",
+            "_roles": {
+                "DC_EXEC": "green",
+                "DC_SOURCE": "green",
+                "DC_TEXT": "yellow",
+                "DC_IMAGE": "red",
+                "DC_ARCHIVE": "orange",
+                "GC_ADDED": "green",
+                "GC_CHANGED": "orange",
+                "GC_UNTRACKED": "red",
+                "GC_REMOTE": "orange",
+                "GC_TAG": "yellow",
+                "GC_OLD": "red",
+                "GC_NEW": "green",
+                "GC_META": "yellow"
+            }
+        },
+        "moon": {
+            "_delta": { "syntax_theme": "tokyonight_moon" },
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "orange",
+                    "magenta",
+                    "green",
+                    "blue",
+                    "yellow",
+                    "fg_dark"
+                ],
+                "DC_EXEC": "add",
+                "DC_SOURCE": "add",
+                "DC_TEXT": "delete",
+                "DC_ARCHIVE": "delete",
+                "GC_ADDED": "add",
+                "GC_CHANGED": "delete",
+                "GC_REMOTE": "delete",
+                "GC_TAG": "delete",
+                "GC_NEW": "add",
+                "GC_META": "delete",
+                "DC_DOC": "change"
+            }
+        },
+        "night": {
+            "_delta": { "syntax_theme": "tokyonight_night" },
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "orange",
+                    "magenta",
+                    "green",
+                    "blue",
+                    "yellow",
+                    "bg_dark"
+                ]
+            }
+        },
+        "storm": {
+            "_delta": { "syntax_theme": "tokyonight_storm" },
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "orange",
+                    "purple",
+                    "green",
+                    "blue1",
+                    "yellow",
+                    "dark5"
+                ],
+                "DC_EXEC": "green1",
+                "DC_SOURCE": "green1",
+                "GC_ADDED": "green1",
+                "GC_NEW": "green1",
+                "DC_DIR": "teal",
+                "DC_LINK": "magenta",
+                "DC_MEDIA": "magenta",
+                "DC_DOC": "blue2",
+                "GC_BRANCH": "teal",
+                "GC_FRAG": "magenta"
+            }
+        }
+    },
+    "flexoki": {
+        "_default_flavor": "dark",
+        "_delta": { "syntax_theme": "flexoki-dark" },
+        "_nvim": { "theme": "flexoki", "variant_key": "flexoki_style" },
+        "_roles": {
+            "BG": "bg",
+            "TEXT": "tx",
+            "SEG": ["re", "or", "pu", "gr", "cy", "ye", "tx-2"],
+            "FG": "bg",
+            "OK": "gr",
+            "ERR": "re",
+            "WARN": "ye",
+            "DC_DIR": "cy",
+            "DC_LINK": "pu",
+            "DC_EXEC": "gr",
+            "DC_SOURCE": "gr",
+            "DC_TEXT": "ye",
+            "DC_IMAGE": "ma",
+            "DC_MEDIA": "pu",
+            "DC_ARCHIVE": "or",
+            "DC_DOC": "bl",
+            "DC_DIMMED": "tx-2",
+            "GC_ADDED": "gr",
+            "GC_CHANGED": "or",
+            "GC_UNTRACKED": "re",
+            "GC_BRANCH": "cy",
+            "GC_REMOTE": "or",
+            "GC_TAG": "ye",
+            "GC_OLD": "re",
+            "GC_NEW": "gr",
+            "GC_META": "ye",
+            "GC_FRAG": "pu"
+        },
+        "light": {
+            "_delta": { "syntax_theme": "flexoki-light" },
+            "_roles": {
+                "SEG": ["re", "or", "pu", "gr", "cy", "ye-2", "tx-2"],
+                "DC_DIR": "cy-2",
+                "DC_LINK": "pu-2",
+                "DC_EXEC": "gr-2",
+                "DC_SOURCE": "gr-2",
+                "DC_MEDIA": "ma-2",
+                "DC_ARCHIVE": "or-2",
+                "DC_DIMMED": "tx-3",
+                "GC_ADDED": "gr-2",
+                "GC_CHANGED": "or-2",
+                "GC_UNTRACKED": "re-2",
+                "GC_BRANCH": "cy-2",
+                "GC_REMOTE": "or-2",
+                "GC_OLD": "re-2",
+                "GC_NEW": "gr-2",
+                "GC_FRAG": "pu-2"
+            }
+        }
+    },
+    "bamboo": {
+        "_default_flavor": "vulgaris",
+        "_nvim": { "theme": "bamboo", "variant_key": "bamboo_style" },
+        "_roles": {
+            "BG": "bg0",
+            "TEXT": "fg",
+            "SEG": [
+                "red",
+                "orange",
+                "purple",
+                "green",
+                "cyan",
+                "yellow",
+                "light_grey"
+            ],
+            "FG": "bg0",
+            "OK": "green",
+            "ERR": "red",
+            "WARN": "orange",
+            "DC_DIR": "light_blue",
+            "DC_LINK": "blue",
+            "DC_EXEC": "diff_add",
+            "DC_SOURCE": "diff_add",
+            "DC_TEXT": "bg_yellow",
+            "DC_IMAGE": "coral",
+            "DC_MEDIA": "blue",
+            "DC_ARCHIVE": "bg_yellow",
+            "DC_DOC": "blue",
+            "DC_DIMMED": "grey",
+            "GC_ADDED": "diff_add",
+            "GC_CHANGED": "bg_yellow",
+            "GC_UNTRACKED": "diff_delete",
+            "GC_BRANCH": "light_blue",
+            "GC_REMOTE": "coral",
+            "GC_TAG": "bg_yellow",
+            "GC_OLD": "diff_delete",
+            "GC_NEW": "diff_add",
+            "GC_META": "bg_yellow",
+            "GC_FRAG": "bright_purple"
+        },
+        "vulgaris": { "_delta": { "syntax_theme": "" }, "_roles": {} },
+        "multiplex": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_TEXT": "bg_blue",
+                "GC_UNTRACKED": "coral",
+                "GC_REMOTE": "bg_yellow",
+                "GC_TAG": "light_blue",
+                "GC_OLD": "coral",
+                "GC_META": "bg_blue",
+                "GC_FRAG": "blue"
+            }
+        },
+        "light": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "FG": "fg",
+                "DC_DIR": "bg_blue",
+                "DC_LINK": "bright_purple",
+                "DC_MEDIA": "bright_purple",
+                "GC_UNTRACKED": "coral",
+                "GC_BRANCH": "bg_blue",
+                "GC_REMOTE": "bg_yellow",
+                "GC_OLD": "coral"
+            }
+        }
+    },
+    "oasis": {
+        "_default_flavor": "moonlight",
+        "_nvim": { "theme": "oasis", "variant_key": "oasis_style" },
+        "_roles": {
+            "BG": "bg",
+            "TEXT": "fg",
+            "SEG": [
+                "rose",
+                "sunrise",
+                "lavender",
+                "palm",
+                "sky",
+                "sunshine",
+                "slate"
+            ],
+            "FG": "bg",
+            "OK": "palm",
+            "ERR": "red",
+            "WARN": "sunset",
+            "DC_DIR": "teal",
+            "DC_LINK": "iris",
+            "DC_EXEC": "aloe",
+            "DC_SOURCE": "aloe",
+            "DC_TEXT": "khaki",
+            "DC_IMAGE": "red",
+            "DC_MEDIA": "iris",
+            "DC_ARCHIVE": "copper",
+            "DC_DOC": "lagoon",
+            "DC_DIMMED": "stone",
+            "GC_ADDED": "aloe",
+            "GC_CHANGED": "copper",
+            "GC_UNTRACKED": "red",
+            "GC_BRANCH": "teal",
+            "GC_REMOTE": "copper",
+            "GC_TAG": "khaki",
+            "GC_OLD": "red",
+            "GC_NEW": "aloe",
+            "GC_META": "khaki",
+            "GC_FRAG": "iris"
+        },
+        "abyss": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_LINK": "desert_rose",
+                "DC_EXEC": "olive",
+                "DC_SOURCE": "olive",
+                "GC_ADDED": "olive",
+                "GC_NEW": "olive",
+                "GC_FRAG": "desert_rose"
+            }
+        },
+        "cactus": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_ARCHIVE": "sunset",
+                "GC_CHANGED": "sunset",
+                "GC_REMOTE": "sunset"
+            }
+        },
+        "canyon": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_EXEC": "olive",
+                "DC_SOURCE": "olive",
+                "DC_ARCHIVE": "sunset",
+                "GC_ADDED": "olive",
+                "GC_CHANGED": "sunset",
+                "GC_REMOTE": "sunset",
+                "GC_NEW": "olive"
+            }
+        },
+        "desert": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_EXEC": "olive",
+                "DC_SOURCE": "olive",
+                "DC_ARCHIVE": "sunset",
+                "GC_ADDED": "olive",
+                "GC_CHANGED": "sunset",
+                "GC_REMOTE": "sunset",
+                "GC_NEW": "olive"
+            }
+        },
+        "dune": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_EXEC": "olive",
+                "DC_SOURCE": "olive",
+                "DC_ARCHIVE": "sunset",
+                "GC_ADDED": "olive",
+                "GC_CHANGED": "sunset",
+                "GC_REMOTE": "sunset",
+                "GC_NEW": "olive"
+            }
+        },
+        "lagoon": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_ARCHIVE": "sunset",
+                "GC_CHANGED": "sunset",
+                "GC_REMOTE": "sunset"
+            }
+        },
+        "luna": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_EXEC": "olive",
+                "DC_SOURCE": "olive",
+                "GC_ADDED": "olive",
+                "GC_NEW": "olive"
+            }
+        },
+        "midnight": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_EXEC": "olive",
+                "DC_SOURCE": "olive",
+                "DC_ARCHIVE": "sunset",
+                "GC_ADDED": "olive",
+                "GC_CHANGED": "sunset",
+                "GC_REMOTE": "sunset",
+                "GC_NEW": "olive"
+            }
+        },
+        "mirage": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_ARCHIVE": "sunset",
+                "GC_CHANGED": "sunset",
+                "GC_REMOTE": "sunset"
+            }
+        },
+        "moonlight": { "_delta": { "syntax_theme": "" }, "_roles": {} },
+        "night": { "_delta": { "syntax_theme": "" }, "_roles": {} },
+        "rose": { "_delta": { "syntax_theme": "" }, "_roles": {} },
+        "scorpion": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_EXEC": "olive",
+                "DC_SOURCE": "olive",
+                "DC_ARCHIVE": "sunset",
+                "GC_ADDED": "olive",
+                "GC_CHANGED": "sunset",
+                "GC_REMOTE": "sunset",
+                "GC_NEW": "olive"
+            }
+        },
+        "sol": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_EXEC": "olive",
+                "DC_SOURCE": "olive",
+                "GC_ADDED": "olive",
+                "GC_NEW": "olive"
+            }
+        },
+        "starlight": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_ARCHIVE": "sandstone",
+                "GC_CHANGED": "sandstone",
+                "GC_REMOTE": "sandstone"
+            }
+        },
+        "twilight": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "DC_IMAGE": "sundown",
+                "DC_ARCHIVE": "sunset",
+                "GC_CHANGED": "sunset",
+                "GC_REMOTE": "sunset"
+            }
+        }
+    },
+    "onedarkpro": {
+        "_default_flavor": "onedark",
+        "_nvim": { "theme": "onedarkpro", "variant_key": "onedarkpro_style" },
+        "_roles": {
+            "BG": "bg",
+            "TEXT": "fg",
+            "FG": "black",
+            "OK": "green",
+            "ERR": "red",
+            "WARN": "yellow",
+            "DC_DIR": "cyan",
+            "DC_LINK": "purple",
+            "DC_EXEC": "green",
+            "DC_SOURCE": "green",
+            "DC_TEXT": "yellow",
+            "DC_IMAGE": "red",
+            "DC_MEDIA": "purple",
+            "DC_ARCHIVE": "orange",
+            "DC_DOC": "blue",
+            "DC_DIMMED": "gray",
+            "GC_ADDED": "green",
+            "GC_CHANGED": "orange",
+            "GC_UNTRACKED": "red",
+            "GC_BRANCH": "cyan",
+            "GC_REMOTE": "orange",
+            "GC_TAG": "yellow",
+            "GC_OLD": "red",
+            "GC_NEW": "green",
+            "GC_META": "yellow",
+            "GC_FRAG": "purple"
+        },
+        "onedark": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "orange",
+                    "purple",
+                    "green",
+                    "cyan",
+                    "yellow",
+                    "white"
+                ]
+            }
+        },
+        "onelight": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "orange",
+                    "purple",
+                    "green",
+                    "cyan",
+                    "yellow",
+                    "white"
+                ]
+            }
+        },
+        "onedark_vivid": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "orange",
+                    "purple",
+                    "green",
+                    "blue",
+                    "yellow",
+                    "white"
+                ]
+            }
+        },
+        "onedark_dark": {
+            "_delta": { "syntax_theme": "" },
+            "_roles": {
+                "SEG": [
+                    "red",
+                    "orange",
+                    "purple",
+                    "green",
+                    "blue",
+                    "yellow",
+                    "white"
+                ]
+            }
+        }
+    },
+    "ayu": {
+        "_default_flavor": "dark",
+        "_nvim": { "theme": "ayu", "variant_key": "ayu_flavor" },
+        "_roles": {
+            "SEG": [
+                "error",
+                "keyword",
+                "constant",
+                "string",
+                "tag",
+                "accent",
+                "comment"
+            ],
+            "BG": "bg",
+            "TEXT": "fg",
+            "FG": "bg",
+            "OK": "string",
+            "ERR": "error",
+            "WARN": "keyword",
+            "DC_DIR": "entity",
+            "DC_LINK": "lsp_parameter",
+            "DC_EXEC": "vcs_added",
+            "DC_SOURCE": "vcs_added",
+            "DC_TEXT": "warning",
+            "DC_IMAGE": "markup",
+            "DC_MEDIA": "lsp_parameter",
+            "DC_ARCHIVE": "warning",
+            "DC_DOC": "entity",
+            "DC_DIMMED": "black",
+            "GC_ADDED": "vcs_added",
+            "GC_CHANGED": "warning",
+            "GC_UNTRACKED": "markup",
+            "GC_BRANCH": "entity",
+            "GC_REMOTE": "warning",
+            "GC_TAG": "warning",
+            "GC_OLD": "markup",
+            "GC_NEW": "vcs_added",
+            "GC_META": "warning",
+            "GC_FRAG": "lsp_parameter"
+        },
+        "mirage": {
+            "_roles": {
+                "DC_DIR": "panel_border",
+                "DC_TEXT": "func",
+                "DC_ARCHIVE": "func",
+                "DC_DOC": "panel_border",
+                "DC_DIMMED": "white",
+                "GC_CHANGED": "func",
+                "GC_BRANCH": "panel_border",
+                "GC_REMOTE": "func",
+                "GC_TAG": "func",
+                "GC_META": "func"
+            }
+        },
+        "light": { "_roles": { "DC_DIMMED": "panel_border" } }
     }
-  },
-  "catppuccin": {
-    "_default_flavor": "mocha",
-    "_nvim": { "theme": "catppuccin", "variant_key": "catppuccin_flavour" },
-    "_roles": {
-      "BG": "base",
-      "TEXT": "text",
-      "FG": "crust",
-      "OK": "green",
-      "ERR": "red",
-      "WARN": "yellow",
-      "DC_EXEC": "green",
-      "DC_SOURCE": "green",
-      "DC_TEXT": "yellow",
-      "DC_DIMMED": "overlay0",
-      "GC_ADDED": "green",
-      "GC_CHANGED": "peach",
-      "GC_UNTRACKED": "red",
-      "GC_REMOTE": "peach",
-      "GC_TAG": "yellow",
-      "GC_OLD": "red",
-      "GC_NEW": "green",
-      "GC_META": "yellow"
-    },
-    "frappe": {
-      "_delta": { "syntax_theme": "Catppuccin Frappe" },
-      "_roles": {
-        "SEG": ["maroon", "peach", "blue", "green", "teal", "yellow", "surface0"],
-        "DC_DIR": "teal",
-        "DC_LINK": "blue",
-        "DC_IMAGE": "maroon",
-        "DC_MEDIA": "blue",
-        "DC_ARCHIVE": "flamingo",
-        "DC_DOC": "sky",
-        "GC_BRANCH": "teal",
-        "GC_FRAG": "blue"
-      }
-    },
-    "latte": {
-      "_delta": { "syntax_theme": "Catppuccin Latte" },
-      "_roles": {
-        "SEG": ["red", "peach", "lavender", "green", "sapphire", "yellow", "surface0"],
-        "DC_DIR": "sapphire",
-        "DC_LINK": "mauve",
-        "DC_IMAGE": "pink",
-        "DC_MEDIA": "mauve",
-        "DC_ARCHIVE": "peach",
-        "DC_DOC": "blue",
-        "GC_BRANCH": "sapphire",
-        "GC_FRAG": "mauve"
-      }
-    },
-    "macchiato": {
-      "_delta": { "syntax_theme": "Catppuccin Macchiato" },
-      "_roles": {
-        "SEG": ["red", "peach", "mauve", "green", "sky", "yellow", "flamingo"],
-        "DC_DIR": "sky",
-        "DC_LINK": "lavender",
-        "DC_IMAGE": "flamingo",
-        "DC_MEDIA": "lavender",
-        "DC_ARCHIVE": "peach",
-        "DC_DOC": "sapphire",
-        "GC_BRANCH": "sky",
-        "GC_FRAG": "lavender"
-      }
-    },
-    "mocha": {
-      "_delta": { "syntax_theme": "Catppuccin Mocha" },
-      "_roles": {
-        "SEG": ["red", "peach", "lavender", "green", "sapphire", "yellow", "flamingo"],
-        "DC_DIR": "sapphire",
-        "DC_LINK": "mauve",
-        "DC_IMAGE": "pink",
-        "DC_MEDIA": "mauve",
-        "DC_ARCHIVE": "peach",
-        "DC_DOC": "blue",
-        "GC_BRANCH": "sapphire",
-        "GC_FRAG": "mauve"
-      }
-    }
-  },
-  "kanagawa": {
-    "_default_flavor": "wave",
-    "_nvim": { "theme": "kanagawa", "variant_key": "kanagawa_variant" },
-    "wave": {
-      "_delta": { "syntax_theme": "kanagawa-wave" },
-      "_roles": {
-        "BG": "sumiInk0",
-        "TEXT": "fujiWhite",
-        "SEG": ["surimiOrange", "springBlue", "oniViolet", "springGreen", "waveAqua2", "oldWhite", "sumiInk4"],
-        "FG": "sumiInk3",
-        "OK": "springGreen",
-        "ERR": "autumnRed",
-        "WARN": "carpYellow",
-        "DC_DIR": "waveAqua2",
-        "DC_LINK": "oniViolet",
-        "DC_EXEC": "springGreen",
-        "DC_SOURCE": "springGreen",
-        "DC_TEXT": "carpYellow",
-        "DC_IMAGE": "sakuraPink",
-        "DC_MEDIA": "oniViolet",
-        "DC_ARCHIVE": "surimiOrange",
-        "DC_DOC": "springBlue",
-        "DC_DIMMED": "fujiGray",
-        "GC_ADDED": "springGreen",
-        "GC_CHANGED": "surimiOrange",
-        "GC_UNTRACKED": "autumnRed",
-        "GC_BRANCH": "waveAqua2",
-        "GC_REMOTE": "surimiOrange",
-        "GC_TAG": "carpYellow",
-        "GC_OLD": "autumnRed",
-        "GC_NEW": "springGreen",
-        "GC_META": "carpYellow",
-        "GC_FRAG": "oniViolet"
-      }
-    },
-    "dragon": {
-      "_delta": { "syntax_theme": "kanagawa-dragon" },
-      "_roles": {
-        "BG": "black3",
-        "TEXT": "white",
-        "SEG": ["orange", "blue2", "pink", "green", "teal", "yellow", "gray"],
-        "FG": "black2",
-        "OK": "green",
-        "ERR": "red",
-        "WARN": "yellow",
-        "DC_DIR": "aqua",
-        "DC_LINK": "pink",
-        "DC_EXEC": "green",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow",
-        "DC_IMAGE": "pink",
-        "DC_MEDIA": "blue2",
-        "DC_ARCHIVE": "orange",
-        "DC_DOC": "blue2",
-        "DC_DIMMED": "black6",
-        "GC_ADDED": "green",
-        "GC_CHANGED": "orange",
-        "GC_UNTRACKED": "red",
-        "GC_BRANCH": "teal",
-        "GC_REMOTE": "orange",
-        "GC_TAG": "yellow",
-        "GC_OLD": "red",
-        "GC_NEW": "green",
-        "GC_META": "yellow",
-        "GC_FRAG": "pink"
-      }
-    },
-    "lotus": {
-      "_delta": { "syntax_theme": "kanagawa-lotus" },
-      "_roles": {
-        "BG": "white3",
-        "TEXT": "ink1",
-        "SEG": ["orange", "teal1", "violet1", "green", "blue3", "yellow", "gray3"],
-        "FG": "ink2",
-        "OK": "green",
-        "ERR": "red",
-        "WARN": "yellow",
-        "DC_DIR": "teal1",
-        "DC_LINK": "violet1",
-        "DC_EXEC": "green",
-        "DC_SOURCE": "green",
-        "DC_TEXT": "yellow3",
-        "DC_IMAGE": "pink",
-        "DC_MEDIA": "violet1",
-        "DC_ARCHIVE": "orange",
-        "DC_DOC": "blue3",
-        "DC_DIMMED": "gray2",
-        "GC_ADDED": "green",
-        "GC_CHANGED": "orange",
-        "GC_UNTRACKED": "red",
-        "GC_BRANCH": "teal1",
-        "GC_REMOTE": "orange",
-        "GC_TAG": "yellow3",
-        "GC_OLD": "red",
-        "GC_NEW": "green",
-        "GC_META": "yellow3",
-        "GC_FRAG": "violet1"
-      }
-    }
-  },
-  "gruvbox": {
-    "_default_flavor": "dark",
-    "_delta": { "syntax_theme": "gruvbox-dark" },
-    "_nvim": { "theme": "gruvbox", "variant_key": "gruvbox_flavor" },
-    "_roles": {
-      "BG": "dark0",
-      "TEXT": "light1",
-      "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "", "gray"],
-      "FG": "dark0",
-      "OK": "bright_green",
-      "ERR": "bright_red",
-      "WARN": "bright_yellow",
-      "DC_DIR": "bright_aqua",
-      "DC_LINK": "bright_purple",
-      "DC_EXEC": "bright_green",
-      "DC_SOURCE": "bright_green",
-      "DC_TEXT": "bright_yellow",
-      "DC_IMAGE": "bright_red",
-      "DC_MEDIA": "bright_purple",
-      "DC_ARCHIVE": "bright_orange",
-      "DC_DOC": "bright_blue",
-      "DC_DIMMED": "dark3",
-      "GC_ADDED": "bright_green",
-      "GC_CHANGED": "bright_orange",
-      "GC_UNTRACKED": "bright_red",
-      "GC_BRANCH": "bright_aqua",
-      "GC_REMOTE": "bright_orange",
-      "GC_TAG": "bright_yellow",
-      "GC_OLD": "bright_red",
-      "GC_NEW": "bright_green",
-      "GC_META": "bright_yellow",
-      "GC_FRAG": "neutral_purple"
-    },
-    "dark": { "_roles": { "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "bright_yellow", "gray"] } },
-    "dark-hard": { "_roles": { "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "bright_yellow", "gray"] } },
-    "dark-soft": { "_roles": { "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "neutral_yellow", "gray"] } },
-    "light": {
-      "_delta": { "syntax_theme": "gruvbox-light" },
-      "_roles": {
-        "BG": "light0",
-        "TEXT": "dark1",
-        "DC_DIMMED": "light3"
-      , "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "faded_yellow", "gray"] }
-    }
-  },
-  "bearded": {
-    "_default_flavor": "arc",
-    "_delta": { "syntax_theme": "" },
-    "_nvim": { "theme": "bearded", "variant_key": "bearded_flavor" },
-    "_roles": {
-      "BG": "uibackground",
-      "TEXT": "default",
-      "SEG": ["red", "orange", "purple", "green", "blue", "yellow", "primaryalt"],
-      "FG": "border",
-      "OK": "success",
-      "ERR": "danger",
-      "WARN": "warning",
-      "DC_DIR": "turquoize",
-      "DC_LINK": "purple",
-      "DC_EXEC": "green",
-      "DC_SOURCE": "green",
-      "DC_TEXT": "yellow",
-      "DC_IMAGE": "pink",
-      "DC_MEDIA": "purple",
-      "DC_ARCHIVE": "orange",
-      "DC_DOC": "blue",
-      "DC_DIMMED": "primary",
-      "GC_ADDED": "green",
-      "GC_CHANGED": "orange",
-      "GC_UNTRACKED": "red",
-      "GC_BRANCH": "turquoize",
-      "GC_REMOTE": "orange",
-      "GC_TAG": "yellow",
-      "GC_OLD": "red",
-      "GC_NEW": "green",
-      "GC_META": "yellow",
-      "GC_FRAG": "purple"
-    },
-    "void": { "_roles": { "SEG": ["red", "salmon", "primary", "greenAlt", "orange", "warning", "primaryalt"] } },
-    "surprising-watermelon": { "_roles": { "SEG": ["red", "salmon", "orange", "green", "blue", "warning", "primaryalt"] } },
-    "surprising-eggplant": { "_roles": { "SEG": ["red", "salmon", "defaultalt", "green", "blue", "warning", "primaryalt"] } },
-    "surprising-blueberry": { "_roles": { "SEG": ["red", "salmon", "primary", "green", "blue", "warning", "primaryalt"] } },
-    "themanopia": { "_roles": { "SEG": ["red", "orange", "primary", "green", "blue", "yellow", "primaryalt"] } },
-    "earth": { "_roles": { "SEG": ["red", "orange", "primary", "green", "blue", "yellow", "primaryalt"] } },
-    "feat-webdevcody": {
-      "_roles": { "SEG": ["red", "turquoize", "primary", "success", "blue", "info", "primaryalt"] }
-    }
-  },
-  "tokyonight": {
-    "_default_flavor": "night",
-    "_nvim": { "theme": "tokyonight", "variant_key": "tokyonight_style" },
-    "_roles": {
-      "BG": "bg",
-      "TEXT": "fg",
-      "FG": "bg",
-      "OK": "green",
-      "ERR": "red",
-      "WARN": "yellow",
-      "DC_EXEC": "green",
-      "DC_SOURCE": "green",
-      "DC_TEXT": "yellow",
-      "DC_IMAGE": "red",
-      "DC_ARCHIVE": "orange",
-      "DC_DIMMED": "dark3",
-      "GC_ADDED": "green",
-      "GC_CHANGED": "orange",
-      "GC_UNTRACKED": "red",
-      "GC_REMOTE": "orange",
-      "GC_TAG": "yellow",
-      "GC_OLD": "red",
-      "GC_NEW": "green",
-      "GC_META": "yellow"
-    },
-    "day": {
-      "_delta": { "syntax_theme": "tokyonight_day" },
-      "_terminal_fallback": "storm"
-    },
-    "moon": {
-      "_delta": { "syntax_theme": "tokyonight_moon" },
-      "_roles": {
-        "SEG": ["red", "orange", "magenta", "green", "blue", "yellow", "fg_dark"],
-        "DC_DIR": "cyan",
-        "DC_LINK": "magenta",
-        "DC_MEDIA": "magenta",
-        "DC_DOC": "blue",
-        "GC_BRANCH": "cyan",
-        "GC_FRAG": "magenta"
-      }
-    },
-    "night": {
-      "_delta": { "syntax_theme": "tokyonight_night" },
-      "_roles": {
-        "SEG": ["red", "orange", "magenta", "green", "blue", "yellow", "bg_dark"],
-        "DC_DIR": "cyan",
-        "DC_LINK": "magenta",
-        "DC_MEDIA": "magenta",
-        "DC_DOC": "blue",
-        "GC_BRANCH": "cyan",
-        "GC_FRAG": "magenta"
-      }
-    },
-    "storm": {
-      "_delta": { "syntax_theme": "tokyonight_storm" },
-      "_roles": {
-        "SEG": ["red", "orange", "purple", "green", "blue1", "yellow", "dark5"],
-        "DC_DIR": "teal",
-        "DC_LINK": "purple",
-        "DC_MEDIA": "purple",
-        "DC_DOC": "blue1",
-        "GC_BRANCH": "teal",
-        "GC_FRAG": "purple"
-      }
-    }
-  },
-  "flexoki": {
-    "_default_flavor": "dark",
-    "_delta": { "syntax_theme": "flexoki-dark" },
-    "_nvim": { "theme": "flexoki", "variant_key": "flexoki_style" },
-    "_roles": {
-      "BG": "bg",
-      "TEXT": "tx",
-      "SEG": ["re", "or", "pu", "gr", "cy", "ye", "tx-2"],
-      "FG": "bg",
-      "OK": "gr",
-      "ERR": "re",
-      "WARN": "ye",
-      "DC_DIR": "cy",
-      "DC_LINK": "pu",
-      "DC_EXEC": "gr",
-      "DC_SOURCE": "gr",
-      "DC_TEXT": "ye",
-      "DC_IMAGE": "ma",
-      "DC_MEDIA": "pu",
-      "DC_ARCHIVE": "or",
-      "DC_DOC": "bl",
-      "DC_DIMMED": "tx-2",
-      "GC_ADDED": "gr",
-      "GC_CHANGED": "or",
-      "GC_UNTRACKED": "re",
-      "GC_BRANCH": "cy",
-      "GC_REMOTE": "or",
-      "GC_TAG": "ye",
-      "GC_OLD": "re",
-      "GC_NEW": "gr",
-      "GC_META": "ye",
-      "GC_FRAG": "pu"
-    },
-    "light": { "_delta": { "syntax_theme": "flexoki-light" }, "_roles": { "SEG": ["re", "or", "pu", "gr", "cy", "ye-2", "tx-2"] } }
-  },
-  "bamboo": {
-    "_default_flavor": "vulgaris",
-    "_nvim": { "theme": "bamboo", "variant_key": "bamboo_style" },
-    "_roles": {
-      "BG": "bg0",
-      "TEXT": "fg",
-      "SEG": ["red", "orange", "purple", "green", "cyan", "yellow", "light_grey"],
-      "FG": "bg0",
-      "OK": "green",
-      "ERR": "red",
-      "WARN": "orange",
-      "DC_DIR": "cyan",
-      "DC_LINK": "purple",
-      "DC_EXEC": "green",
-      "DC_SOURCE": "green",
-      "DC_TEXT": "yellow",
-      "DC_IMAGE": "red",
-      "DC_MEDIA": "purple",
-      "DC_ARCHIVE": "orange",
-      "DC_DOC": "blue",
-      "DC_DIMMED": "grey",
-      "GC_ADDED": "green",
-      "GC_CHANGED": "orange",
-      "GC_UNTRACKED": "red",
-      "GC_BRANCH": "cyan",
-      "GC_REMOTE": "orange",
-      "GC_TAG": "yellow",
-      "GC_OLD": "red",
-      "GC_NEW": "green",
-      "GC_META": "yellow",
-      "GC_FRAG": "purple"
-    },
-    "vulgaris": { "_delta": { "syntax_theme": "" } },
-    "multiplex": { "_delta": { "syntax_theme": "" } },
-    "light": {
-      "_delta": { "syntax_theme": "" },
-      "_roles": { "FG": "fg" }
-    }
-  },
-  "oasis": {
-    "_default_flavor": "moonlight",
-    "_nvim": { "theme": "oasis", "variant_key": "oasis_style" },
-    "_roles": {
-      "BG": "bg",
-      "TEXT": "fg",
-      "SEG": ["rose", "sunrise", "lavender", "palm", "sky", "sunshine", "slate"],
-      "FG": "bg",
-      "OK": "palm",
-      "ERR": "red",
-      "WARN": "sunset",
-      "DC_DIR": "sky",
-      "DC_LINK": "lavender",
-      "DC_EXEC": "palm",
-      "DC_SOURCE": "palm",
-      "DC_TEXT": "khaki",
-      "DC_IMAGE": "rose",
-      "DC_MEDIA": "iris",
-      "DC_ARCHIVE": "sunrise",
-      "DC_DOC": "lagoon",
-      "DC_DIMMED": "slate",
-      "GC_ADDED": "palm",
-      "GC_CHANGED": "sunrise",
-      "GC_UNTRACKED": "red",
-      "GC_BRANCH": "sky",
-      "GC_REMOTE": "sunrise",
-      "GC_TAG": "khaki",
-      "GC_OLD": "red",
-      "GC_NEW": "palm",
-      "GC_META": "khaki",
-      "GC_FRAG": "lavender"
-    },
-    "abyss":     { "_delta": { "syntax_theme": "" } },
-    "cactus":    { "_delta": { "syntax_theme": "" } },
-    "canyon":    { "_delta": { "syntax_theme": "" } },
-    "desert":    { "_delta": { "syntax_theme": "" } },
-    "dune":      { "_delta": { "syntax_theme": "" } },
-    "lagoon":    { "_delta": { "syntax_theme": "" } },
-    "luna":      { "_delta": { "syntax_theme": "" } },
-    "midnight":  { "_delta": { "syntax_theme": "" } },
-    "mirage":    { "_delta": { "syntax_theme": "" } },
-    "moonlight": { "_delta": { "syntax_theme": "" } },
-    "night":     { "_delta": { "syntax_theme": "" } },
-    "rose":      { "_delta": { "syntax_theme": "" } },
-    "scorpion":  { "_delta": { "syntax_theme": "" } },
-    "sol":       { "_delta": { "syntax_theme": "" } },
-    "starlight": { "_delta": { "syntax_theme": "" } },
-    "twilight":  { "_delta": { "syntax_theme": "" } }
-  },
-  "onedarkpro": {
-    "_default_flavor": "onedark",
-    "_nvim": { "theme": "onedarkpro", "variant_key": "onedarkpro_style" },
-    "_roles": {
-      "BG": "bg",
-      "TEXT": "fg",
-      "FG": "black",
-      "OK": "green",
-      "ERR": "red",
-      "WARN": "yellow",
-      "DC_DIR": "cyan",
-      "DC_LINK": "purple",
-      "DC_EXEC": "green",
-      "DC_SOURCE": "green",
-      "DC_TEXT": "yellow",
-      "DC_IMAGE": "red",
-      "DC_MEDIA": "purple",
-      "DC_ARCHIVE": "orange",
-      "DC_DOC": "blue",
-      "DC_DIMMED": "gray",
-      "GC_ADDED": "green",
-      "GC_CHANGED": "orange",
-      "GC_UNTRACKED": "red",
-      "GC_BRANCH": "cyan",
-      "GC_REMOTE": "orange",
-      "GC_TAG": "yellow",
-      "GC_OLD": "red",
-      "GC_NEW": "green",
-      "GC_META": "yellow",
-      "GC_FRAG": "purple"
-    },
-    "onedark": {
-      "_delta": { "syntax_theme": "" },
-      "_roles": { "SEG": ["red", "orange", "purple", "green", "cyan", "yellow", "white"] }
-    },
-    "onelight": {
-      "_delta": { "syntax_theme": "" },
-      "_roles": { "SEG": ["red", "orange", "purple", "green", "cyan", "yellow", "white"] }
-    },
-    "onedark_vivid": {
-      "_delta": { "syntax_theme": "" },
-      "_roles": { "SEG": ["red", "orange", "purple", "green", "blue", "yellow", "white"] }
-    },
-    "onedark_dark": {
-      "_delta": { "syntax_theme": "" },
-      "_roles": { "SEG": ["red", "orange", "purple", "green", "blue", "yellow", "white"] }
-    }
-  }
 }

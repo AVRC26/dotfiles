@@ -282,6 +282,30 @@ local palette = {
 return palette
 """
 
+AYU_LUA = """\
+local colors = {
+  white = '#FFFFFF',
+  black = '#000000',
+}
+
+function colors.generate(mirage)
+  if vim.o.background == 'dark' then
+    if mirage then
+      colors.accent = '#FFCC66'
+      colors.bg = '#1F2430'
+    else
+      colors.accent = '#E6B450'
+      colors.bg = '#0B0E14'
+    end
+  else
+    colors.accent = '#FFAA33'
+    colors.bg = '#F8F9FA'
+  end
+end
+
+return colors
+"""
+
 OASIS_LUA = """\
 local colors = {
   rose = {
@@ -456,6 +480,64 @@ class TestExtractOasisFlavor(unittest.TestCase):
 
     def test_missing_file_returns_empty(self) -> None:
         self.assertEqual(gc._extract_oasis_flavor("/no/dir", "moonlight"), [])
+
+
+# ── KNOWN_THEMES ─────────────────────────────────────────────────────────────
+
+
+class TestKnownThemes(unittest.TestCase):
+    def test_ayu_is_registered(self) -> None:
+        """ayu must be a valid --theme choice, not just have an extractor."""
+        self.assertIn("ayu", gc.KNOWN_THEMES)
+
+
+# ── _extract_ayu_flavor ──────────────────────────────────────────────────────
+
+
+class TestExtractAyuFlavor(unittest.TestCase):
+    def setUp(self) -> None:
+        self.tmp = tempfile.mkdtemp()
+        path = os.path.join(self.tmp, "ayu/lua/ayu/colors.lua")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        Path(path).write_text(AYU_LUA)
+
+    def test_extracts_dark_branch(self) -> None:
+        pairs = gc._extract_ayu_flavor(self.tmp, "dark")
+        d = dict(pairs)
+        self.assertEqual(d["bg"], "#0B0E14")
+        self.assertEqual(d["accent"], "#E6B450")
+
+    def test_extracts_mirage_branch(self) -> None:
+        pairs = gc._extract_ayu_flavor(self.tmp, "mirage")
+        d = dict(pairs)
+        self.assertEqual(d["bg"], "#1F2430")
+        self.assertEqual(d["accent"], "#FFCC66")
+
+    def test_extracts_light_branch(self) -> None:
+        pairs = gc._extract_ayu_flavor(self.tmp, "light")
+        d = dict(pairs)
+        self.assertEqual(d["bg"], "#F8F9FA")
+        self.assertEqual(d["accent"], "#FFAA33")
+
+    def test_static_colors_shared_across_flavors(self) -> None:
+        for flavor in ("dark", "mirage", "light"):
+            d = dict(gc._extract_ayu_flavor(self.tmp, flavor))
+            self.assertEqual(d["white"], "#FFFFFF")
+            self.assertEqual(d["black"], "#000000")
+
+    def test_branches_do_not_leak_into_each_other(self) -> None:
+        dark = dict(gc._extract_ayu_flavor(self.tmp, "dark"))
+        mirage = dict(gc._extract_ayu_flavor(self.tmp, "mirage"))
+        light = dict(gc._extract_ayu_flavor(self.tmp, "light"))
+        self.assertNotEqual(dark["bg"], mirage["bg"])
+        self.assertNotEqual(dark["bg"], light["bg"])
+        self.assertNotEqual(mirage["bg"], light["bg"])
+
+    def test_unknown_flavor_returns_empty(self) -> None:
+        self.assertEqual(gc._extract_ayu_flavor(self.tmp, "nonexistent"), [])
+
+    def test_missing_file_returns_empty(self) -> None:
+        self.assertEqual(gc._extract_ayu_flavor("/no/dir", "dark"), [])
 
 
 # ── _extract_onedarkpro_style ──────────────────────────────────────────────────
@@ -956,6 +1038,19 @@ local colors = {
         with patch("sys.stdout", new_callable=StringIO) as out:
             gc.show_theme(self.tmp, "onedarkpro", "onedark")
         self.assertIn("ONEDARKPRO", out.getvalue())
+
+    def test_ayu_missing(self) -> None:
+        with patch("sys.stdout", new_callable=StringIO) as out:
+            gc.show_theme(self.tmp, "ayu")
+        self.assertIn("❌", out.getvalue())
+
+    def test_ayu_renders(self) -> None:
+        path = os.path.join(self.tmp, "ayu/lua/ayu/colors.lua")
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        Path(path).write_text(AYU_LUA)
+        with patch("sys.stdout", new_callable=StringIO) as out:
+            gc.show_theme(self.tmp, "ayu", "dark")
+        self.assertIn("AYU", out.getvalue())
 
 
 # ── cmd_show ───────────────────────────────────────────────────────────────────
@@ -1682,25 +1777,26 @@ class TestWriteColorsMd(unittest.TestCase):
         }
 
     def test_elements_table_has_seg_columns_and_two_legend_rows(self) -> None:
-        """Header is seg0..seg6 plus single-purpose bg/text/fg/ok/err/warn columns
-        (each one swatch — no combined/side-by-side cell); main-line and stats-line
-        legend rows follow. SEG6 (not SEG5) now colors time/battery/status/jobs;
-        SEG5 is a spare vivid-accent slot with no module assigned yet."""
+        """Header is Blended plus seg0..seg6 plus single-purpose bg/text/fg/ok/err/warn
+        columns (each one swatch — no combined/side-by-side cell); main-line and
+        stats-line legend rows follow. SEG6 (not SEG5) now colors
+        time/battery/status/jobs; SEG5 is a vivid-accent slot with no module of
+        its own (hence "—" in both legends)."""
         gc._write_colors_md(self.data, self.out_path)
         content = Path(self.out_path).read_text(encoding="utf-8")
         self.assertIn(
-            "| Flavor | seg0 | seg1 | seg2 | seg3 | seg4 | seg5 | seg6 | bg | text | fg | ok "
-            "| err | warn |",
+            "| Flavor | Blended | seg0 | seg1 | seg2 | seg3 | seg4 | seg5 | seg6 | bg | text "
+            "| fg | ok | err | warn |",
             content,
         )
         self.assertIn(
-            "| *(main line)* | os | dir | git | lang | tools | spare | time | user/hostname "
+            "| *(main line)* | — | os | dir | git | lang | tools | — | time | user/hostname "
             "| user/hostname | pill text | ❯ ok | ❯ err | ❯ warn |",
             content,
         )
         self.assertIn(
-            "| *(stats line)* | shell<br/>sudo<br/>shlvl<br/>env_var | memory | cpu | disk "
-            "| duration | - | battery<br/>status<br/>jobs | - | - | pill text | - | - | - |",
+            "| *(stats line)* | — | shell<br/>sudo<br/>shlvl<br/>env_var | memory | cpu | disk "
+            "| duration | — | battery<br/>status<br/>jobs | — | — | pill text | — | — | — |",
             content,
         )
         self.assertNotIn("*(slot)*", content)
@@ -1747,8 +1843,8 @@ class TestWriteColorsMd(unittest.TestCase):
         content = Path(self.out_path).read_text(encoding="utf-8")
         self.assertIn("### DirColors", content)
         self.assertIn("### GitColors", content)
-        self.assertIn("| Flavor | DC_DIR |", content)
-        self.assertIn("| Flavor | GC_ADDED |", content)
+        self.assertIn("| Flavor | Blended | DC_DIR |", content)
+        self.assertIn("| Flavor | Blended | GC_ADDED |", content)
         self.assertNotIn("DC_DIR | GC_ADDED", content)  # never in the same table header
         self.assertIn('src=".assets/swatches/5ad4e6.png"', content)  # DC_DIR -> cyan
         self.assertIn('src=".assets/swatches/7bd88f.png"', content)  # GC_ADDED -> green
@@ -2018,7 +2114,9 @@ class TestMergeRoles(unittest.TestCase):
         merged = gc._merge_roles(theme_roles, flavor_roles)
         self.assertEqual(merged["DC_DIR"], "cyan")
         self.assertEqual(merged["GC_BRANCH"], "cyan")
-        self.assertEqual(merged["SEG"], ["red", "orange", "purple", "green", "cyan", "yellow"])
+        self.assertEqual(
+            merged["SEG"], ["red", "orange", "purple", "green", "cyan", "yellow", "white"]
+        )
 
 
 # ── cmd_matrix auto-detect ─────────────────────────────────────────────────────

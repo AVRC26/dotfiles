@@ -307,6 +307,19 @@ require("lazy").setup({
       end
     end,
   },
+  {
+    "Shatur/neovim-ayu",
+    name = "ayu",
+    lazy = false, priority = 990,
+    config = function()
+      if vim.g.active_theme == "ayu" then
+        local flavor = vim.g.ayu_flavor or "dark"
+        vim.o.background = (flavor == "light") and "light" or "dark"
+        require("ayu").setup({ mirage = (flavor == "mirage"), terminal = true })
+        require("ayu").colorscheme()
+      end
+    end,
+  },
 
   -- ── Navigation & search ───────────────────────────────────
   {

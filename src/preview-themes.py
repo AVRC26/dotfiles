@@ -10,35 +10,35 @@ Default (no output flags): shows dircolors, git status, git diff, and starship p
 --nvim is selective: alone it shows only nvim; combined with others it adds nvim to those.
 
 Usage:
-  python3 /usr/local/share/dotfiles/src/preview-themes.py
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --theme catppuccin
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --starship-template pills
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --theme tokyonight --flavor storm
+  python3 src/preview-themes.py
+  python3 src/preview-themes.py --theme catppuccin
+  python3 src/preview-themes.py --starship-template pills
+  python3 src/preview-themes.py --theme tokyonight --flavor storm
 
   # Restrict to one output
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --prompt
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --git-diff
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --git-status
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --dir-colors
+  python3 src/preview-themes.py --prompt
+  python3 src/preview-themes.py --git-diff
+  python3 src/preview-themes.py --git-status
+  python3 src/preview-themes.py --dir-colors
 
   # --nvim: selective (shows only nvim, like --prompt shows only the prompt)
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --nvim
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --nvim --theme gruvbox --flavor light
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --nvim --prompt --theme catppuccin --flavor mocha
+  python3 src/preview-themes.py --nvim
+  python3 src/preview-themes.py --nvim --theme gruvbox --flavor light
+  python3 src/preview-themes.py --nvim --prompt --theme catppuccin --flavor mocha
 
   # --include-nvim: additive (adds nvim to full default set or to selected outputs)
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --include-nvim
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --include-nvim --theme gruvbox --flavor light
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --include-nvim --prompt --theme catppuccin --flavor mocha
+  python3 src/preview-themes.py --include-nvim
+  python3 src/preview-themes.py --include-nvim --theme gruvbox --flavor light
+  python3 src/preview-themes.py --include-nvim --prompt --theme catppuccin --flavor mocha
 
   # --prompt without --starship-template cycles ALL available templates
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --theme gruvbox --flavor dark --prompt
+  python3 src/preview-themes.py --theme gruvbox --flavor dark --prompt
   # --prompt with --starship-template shows only that template
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --prompt --starship-template pills
+  python3 src/preview-themes.py --prompt --starship-template pills
 
   # Combine as needed
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --prompt --git-diff
-  python3 /usr/local/share/dotfiles/src/preview-themes.py --theme gruvbox --git-diff --dir-colors
+  python3 src/preview-themes.py --prompt --git-diff
+  python3 src/preview-themes.py --theme gruvbox --git-diff --dir-colors
 
   # $status/$cmd_duration/$jobs/$shlvl are forced to render automatically —
   # starship only shows these when real shell state warrants it, so a bare

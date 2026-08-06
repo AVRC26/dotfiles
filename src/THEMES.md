@@ -435,6 +435,8 @@ Themes where shared `_roles` gives sufficient differentiation:
 ### Applying this to a new theme
 
 0. Add the theme's `_nvim` metadata (and one flavor stub) to `roles.json`, run `--export`, and read that flavor's **Accent Ranking** table in `COLORS.md` (see [Accent Ranking — objective per-color usage](#accent-ranking--objective-per-color-usage)) — this gives an objective, real-usage-ranked view of the palette *before* any role is authored, so steps 1–5 below are picks informed by rank, not blind key-name guessing.
+
+> **Prefer generating `PICK-ROLES.md`** (step 2.5 of [Adding a new theme](#adding-a-new-theme--step-by-step)) over doing steps 1–6 below by hand — it applies this same rank+hue reasoning mechanically, per flavor, and stages the result as an editable table for a human to review before anything is written to `roles.json`. Steps 1–6 are still the reasoning `PICK-ROLES.md` automates, useful to know for judging its output or picking manually on a small/single-flavor theme.
 1. Find the nvim `Normal` bg key → that's `BG` (Accent Ranking's top few rows are usually `Normal`'s fg/bg — cross-check against the swatch)
 2. Find the nvim `Normal` fg key → that's `TEXT`
 3. Set `FG` = same key as `BG` (dark text on bright accent pills works for both dark and light themes)
@@ -701,6 +703,41 @@ Use the mapping table below as a **secondary aid** — once Accent Ranking has t
 
 > **Kanagawa:** wave/dragon/lotus use different name conventions because the extractor strips flavor prefixes. Run `--palette kanagawa wave`, `--palette kanagawa dragon`, `--palette kanagawa lotus` separately and use the stripped names you see in each output.
 
+**If the theme's palette isn't a static Lua table** (e.g. it's built by a function that conditionally assigns fields based on `vim.o.background` or a config flag — `ayu` does this, see `Shatur/neovim-ayu`'s `colors.lua`), the generic regex-based extractors in `get-colors.py` won't parse it. Write a dedicated `_extract_<theme>_flavor(themes_dir, flavor)` function instead — `_extract_ayu_flavor` is the reference example: it locates each flavor's branch by known indentation/anchor text and regexes `name = 'hex'` pairs out of just that branch, plus any static colors declared outside the function (shared across all flavors). Wire it into `extract_palette()`'s per-theme dispatch and add the theme/flavor list to `cmd_export`'s `all_themes` dict. This follows the same one-extractor-per-nonstandard-theme pattern already used for `oasis`, `bamboo`, `tokyonight`, `flexoki`, `onedarkpro`, and `bearded` — add unit tests for it.
+
+**Registration checklist — every new theme needs all of these, not just the extractor.** It's easy to wire the extractor and `cmd_export`'s `all_themes` dict (both needed to make `--export` work) and stop there, but `--show`/`--palette`/`--matrix` need two more registration points or they'll error/no-op on the new theme:
+
+- `KNOWN_THEMES` (module-level list near the top of `get-colors.py`)
+- `show_theme()`'s `if theme == ... elif theme == ...` dispatch
+- `extract_palette()`'s per-theme dispatch
+- `cmd_export`'s `all_themes` dict
+
+### 2.5. Generate PICK-ROLES.md instead of hand-picking roles
+
+**This replaces guessing role assignments yourself.** Once step 2's `--export` has given you Accent Ranking data for the new theme (with a `_roles`-less stub in `roles.json`), generate a **`PICK-ROLES.md`** at the repo root — a per-flavor pick table for a human to review and edit, instead of an agent/author silently choosing every role mapping. This file is meant to be committed.
+
+**Structure**, one section per flavor (with a `## Contents` TOC linking to each):
+
+| Column | What it shows |
+|---|---|
+| Element | The role key (`BG`, `TEXT`, `FG`, `SEG0`–`SEG6`, `OK`, `ERR`, `WARN`, every `DC_*`/`GC_*`) |
+| Available Colors | Up to 5 ranked candidates (Accent Ranking order) filtered to the hue family that role expects — see below |
+| Recommended | The top-ranked candidate — same filtering, just the first pick |
+| Already Recommended In | Every *other* Element (same flavor) whose Recommended is the identical color name — informational, not a conflict (per [Color selection philosophy](#color-selection-philosophy), sharing a name across roles is normal) |
+| Pick | Defaults to Recommended; the human edits this to any other candidate (or any other palette color) before it's applied |
+
+Each color cell shows `name` `` `#hexvalue` `` on one line, the swatch image centered underneath.
+
+**Hue filtering:**
+
+- `SEG0`–`SEG6` follow a fixed, strict per-slot hue bucket: `SEG0` reds, `SEG1` oranges, `SEG2` purples, `SEG3` greens, `SEG4` cyans/blues, `SEG5` yellows (oranges also allowed — few themes have a color that reads as pure yellow), `SEG6` muted (low-saturation or near-black/near-white).
+- Every other role uses the categories from the mapping table in step 2 above (e.g. `ERR`/`GC_UNTRACKED`/`GC_OLD` → red-ish, `DC_DIMMED` → muted).
+- Classify each candidate's hue via HSL (`colorsys.rgb_to_hls`); bucket boundaries: red `<15°or≥345°`, orange `<45°`, yellow `<70°`, green `<160°`, cyan `<200°`, blue `<255°`, purple `<300°`, else pink. "Muted" overrides hue entirely: saturation `<20%`, or lightness `>85%`/`<12%`.
+- Exclude the color names already assigned to `BG`/`TEXT`/`FG` from every `SEG`/other candidate pool — otherwise a structural editor color (background/foreground) can get recommended as an accent by mistake.
+- Roles other than `OK`/`ERR`/`WARN` also exclude the 7 colors already recommended for `SEG0`–`SEG6` from their candidate pool — a `DC_*`/`GC_*` role gets its own identity instead of silently doubling up with whatever a segment already claimed. `OK`/`ERR`/`WARN` are the exception (they're *expected* to match a `SEG` color — e.g. `ERR` and `SEG0` sharing the same red is the norm, per [Color roles reference](#color-roles-reference)). If excluding `SEG` colors leaves a role with zero candidates in its hue family, fall back to allowing them rather than recommending an empty/off-hue pick.
+
+Once the human has filled in every `Pick` column, apply those values as the `_roles` mapping in step 3 below (shared or per-flavor, per that step's decision table) — `PICK-ROLES.md`'s `Pick` column *is* the role mapping, just staged for review before it's committed to `roles.json`.
+
 ### 3. Add the role mapping to roles.json
 
 **First, decide: shared `_roles` or per-flavor?**
@@ -854,10 +891,13 @@ git config --list | grep "^color\."         # all values should be hex, not empt
 
 ### 6. Commit
 
+**Add the theme to `README.md`'s Credits section** (`## Credits` → `**Themes**` line) before committing — a link to the theme's own plugin repo, inserted alphabetically alongside the existing entries.
+
 ```bash
 git add src/.config/nvim/init.lua
 git add src/.config/roles.json
 git add src/.config/palettes.json
+git add README.md
 git commit -m "feat: add mytheme theme"
 ```
 

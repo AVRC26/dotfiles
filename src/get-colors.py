@@ -25,19 +25,19 @@ Environment:
   SHOW_COLORS_THEMES_DIR   Override lazy plugins dir
 
 Examples:
-  python3 /usr/local/share/dotfiles/src/get-colors.py --show
-  python3 /usr/local/share/dotfiles/src/get-colors.py --show --theme kanagawa
-  python3 /usr/local/share/dotfiles/src/get-colors.py --show --theme catppuccin --flavor mocha
-  python3 /usr/local/share/dotfiles/src/get-colors.py --palette --theme gruvbox --flavor dark
-  python3 /usr/local/share/dotfiles/src/get-colors.py --matrix
-  python3 /usr/local/share/dotfiles/src/get-colors.py --matrix --prompt
-  python3 /usr/local/share/dotfiles/src/get-colors.py --matrix --colors
-  python3 /usr/local/share/dotfiles/src/get-colors.py --matrix --theme catppuccin
-  python3 /usr/local/share/dotfiles/src/get-colors.py --matrix --theme catppuccin --flavor mocha
-  python3 /usr/local/share/dotfiles/src/get-colors.py --matrix --theme catppuccin --flavor mocha --prompt
-  python3 /usr/local/share/dotfiles/src/get-colors.py --export
-  python3 /usr/local/share/dotfiles/src/get-colors.py --export --blend
-  python3 /usr/local/share/dotfiles/src/get-colors.py --export --output /tmp/palettes-preview.json
+  python3 src/get-colors.py --show
+  python3 src/get-colors.py --show --theme kanagawa
+  python3 src/get-colors.py --show --theme catppuccin --flavor mocha
+  python3 src/get-colors.py --palette --theme gruvbox --flavor dark
+  python3 src/get-colors.py --matrix
+  python3 src/get-colors.py --matrix --prompt
+  python3 src/get-colors.py --matrix --colors
+  python3 src/get-colors.py --matrix --theme catppuccin
+  python3 src/get-colors.py --matrix --theme catppuccin --flavor mocha
+  python3 src/get-colors.py --matrix --theme catppuccin --flavor mocha --prompt
+  python3 src/get-colors.py --export
+  python3 src/get-colors.py --export --blend
+  python3 src/get-colors.py --export --output /tmp/palettes-preview.json
 """
 
 from __future__ import annotations
@@ -82,6 +82,7 @@ KNOWN_THEMES = [
     "bamboo",
     "oasis",
     "onedarkpro",
+    "ayu",
 ]
 
 
@@ -250,6 +251,56 @@ def _extract_bamboo_flavor(themes_dir: str, flavor: str) -> list[tuple[str, str]
     )
 
 
+def _extract_ayu_flavor(themes_dir: str, flavor: str) -> list[tuple[str, str]]:
+    """Extract ayu's name/hex pairs for one flavor from `colors.lua`.
+
+    ayu doesn't ship a static per-flavor palette table like most other themes
+    here — `colors.generate(mirage)` conditionally assigns fields onto one
+    shared table based on `vim.o.background` and a `mirage` flag. This slices
+    the function body into its three mutually-exclusive branches (`dark`,
+    `mirage`, `light`) by their known indentation, plus the handful of static
+    colors (`white`/`black`/`lsp_inlay_hint`) declared outside the function
+    and shared by every flavor.
+
+    Args:
+        themes_dir: Root directory containing installed Neovim plugins
+            (lazy.nvim's `~/.local/share/nvim/lazy` by convention).
+        flavor: One of `"dark"`, `"mirage"`, `"light"`.
+
+    Returns:
+        Sorted `(color_name, hex)` pairs, or `[]` if the plugin source
+        isn't installed or `flavor` isn't one of the three known branches.
+    """
+    path = os.path.join(themes_dir, "ayu/lua/ayu/colors.lua")
+    content = _read_file(path)
+    if not content:
+        return []
+
+    static_block = content[: content.index("function colors.generate")]
+    pairs: dict[str, str] = dict(re.findall(r"(\w+)\s*=\s*'(#[A-Fa-f0-9]{6})'", static_block))
+
+    try:
+        dark_start = content.index("if vim.o.background == 'dark' then")
+        mirage_start = content.index("if mirage then", dark_start)
+        inner_else = content.index("\n    else\n", mirage_start)
+        inner_end = content.index("\n    end\n", inner_else)
+        outer_else = content.index("\n  else\n", inner_end)
+        outer_end = content.index("\n  end\n", outer_else)
+    except ValueError:
+        return []
+
+    block_by_flavor = {
+        "mirage": content[mirage_start:inner_else],
+        "dark": content[inner_else:inner_end],
+        "light": content[outer_else:outer_end],
+    }
+    block = block_by_flavor.get(flavor)
+    if block is None:
+        return []
+    pairs.update(re.findall(r"colors\.(\w+)\s*=\s*'(#[A-Fa-f0-9]{6})'", block))
+    return sorted(pairs.items())
+
+
 def _extract_oasis_flavor(themes_dir: str, flavor: str) -> list[tuple[str, str]]:
     path = os.path.join(themes_dir, "oasis.nvim/lua/oasis/palette.lua")
     content = _read_file(path)
@@ -405,6 +456,8 @@ def extract_palette(themes_dir: str, theme: str, flavor: str) -> list[tuple[str,
         return _extract_oasis_flavor(td, flavor)
     if theme == "onedarkpro":
         return _extract_onedarkpro_style(td, flavor)
+    if theme == "ayu":
+        return _extract_ayu_flavor(td, flavor)
     logger.error(f"Unknown theme: {theme}")
     sys.exit(1)
 
@@ -573,6 +626,17 @@ def show_theme(themes_dir: str, theme: str, want_flavor: str | None = None) -> N
                 continue
             _flavor_header(f.upper())
             _show_pairs(_extract_onedarkpro_style(td, f))
+
+    elif theme == "ayu":
+        _section("AYU   (dark · mirage · light)")
+        if not os.path.exists(os.path.join(td, "ayu/lua/ayu/colors.lua")):
+            print("  ❌ Ayu not found")
+            return
+        for f in ["dark", "mirage", "light"]:
+            if want_flavor and f != want_flavor:
+                continue
+            _flavor_header(f.upper())
+            _show_pairs(_extract_ayu_flavor(td, f))
 
 
 # ── Action handlers ────────────────────────────────────────────────────────────
@@ -1775,6 +1839,7 @@ def cmd_export(args: argparse.Namespace) -> None:
             "twilight",
         ],
         "onedarkpro": ["onedark", "onelight", "onedark_vivid", "onedark_dark"],
+        "ayu": ["dark", "mirage", "light"],
     }
 
     ok = err = 0
