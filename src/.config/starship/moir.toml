@@ -14,11 +14,11 @@ ${custom.cpu_load}\
 ${custom.disk_usage}\
 [{{SEP_TRANS}}](bg:color_seg4 fg:color_seg3)\
 $cmd_duration\
-[{{SEP_TRANS}}](bg:color_seg5 fg:color_seg4)\
+[{{SEP_TRANS}}](bg:color_seg6 fg:color_seg4)\
 $battery\
 $status\
 $jobs\
-[{{SEP_TRANS}}](fg:color_seg5)\
+[{{SEP_TRANS}}](fg:color_seg6)\
 $line_break\
 $os(bg:color_bg)\
 [{{SEP_TRANS}}](bg:color_bg fg:color_seg0)\
@@ -113,10 +113,10 @@ $solidity\
 $direnv\
 $custom\
 $fill\
-[](fg:color_seg5 bg:none)\
+[](fg:color_seg6 bg:none)\
 $time\
 $line_break\
-[ ╰─](fg:color_seg5)\
+[ ╰─](fg:color_seg6)\
 $character"""
 
 palette = 'theme'
@@ -128,6 +128,7 @@ color_seg2 = "{{COLOR_SEG2}}"
 color_seg3 = "{{COLOR_SEG3}}"
 color_seg4 = "{{COLOR_SEG4}}"
 color_seg5 = "{{COLOR_SEG5}}"
+color_seg6 = "{{COLOR_SEG6}}"
 color_bg   = "{{COLOR_BG}}"
 color_text = "{{COLOR_TEXT}}"
 color_fg   = "{{COLOR_FG}}"
@@ -192,8 +193,8 @@ truncate_to_repo  = false
 
 [time]
 disabled = false
-style    = "bg:color_seg5 fg:color_fg"
-format   = '[ $time ](bg:color_seg5 fg:color_fg)'
+style    = "bg:color_seg6 fg:color_fg"
+format   = '[ $time ](bg:color_seg6 fg:color_fg)'
 
 [memory_usage]
 disabled  = false
@@ -578,11 +579,11 @@ full_symbol        = "󰁹"
 charging_symbol    = "󰂄"
 discharging_symbol = "󰁽"
 empty_symbol       = "󰂎"
-format             = '[ $symbol $percentage ](bg:color_seg5 fg:color_fg) '
+format             = '[ $symbol $percentage ](bg:color_seg6 fg:color_fg) '
 
 [[battery.display]]
 threshold = 100
-style     = "bg:color_seg5 fg:color_fg"
+style     = "bg:color_seg6 fg:color_fg"
 
 [os]
 disabled = false
@@ -678,19 +679,19 @@ disabled = false
 
 [status]
 disabled = false
-format   = '[ $status:$common_meaning ](bg:color_seg5 fg:color_err)'
+format   = '[ $status:$common_meaning ](bg:color_seg6 fg:color_err)'
 
 [jobs]
 symbol           = ''
 number_threshold = 1
 symbol_threshold = 1
-style            = "bg:color_seg5 fg:color_fg"
-format           = '[ $symbol $number ](bg:color_seg5 fg:color_fg)'
+style            = "bg:color_seg6 fg:color_fg"
+format           = '[ $symbol $number ](bg:color_seg6 fg:color_fg)'
 disabled         = false
 
 [fill]
 symbol = '·'
-style  = 'fg:color_seg5'
+style  = 'fg:color_seg6'
 
 [character]
 success_symbol = '[❯](bold blink fg:color_ok)'

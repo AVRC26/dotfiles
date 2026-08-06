@@ -29,7 +29,7 @@
 # ╭╴ # \u256D\u2574
 # ╰╴ # \u2570\u2574
 format = """
-[╭╴](fg:color_seg5)\
+[╭╴](fg:color_seg6)\
 $shell\
 $sudo\
 $shlvl\
@@ -43,7 +43,7 @@ $status\
 $jobs\
 [](fg:color_bg)\
 $line_break\
-[├╴](fg:color_seg5)\
+[├╴](fg:color_seg6)\
 $os\
 $username\
 $hostname\
@@ -126,7 +126,7 @@ $fill\
 $time\
 $line_break\
 \
-[╰╴](fg:color_seg5)\
+[╰╴](fg:color_seg6)\
 [$character]($style)"""
 
 # move the rest of the prompt to the right
@@ -144,6 +144,7 @@ color_seg2 = "{{COLOR_SEG2}}"
 color_seg3 = "{{COLOR_SEG3}}"
 color_seg4 = "{{COLOR_SEG4}}"
 color_seg5 = "{{COLOR_SEG5}}"
+color_seg6 = "{{COLOR_SEG6}}"
 color_bg   = "{{COLOR_BG}}"
 color_text = "{{COLOR_TEXT}}"
 color_fg   = "{{COLOR_FG}}"
@@ -269,7 +270,7 @@ truncate_to_repo  = false
 
 [direnv]
 symbol          = 'direnv'
-style           = 'fg:color_seg5 bold bg:color_bg'
+style           = 'fg:color_seg6 bold bg:color_bg'
 format          = "[❯ $symbol $loaded/$allowed ]($style)"
 allowed_msg     = 'a' # 'ok' # '✓'
 not_allowed_msg = '!a' # 'nok' # '!'
@@ -330,7 +331,7 @@ typechanged = "$count "
 #disabled = false
 
 [fill]
-style  = 'fg:color_seg5'
+style  = 'fg:color_seg6'
 symbol = "\u2500" # "\u2500" "─" # no line: ' '
 
 [buf]
@@ -685,7 +686,7 @@ disabled = false
 
 [jobs]
 format           = "[ $symbol $number ]($style)"
-style            = 'fg:color_seg5 bg:color_bg'
+style            = 'fg:color_seg6 bg:color_bg'
 symbol           = ''
 symbol_threshold = 1
 number_threshold = 1
@@ -720,7 +721,7 @@ style    = 'fg:color_seg4 bg:color_bg'
 disabled = false
 
 [battery]
-format             = "[ $symbol $percentage ](fg:color_seg5 bg:color_bg)"
+format             = "[ $symbol $percentage ](fg:color_seg6 bg:color_bg)"
 full_symbol        = "󰁹"
 charging_symbol    = "󰂄"
 discharging_symbol = "󰁽"
@@ -731,8 +732,8 @@ disabled           = true
 threshold = 100
 
 [time]
-format   = "[  ](fg:color_seg5 bg:color_bg)[  $time ]($style)[](fg:color_bg)"
-style    = 'fg:color_seg5 bg:color_bg'
+format   = "[  ](fg:color_seg6 bg:color_bg)[  $time ]($style)[](fg:color_bg)"
+style    = 'fg:color_seg6 bg:color_bg'
 disabled = false # set to 'false', if you want to see the time
 
 [localip]

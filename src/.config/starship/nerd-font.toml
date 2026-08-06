@@ -109,6 +109,7 @@ color_seg2 = "{{COLOR_SEG2}}"
 color_seg3 = "{{COLOR_SEG3}}"
 color_seg4 = "{{COLOR_SEG4}}"
 color_seg5 = "{{COLOR_SEG5}}"
+color_seg6 = "{{COLOR_SEG6}}"
 color_bg   = "{{COLOR_BG}}"
 color_text = "{{COLOR_TEXT}}"
 color_fg   = "{{COLOR_FG}}"
@@ -617,7 +618,7 @@ symbol = " "
 
 [time]
 disabled = false
-style    = "fg:color_seg5"
+style    = "fg:color_seg6"
 format   = '[ $time ]($style)'
 
 [line_break]
@@ -663,7 +664,7 @@ format   = '[ $symbol $shlvl ]($style)'
 
 [battery]
 disabled           = true
-format             = '[ $symbol $percentage ](fg:color_seg5)'
+format             = '[ $symbol $percentage ](fg:color_seg6)'
 full_symbol        = "󰁹"
 charging_symbol    = "󰂄"
 discharging_symbol = "󰁽"
@@ -674,7 +675,7 @@ threshold = 100
 
 [status]
 disabled = false
-style    = "fg:color_seg5"
+style    = "fg:color_seg6"
 format   = '[ $status:$common_meaning ]($style)'
 
 [jobs]
@@ -682,5 +683,5 @@ symbol           = ''
 number_threshold = 1
 symbol_threshold = 1
 disabled         = false
-style            = "fg:color_seg5"
+style            = "fg:color_seg6"
 format           = '[ $symbol $number ]($style)'

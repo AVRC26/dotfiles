@@ -1682,24 +1682,25 @@ class TestWriteColorsMd(unittest.TestCase):
         }
 
     def test_elements_table_has_seg_columns_and_two_legend_rows(self) -> None:
-        """Header is seg0..seg5 plus single-purpose bg/text/fg/ok/err/warn columns
-        (each one swatch, same as seg0-5 — no combined/side-by-side cell); main-line
-        and stats-line legend rows follow."""
+        """Header is seg0..seg6 plus single-purpose bg/text/fg/ok/err/warn columns
+        (each one swatch — no combined/side-by-side cell); main-line and stats-line
+        legend rows follow. SEG6 (not SEG5) now colors time/battery/status/jobs;
+        SEG5 is a spare vivid-accent slot with no module assigned yet."""
         gc._write_colors_md(self.data, self.out_path)
         content = Path(self.out_path).read_text(encoding="utf-8")
         self.assertIn(
-            "| Flavor | seg0 | seg1 | seg2 | seg3 | seg4 | seg5 | bg | text | fg | ok | err "
-            "| warn |",
+            "| Flavor | seg0 | seg1 | seg2 | seg3 | seg4 | seg5 | seg6 | bg | text | fg | ok "
+            "| err | warn |",
             content,
         )
         self.assertIn(
-            "| *(main line)* | os | dir | git | lang | tools | time | user/hostname "
+            "| *(main line)* | os | dir | git | lang | tools | spare | time | user/hostname "
             "| user/hostname | pill text | ❯ ok | ❯ err | ❯ warn |",
             content,
         )
         self.assertIn(
             "| *(stats line)* | shell<br/>sudo<br/>shlvl<br/>env_var | memory | cpu | disk "
-            "| duration | battery<br/>status<br/>jobs | - | - | pill text | - | - | - |",
+            "| duration | - | battery<br/>status<br/>jobs | - | - | pill text | - | - | - |",
             content,
         )
         self.assertNotIn("*(slot)*", content)
@@ -1934,6 +1935,48 @@ class TestValidateSegRoles(unittest.TestCase):
             }
         }
         self.assertEqual(gc._validate_seg_roles(data), [])
+
+    def test_exempted_flavor_is_skipped_against_every_sibling(self) -> None:
+        """A flavor listed in _SEG_DRIFT_EXCEPTIONS for its theme is never compared."""
+        data = {
+            "bearded": {
+                "arc-eolstorm": {"_roles": {"SEG": ["red", "orange", "purple", "green", "blue", "", "primary"]}},
+                "void": {"_roles": {"SEG": ["red", "salmon", "primary", "greenAlt", "orange", "", "defaultMain"]}},
+            }
+        }
+        self.assertEqual(gc._validate_seg_roles(data), [])
+
+    def test_exemption_does_not_hide_drift_between_non_exempted_flavors(self) -> None:
+        """Exempting one flavor must not suppress genuine drift between two other flavors."""
+        data = {
+            "bearded": {
+                "arc-eolstorm": {"_roles": {"SEG": ["red", "orange", "purple", "green", "blue", "", "primary"]}},
+                "aquarelle-lilac": {"_roles": {"SEG": ["red", "purple", "orange", "green", "blue", "", "primary"]}},
+                "void": {"_roles": {"SEG": ["red", "salmon", "primary", "greenAlt", "orange", "", "defaultMain"]}},
+            }
+        }
+        errors = gc._validate_seg_roles(data)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("arc-eolstorm", errors[0])
+        self.assertIn("aquarelle-lilac", errors[0])
+        self.assertNotIn("void", errors[0])
+
+
+# ── _blended_label ───────────────────────────────────────────────────────────
+
+
+class TestBlendedLabel(unittest.TestCase):
+    def test_returns_yes_when_blended_true(self) -> None:
+        """A flavor reshaded by _apply_accent_blend renders as 'yes'."""
+        self.assertEqual(gc._blended_label({"_blended": True}), "yes")
+
+    def test_returns_no_when_blended_false(self) -> None:
+        """A flavor considered but left untouched renders as 'no'."""
+        self.assertEqual(gc._blended_label({"_blended": False}), "no")
+
+    def test_returns_em_dash_when_key_absent(self) -> None:
+        """A flavor never processed by --blend (key missing entirely) renders as an em dash."""
+        self.assertEqual(gc._blended_label({}), "—")
 
 
 # ── _merge_roles ─────────────────────────────────────────────────────────────

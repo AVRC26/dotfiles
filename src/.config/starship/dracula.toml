@@ -2,7 +2,7 @@
 # Credit: https://github.com/starship/starship/discussions/1107#discussioncomment-11130385
 
 format = """
-[╭](fg:color_seg5)\
+[╭](fg:color_seg6)\
 $shell\
 $sudo\
 $shlvl\
@@ -15,7 +15,7 @@ $battery\
 $status\
 $jobs\
 $line_break\
-[├╴](fg:color_seg5)\
+[├╴](fg:color_seg6)\
 $os\
 $username\
 $hostname\
@@ -112,6 +112,7 @@ color_seg2 = "{{COLOR_SEG2}}"
 color_seg3 = "{{COLOR_SEG3}}"
 color_seg4 = "{{COLOR_SEG4}}"
 color_seg5 = "{{COLOR_SEG5}}"
+color_seg6 = "{{COLOR_SEG6}}"
 color_bg   = "{{COLOR_BG}}"
 color_text = "{{COLOR_TEXT}}"
 color_fg   = "{{COLOR_FG}}"
@@ -120,11 +121,11 @@ color_err  = "{{COLOR_ERR}}"
 color_warn = "{{COLOR_WARN}}"
 
 # Module format pattern:
-#   [─](fg:color_seg5)                          — connector
+#   [─](fg:color_seg6)                          — connector
 #   [](fg:ACCENT)[$icon](fg:color_bg bg:ACCENT)  — icon pill
-#   [](fg:ACCENT bg:color_seg5)                  — transition
-#   [ $content](fg:color_bg bg:color_seg5)     — text box
-#   [](fg:color_seg5)                            — close
+#   [](fg:ACCENT bg:color_seg6)                  — transition
+#   [ $content](fg:color_bg bg:color_seg6)     — text box
+#   [](fg:color_seg6)                            — close
 
 [os]
 format   = '[](fg:color_seg0)[ $symbol ](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
@@ -192,10 +193,10 @@ Zorin            = '🔹'
 [hostname]
 ssh_only = false
 style    = "fg:color_bg bg:color_seg0"
-format   = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_bg)[ $hostname](fg:color_text bg:color_bg)[](fg:color_bg)'
+format   = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_bg)[ $hostname](fg:color_text bg:color_bg)[](fg:color_bg)'
 
 [directory]
-format            = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰷏 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg1)[ $read_only$path](fg:color_bg bg:color_seg1)[](fg:color_seg1)'
+format            = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰷏 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg1)[ $read_only$path](fg:color_bg bg:color_seg1)[](fg:color_seg1)'
 read_only         = '󰌾 '
 home_symbol       = " "
 truncation_length = 0
@@ -203,7 +204,7 @@ truncation_symbol = ""
 truncate_to_repo  = false
 
 [git_branch]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg2)[ $branch](fg:color_bg bg:color_seg2)[](fg:color_seg2)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg2)[ $branch](fg:color_bg bg:color_seg2)[](fg:color_seg2)'
 symbol = ''
 
 [git_status]
@@ -237,220 +238,220 @@ format        = '([+$added ]($added_style)[-$deleted ]($deleted_style))'
 disabled      = false
 
 [buf]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [bun]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [c]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [cmake]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [cobol]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ ⚙️ ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ ⚙️ ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [conda]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [crystal]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [daml]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 𝜦 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 𝜦 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [dart]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [deno]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [dotnet]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰪮 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰪮 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [elixir]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [elm]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [erlang]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [fennel]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [fortran]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󱈚 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󱈚 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [gleam]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ GLEAM ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ GLEAM ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [golang]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [gradle]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [haxe]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [helm]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [haskell]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [java]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ ☕ ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ ☕ ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [julia]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ ஃ ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ ஃ ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [kotlin]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [lua]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [maven]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [meson]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰔷 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰔷 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [mise]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰰏 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰰏 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [mojo]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ MOJO ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ MOJO ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [nats]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰰒 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰰒 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [nim]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [nix_shell]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [nodejs]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰎙 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰎙 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [ocaml]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [odin]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ ODIN](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ ODIN](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [opa]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [package]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰏗 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰏗 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [perl]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [php]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [pulumi]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [purescript]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [python]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version \($virtualenv\)](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version \($virtualenv\)](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [quarto]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ QUARTO ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ QUARTO ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [raku]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [red]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ RED ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ RED ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [rlang]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰟔 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰟔 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [ruby]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [scala]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [rust]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [spack]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [swift]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [typst]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [vagrant]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [vlang]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [xmake]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰰰 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰰰 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [zig]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $version](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [aws]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰸏 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $profile](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰸏 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $profile](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [azure]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $subscription](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $subscription](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [container]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰡨 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰡨 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [docker_context]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰡨 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰡨 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [gcloud]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󱇶 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $account](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󱇶 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $account](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [guix_shell]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [kubernetes]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [terraform]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $version](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $version](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [netns]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $name](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $name](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [openstack]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $name](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $name](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [pixi]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰰘 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰰘 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [singularity]
-format = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰯭 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰯭 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $context](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 
 [sudo]
 symbol   = ''
-format   = '[─](fg:color_seg5)[](fg:color_seg5)[ $symbol ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg0)[](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
+format   = '[─](fg:color_seg6)[](fg:color_seg6)[ $symbol ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg0)[](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
 disabled = false
 
 [shlvl]
 symbol   = ''
-format   = '[─](fg:color_seg5)[](fg:color_seg5)[ $symbol ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg0)[ $shlvl ](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
+format   = '[─](fg:color_seg6)[](fg:color_seg6)[ $symbol ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg0)[ $shlvl ](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
 disabled = false
 
 [battery]
@@ -458,27 +459,27 @@ full_symbol        = "󰁹"
 charging_symbol    = "󰂄"
 discharging_symbol = "󰁽"
 empty_symbol       = "󰂎"
-format             = '[─](fg:color_seg5)[](fg:color_seg5)[ $symbol ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg5)[ $percentage ](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+format             = '[─](fg:color_seg6)[](fg:color_seg6)[ $symbol ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg6)[ $percentage ](fg:color_bg bg:color_seg6)[](fg:color_seg6)'
 disabled           = true
 
 [[battery.display]]
 threshold = 100
-style     = 'fg:color_bg bg:color_seg5'
+style     = 'fg:color_bg bg:color_seg6'
 
 [status]
 disabled = false
-format   = '[─](fg:color_seg5)[](fg:color_seg5)[ $status ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg5)[ $common_meaning ](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+format   = '[─](fg:color_seg6)[](fg:color_seg6)[ $status ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg6)[ $common_meaning ](fg:color_bg bg:color_seg6)[](fg:color_seg6)'
 
 [jobs]
 symbol           = ''
 number_threshold = 1
 symbol_threshold = 1
-format           = '[─](fg:color_seg5)[](fg:color_seg5)[ $symbol ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg5)[ $number ](fg:color_bg bg:color_seg5)[](fg:color_seg5)'
+format           = '[─](fg:color_seg6)[](fg:color_seg6)[ $symbol ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg6)[ $number ](fg:color_bg bg:color_seg6)[](fg:color_seg6)'
 disabled         = false
 
 
 [memory_usage]
-format    = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰍛 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg1)[ ${ram_pct} ](fg:color_bg bg:color_seg1)[](fg:color_seg1)'
+format    = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰍛 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg1)[ ${ram_pct} ](fg:color_bg bg:color_seg1)[](fg:color_seg1)'
 threshold = -1
 disabled  = false
 
@@ -486,24 +487,24 @@ disabled  = false
 description = "1-minute load average"
 command     = "awk '{print $1}' /proc/loadavg"
 when        = "true"
-format      = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰻠 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg2)[ $output ](fg:color_bg bg:color_seg2)[](fg:color_seg2)'
+format      = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰻠 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg2)[ $output ](fg:color_bg bg:color_seg2)[](fg:color_seg2)'
 
 [custom.disk_usage]
 description = "Used % of root filesystem"
 command     = "df -h / | awk 'NR==2{print $5}'"
 when        = "true"
-format      = '[─](fg:color_seg5)[](fg:color_seg5)[  󰋊 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg3)[ $output ](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
+format      = '[─](fg:color_seg6)[](fg:color_seg6)[  󰋊 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg3)[ $output ](fg:color_bg bg:color_seg3)[](fg:color_seg3)'
 
 [fill]
 symbol = '─'
-style  = 'fg:color_seg5'
+style  = 'fg:color_seg6'
 
 [cmd_duration]
-format   = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg4)[ $duration ](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
+format   = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg4)[ $duration ](fg:color_bg bg:color_seg4)[](fg:color_seg4)'
 disabled = false
 
 [shell]
-format               = '[─](fg:color_seg5)[](fg:color_seg5)[  ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg0)[ $indicator ](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
+format               = '[─](fg:color_seg6)[](fg:color_seg6)[  ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg0)[ $indicator ](fg:color_bg bg:color_seg0)[](fg:color_seg0)'
 disabled             = false
 bash_indicator       = ''
 fish_indicator       = '󰈺'
@@ -518,15 +519,15 @@ xonsh_indicator      = ""
 unknown_indicator    = ''
 
 [time]
-format   = '[─](fg:color_seg5)[](fg:color_seg5)[󰦖 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_seg5)[ $time](fg:color_bg bg:color_seg5)[](fg:color_seg5) '
+format   = '[─](fg:color_seg6)[](fg:color_seg6)[󰦖 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_seg6)[ $time](fg:color_bg bg:color_seg6)[](fg:color_seg6) '
 disabled = false
 
 [username]
-format      = '[─](fg:color_seg5)[](fg:color_seg5)[ 󰀄 ](fg:color_bg bg:color_seg5)[](fg:color_seg5 bg:color_bg)[ $user](fg:color_text bg:color_bg)[](fg:color_bg)'
+format      = '[─](fg:color_seg6)[](fg:color_seg6)[ 󰀄 ](fg:color_bg bg:color_seg6)[](fg:color_seg6 bg:color_bg)[ $user](fg:color_text bg:color_bg)[](fg:color_bg)'
 show_always = true
 
 [character]
-format         = "[╰─$symbol](fg:color_seg5) "
+format         = "[╰─$symbol](fg:color_seg6) "
 success_symbol = '[❯](bold blink fg:color_ok)'
 error_symbol   = '[❯](bold blink fg:color_err)'
 vimcmd_symbol  = '[❮](bold fg:color_ok)'

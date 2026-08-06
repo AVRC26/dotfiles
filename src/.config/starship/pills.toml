@@ -4,7 +4,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[╭╴](fg:color_seg5)\
+[╭╴](fg:color_seg6)\
 $shell\
 $sudo\
 $shlvl\
@@ -17,7 +17,7 @@ $battery\
 $status\
 $jobs\
 $line_break\
-[├╴](fg:color_seg5)\
+[├╴](fg:color_seg6)\
 $os\
 $username\
 $hostname\
@@ -97,7 +97,7 @@ $openstack\
 $pixi\
 $singularity\
 $time
-[╰─](fg:color_seg5)$character\
+[╰─](fg:color_seg6)$character\
 """
 
 add_newline = true
@@ -110,6 +110,7 @@ color_seg2 = "{{COLOR_SEG2}}"
 color_seg3 = "{{COLOR_SEG3}}"
 color_seg4 = "{{COLOR_SEG4}}"
 color_seg5 = "{{COLOR_SEG5}}"
+color_seg6 = "{{COLOR_SEG6}}"
 color_bg   = "{{COLOR_BG}}"
 color_text = "{{COLOR_TEXT}}"
 color_fg   = "{{COLOR_FG}}"
@@ -202,7 +203,7 @@ format   = '[](fg:color_seg0)[ $symbol $shlvl ](bg:color_seg0 fg:color_fg)[�
 
 [battery]
 disabled = true
-format   = '[](fg:color_seg5)[ $symbol $percentage ](bg:color_seg5 fg:color_fg)[](fg:color_seg5) '
+format   = '[](fg:color_seg6)[ $symbol $percentage ](bg:color_seg6 fg:color_fg)[](fg:color_seg6) '
 
 full_symbol        = "󰁹"
 charging_symbol    = "󰂄"
@@ -211,18 +212,18 @@ empty_symbol       = "󰂎"
 
 [[battery.display]]
 threshold = 100
-style     = 'bg:color_seg5 fg:color_fg'
+style     = 'bg:color_seg6 fg:color_fg'
 
 [status]
 disabled = false
-format   = '[](fg:color_seg5)[ $status:$common_meaning ](bg:color_seg5 fg:color_err)[](fg:color_seg5) '
+format   = '[](fg:color_seg6)[ $status:$common_meaning ](bg:color_seg6 fg:color_err)[](fg:color_seg6) '
 
 [jobs]
 symbol           = ''
 number_threshold = 1
 symbol_threshold = 1
 disabled         = false
-format           = '[](fg:color_seg5)[ $symbol $number ](bg:color_seg5 fg:color_fg)[](fg:color_seg5) '
+format           = '[](fg:color_seg6)[ $symbol $number ](bg:color_seg6 fg:color_fg)[](fg:color_seg6) '
 
 
 [buf]
@@ -658,5 +659,5 @@ format      = ' [](fg:color_seg3)[ 󰋊 $output ](bg:color_seg3 fg:color_fg)[
 
 [time]
 disabled = false
-style    = "bg:color_seg5 fg:color_fg"
-format   = ' [](fg:color_seg5)[ $time ](bg:color_seg5 fg:color_fg)[](fg:color_seg5)'
+style    = "bg:color_seg6 fg:color_fg"
+format   = ' [](fg:color_seg6)[ $time ](bg:color_seg6 fg:color_fg)[](fg:color_seg6)'

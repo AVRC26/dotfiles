@@ -629,6 +629,7 @@ def cmd_matrix(args: argparse.Namespace) -> None:
         "SEG3",
         "SEG4",
         "SEG5",
+        "SEG6",
         "BG",
         "TEXT",
         "FG",
@@ -699,7 +700,7 @@ def cmd_matrix(args: argparse.Namespace) -> None:
     show_prompt = args.prompt or (not args.prompt and not args.colors)
     show_colors = args.colors or (not args.prompt and not args.colors)
     if show_prompt:
-        print_table("PROMPT ROLES  —  SEG0–SEG5  FG  OK  ERR  WARN", PROMPT_ROLES)
+        print_table("PROMPT ROLES  —  SEG0–SEG6  FG  OK  ERR  WARN", PROMPT_ROLES)
     if show_colors:
         print_table("DIRCOLORS ROLES  —  DC_*", DC_ROLES)
         print_table("GIT COLOR ROLES  —  GC_*", GC_ROLES)
@@ -731,6 +732,24 @@ def _resolve_roles(theme_data: dict[str, Any], flavor: str) -> dict[str, str]:
     return out
 
 
+def _blended_label(fdata: dict[str, Any]) -> str:
+    """Render a flavor's `_blended` state as a COLORS.md table cell.
+
+    Args:
+        fdata: A flavor's raw palette dict (may carry a `_blended` bool set
+            by `_apply_accent_blend`, see its docstring).
+
+    Returns:
+        `"yes"` if the flavor was reshaded, `"no"` if it was considered but
+        left as the canonical/untouched color holder, `"—"` if `--blend`
+        was never run against this export (the key isn't present at all).
+    """
+    blended = fdata.get("_blended")
+    if blended is None:
+        return "—"
+    return "yes" if blended else "no"
+
+
 def _merge_roles(
     theme_roles: dict[str, Any], flavor_roles: dict[str, Any] | None
 ) -> dict[str, Any]:
@@ -748,6 +767,15 @@ def _merge_roles(
     return {**theme_roles, **(flavor_roles or {})}
 
 
+_SEG_DRIFT_EXCEPTIONS: dict[str, frozenset[str]] = {
+    # void's SEG deliberately places `primary`/`orange` at different slots
+    # than the rest of bearded's flavors (a one-off per-flavor design choice,
+    # not a mistake) — exempt it from cross-flavor drift comparison rather
+    # than force 40+ sibling flavors to adopt void's slot order.
+    "bearded": frozenset({"void"}),
+}
+
+
 def _validate_seg_roles(data: dict[str, Any]) -> list[str]:
     """Detect SEG-role drift between sibling flavors of the same theme.
 
@@ -757,6 +785,10 @@ def _validate_seg_roles(data: dict[str, Any]) -> list[str]:
     index indicates the array was reordered by mistake, which silently
     reassigns which prompt segment (dir/git/lang/docker/time) gets which
     color.
+
+    Flavors listed in `_SEG_DRIFT_EXCEPTIONS` for their theme are skipped
+    entirely from comparison — used for a deliberate, documented per-flavor
+    slot layout rather than an accidental reorder.
 
     Args:
         data: The merged roles/palettes dict, keyed by theme then flavor.
@@ -770,6 +802,7 @@ def _validate_seg_roles(data: dict[str, Any]) -> list[str]:
         if theme.startswith("_") or not isinstance(flavors, dict):
             continue
         theme_default_roles: dict[str, Any] = flavors.get("_roles", {})
+        exceptions = _SEG_DRIFT_EXCEPTIONS.get(theme, frozenset())
         segs: dict[str, list[str]] = {}
         for flavor, fdata in flavors.items():
             if flavor.startswith("_") or not isinstance(fdata, dict):
@@ -784,6 +817,8 @@ def _validate_seg_roles(data: dict[str, Any]) -> list[str]:
             continue
         base_name, base = names[0], segs[names[0]]
         for other_name in names[1:]:
+            if base_name in exceptions or other_name in exceptions:
+                continue
             other = segs[other_name]
             if len(other) != len(base):
                 errors.append(
@@ -1028,8 +1063,10 @@ def _blend_color_name(
 
 
 # Two legend rows for the Elements table: what each color_segN slot means on the
-# prompt's main line vs. its stats line (both lines reuse the same seg0-seg5 palette
+# prompt's main line vs. its stats line (both lines reuse the same seg0-seg6 palette
 # for different module clusters — see any src/.config/starship/*.toml format string).
+# SEG6 took over the previously-muted `time`/`battery`/`status`/`jobs` slot from
+# SEG5; SEG5 is a vivid-accent slot with no module of its own (hence "—" in both legends).
 # bg/text/fg/ok/err/warn are single-purpose roles (not dual main/stats-line like
 # SEG) — see the "Color roles reference" section of THEMES.md for the full detail.
 _MAIN_LINE_LEGEND = [
@@ -1038,6 +1075,7 @@ _MAIN_LINE_LEGEND = [
     "git",
     "lang",
     "tools",
+    "—",
     "time",
     "user/hostname",
     "user/hostname",
@@ -1052,15 +1090,16 @@ _STATS_LINE_LEGEND = [
     "cpu",
     "disk",
     "duration",
+    "—",
     "battery<br/>status<br/>jobs",
-    "-",
-    "-",
+    "—",
+    "—",
     "pill text",
-    "-",
-    "-",
-    "-",
+    "—",
+    "—",
+    "—",
 ]
-_SEG_COUNT = 6  # color_seg0 .. color_seg5
+_SEG_COUNT = 7  # color_seg0 .. color_seg6
 
 
 _HEX_RE = re.compile(r"^#[0-9a-fA-F]{6}$")
@@ -1482,11 +1521,11 @@ def _write_colors_md(data: dict[str, Any], out_path: str) -> None:
         lines.append(f'<a id="{theme}-elements"></a>')
         lines.append("### Elements")
         lines.append("")
-        header = ["Flavor"] + seg_cols + ["bg", "text", "fg", "ok", "err", "warn"]
+        header = ["Flavor", "Blended"] + seg_cols + ["bg", "text", "fg", "ok", "err", "warn"]
         lines.append("| " + " | ".join(header) + " |")
         lines.append("|" + "---|" * len(header))
-        lines.append("| *(main line)* | " + " | ".join(_MAIN_LINE_LEGEND) + " |")
-        lines.append("| *(stats line)* | " + " | ".join(_STATS_LINE_LEGEND) + " |")
+        lines.append("| *(main line)* | — | " + " | ".join(_MAIN_LINE_LEGEND) + " |")
+        lines.append("| *(stats line)* | — | " + " | ".join(_STATS_LINE_LEGEND) + " |")
 
         any_elements = False
         for flavor in flavors:
@@ -1496,7 +1535,7 @@ def _write_colors_md(data: dict[str, Any], out_path: str) -> None:
                 continue  # nvim-only flavor, no terminal colors to show
             roles = _merge_roles(theme_roles, fdata.get("_roles"))
             seg = roles.get("SEG", [])
-            row = [flavor]
+            row = [flavor, _blended_label(fdata)]
             for i in range(_SEG_COUNT):
                 name = seg[i] if i < len(seg) else ""
                 row.append(_swatch(palette.get(name, ""), swatch_dir))
@@ -1530,15 +1569,15 @@ def _write_colors_md(data: dict[str, Any], out_path: str) -> None:
             lines.append(f'<a id="{theme}-{anchor_slug}"></a>')
             lines.append(f"### {section}")
             lines.append("")
-            lines.append("| Flavor | " + " | ".join(role_keys) + " |")
-            lines.append("|---|" + "---|" * len(role_keys))
+            lines.append("| Flavor | Blended | " + " | ".join(role_keys) + " |")
+            lines.append("|---|---|" + "---|" * len(role_keys))
             for flavor in flavors:
                 fdata = theme_body[flavor]
                 palette = {k: v for k, v in fdata.items() if not k.startswith("_")}
                 if not palette:
                     continue
                 roles = _merge_roles(theme_roles, fdata.get("_roles"))
-                row = [flavor] + [
+                row = [flavor, _blended_label(fdata)] + [
                     _swatch(palette.get(roles.get(k, ""), ""), swatch_dir) for k in role_keys
                 ]
                 lines.append("| " + " | ".join(row) + " |")
@@ -1853,7 +1892,7 @@ def main() -> None:
     parser.add_argument(
         "--prompt",
         action="store_true",
-        help="With --matrix: show prompt roles only (SEG0–SEG5, FG, OK, ERR, WARN)",
+        help="With --matrix: show prompt roles only (SEG0–SEG6, FG, OK, ERR, WARN)",
     )
     parser.add_argument(
         "--colors",

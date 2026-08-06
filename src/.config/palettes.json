@@ -36,7 +36,8 @@
         "purple",
         "green",
         "cyan",
-        "yellow"
+        "yellow",
+        "light_grey"
       ],
       "TEXT": "fg",
       "WARN": "orange"
@@ -178,26 +179,17 @@
       "SEG": [
         "red",
         "orange",
-        "primary",
+        "purple",
         "green",
         "blue",
-        "purple"
+        "yellow",
+        "primaryalt"
       ],
       "TEXT": "default",
       "WARN": "warning"
     },
     "altica": {
       "_blended": false,
-      "_roles": {
-        "SEG": [
-          "red",
-          "orange",
-          "yellow",
-          "green",
-          "blue",
-          "purple"
-        ]
-      },
       "blue": "#10bdc9",
       "border": "#0a1217",
       "danger": "#C13838",
@@ -276,10 +268,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -302,6 +295,7 @@
       "primary": "#6394f1",
       "primary__blend": "#114dbf",
       "primaryalt": "#2b324c",
+      "primaryalt__blend": "#4b5785",
       "purple": "#bcb1f1",
       "purple__blend": "#3920b0",
       "red": "#eca099",
@@ -347,10 +341,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -373,6 +368,7 @@
       "primary": "#9587ff",
       "primary__blend": "#1800cd",
       "primaryalt": "#302f42",
+      "primaryalt__blend": "#575578",
       "purple": "#bcb1f1",
       "purple__blend": "#381fae",
       "red": "#eca099",
@@ -444,10 +440,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -470,6 +467,7 @@
       "primary": "#8eb0e6",
       "primary__blend": "#22519b",
       "primaryalt": "#1a1e33",
+      "primaryalt__blend": "#404a7d",
       "purple": "#B78AFF",
       "purple__blend": "#4900bd",
       "red": "#E35535",
@@ -515,10 +513,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -541,6 +540,7 @@
       "primary": "#9698d8",
       "primary__blend": "#34368b",
       "primaryalt": "#241e31",
+      "primaryalt__blend": "#574876",
       "purple": "#B78AFF",
       "purple__blend": "#4900be",
       "red": "#E35535",
@@ -586,10 +586,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -612,6 +613,7 @@
       "primary": "#9DACC3",
       "primary__blend": "#4e6280",
       "primaryalt": "#2c3648",
+      "primaryalt__blend": "#4e6080",
       "purple": "#B78AFF",
       "purple__blend": "#4f00ce",
       "red": "#E35535",
@@ -657,10 +659,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -683,6 +686,7 @@
       "primary": "#8196b5",
       "primary__blend": "#465a77",
       "primaryalt": "#1f2838",
+      "primaryalt__blend": "#43577a",
       "purple": "#B78AFF",
       "purple__blend": "#4900bd",
       "red": "#E35535",
@@ -728,10 +732,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -754,6 +759,7 @@
       "primary": "#a85ff1",
       "primary__blend": "#5c0faa",
       "primaryalt": "#1c2027",
+      "primaryalt__blend": "#4d586c",
       "purple": "#a85ff1",
       "purple__blend": "#5c0faa",
       "red": "#E35535",
@@ -799,10 +805,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -825,6 +832,7 @@
       "primary": "#a85ff1",
       "primary__blend": "#6110b2",
       "primaryalt": "#211f36",
+      "primaryalt__blend": "#4b467b",
       "purple": "#a85ff1",
       "purple__blend": "#6110b2",
       "red": "#E35535",
@@ -870,10 +878,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -896,6 +905,7 @@
       "primary": "#11B7D4",
       "primary__blend": "#0e94ab",
       "primaryalt": "#1c2027",
+      "primaryalt__blend": "#4d586c",
       "purple": "#a85ff1",
       "purple__blend": "#5c0faa",
       "red": "#E35535",
@@ -941,10 +951,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -967,6 +978,7 @@
       "primary": "#11B7D4",
       "primary__blend": "#0e9ab3",
       "primaryalt": "#1f2936",
+      "primaryalt__blend": "#465d7b",
       "purple": "#a85ff1",
       "purple__blend": "#6110b2",
       "red": "#E35535",
@@ -1012,10 +1024,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1038,6 +1051,7 @@
       "primary": "#38c7bd",
       "primary__blend": "#299089",
       "primaryalt": "#1c2027",
+      "primaryalt__blend": "#4d586c",
       "purple": "#a85ff1",
       "purple__blend": "#5c0faa",
       "red": "#E35535",
@@ -1083,10 +1097,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1109,6 +1124,7 @@
       "primary": "#38c7bd",
       "primary__blend": "#2a978f",
       "primaryalt": "#1f3036",
+      "primaryalt__blend": "#466d7b",
       "purple": "#a85ff1",
       "purple__blend": "#6110b2",
       "red": "#E35535",
@@ -1154,10 +1170,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1180,6 +1197,7 @@
       "primary": "#c7910c",
       "primary__blend": "#ae7f0b",
       "primaryalt": "#1c2027",
+      "primaryalt__blend": "#4d586c",
       "purple": "#a85ff1",
       "purple__blend": "#5c0faa",
       "red": "#E35535",
@@ -1225,10 +1243,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1251,6 +1270,7 @@
       "primary": "#c7910c",
       "primary__blend": "#b7860b",
       "primaryalt": "#302c29",
+      "primaryalt__blend": "#69605a",
       "purple": "#a85ff1",
       "purple__blend": "#6110b3",
       "red": "#E35535",
@@ -1296,10 +1316,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1322,6 +1343,7 @@
       "primary": "#c62f52",
       "primary__blend": "#96233e",
       "primaryalt": "#1c2027",
+      "primaryalt__blend": "#4d586c",
       "purple": "#a85ff1",
       "purple__blend": "#5c0faa",
       "red": "#E35535",
@@ -1367,10 +1389,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1393,6 +1416,7 @@
       "primary": "#c62f52",
       "primary__blend": "#9e2642",
       "primaryalt": "#37242e",
+      "primaryalt__blend": "#764d63",
       "purple": "#a85ff1",
       "purple__blend": "#6210b4",
       "red": "#E35535",
@@ -1438,10 +1462,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1464,6 +1489,7 @@
       "primary": "#a2abb6",
       "primary__blend": "#545e6b",
       "primaryalt": "#23262d",
+      "primaryalt__blend": "#545b6b",
       "purple": "#935cd1",
       "purple__blend": "#5c2a95",
       "red": "#C13838",
@@ -1587,10 +1613,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1613,6 +1640,7 @@
       "primary": "#F09177",
       "primary__blend": "#a93313",
       "primaryalt": "#51403b",
+      "primaryalt__blend": "#6d564f",
       "purple": "#9991F1",
       "purple__blend": "#2115a7",
       "red": "#f24343",
@@ -1661,7 +1689,8 @@
           "primary__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1684,6 +1713,7 @@
       "primary": "#d35386",
       "primary__blend": "#9a2755",
       "primaryalt": "#40222e",
+      "primaryalt__blend": "#7e435b",
       "purple": "#BAB13B",
       "purple__blend": "#938c2f",
       "red": "#C13838",
@@ -1755,10 +1785,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1781,6 +1812,7 @@
       "primary": "#2397e5",
       "primary__blend": "#8ac8f1",
       "primaryalt": "#fafafa",
+      "primaryalt__blend": "#bebebe",
       "purple": "#7537d7",
       "purple__blend": "#b492e9",
       "red": "#f7775a",
@@ -1859,7 +1891,8 @@
           "primary",
           "success",
           "blue",
-          "salmon"
+          "info",
+          "primaryalt"
         ]
       },
       "blue": "#82f0ff",
@@ -1914,10 +1947,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -1940,6 +1974,7 @@
       "primary": "#b498f5",
       "primary__blend": "#3f11ab",
       "primaryalt": "#231e36",
+      "primaryalt__blend": "#4e4379",
       "purple": "#c39eff",
       "purple__blend": "#4800bc",
       "red": "#f7775a",
@@ -2089,10 +2124,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2115,6 +2151,7 @@
       "primary": "#dbefff",
       "primary__blend": "#006bc1",
       "primaryalt": "#1e2c38",
+      "primaryalt__blend": "#43637e",
       "purple": "#bc98ff",
       "purple__blend": "#4400c1",
       "red": "#fd604f",
@@ -2160,10 +2197,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2186,6 +2224,7 @@
       "primary": "#ecc48c",
       "primary__blend": "#a76d1c",
       "primaryalt": "#635345",
+      "primaryalt__blend": "#736050",
       "purple": "#ad92ff",
       "purple__blend": "#3000c3",
       "red": "#fb7a6c",
@@ -2231,10 +2270,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2257,6 +2297,7 @@
       "primary": "#fbe7c3",
       "primary__blend": "#be7f0d",
       "primaryalt": "#52426a",
+      "primaryalt__blend": "#614e7d",
       "purple": "#9a94e9",
       "purple__blend": "#2c23a9",
       "red": "#ff7e70",
@@ -2302,10 +2343,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2328,6 +2370,7 @@
       "primary": "#422eb0",
       "primary__blend": "#988ae1",
       "primaryalt": "#e1e0ef",
+      "primaryalt__blend": "#a19ecd",
       "purple": "#9244ec",
       "purple__blend": "#b17af1",
       "red": "#df3c3c",
@@ -2373,10 +2416,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2399,6 +2443,7 @@
       "primary": "#bd4f27",
       "primary__blend": "#e7a48c",
       "primaryalt": "#f6efea",
+      "primaryalt__blend": "#d5b59e",
       "purple": "#9244ec",
       "purple__blend": "#b581f2",
       "red": "#df3c3c",
@@ -2444,10 +2489,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2470,6 +2516,7 @@
       "primary": "#2a9b7d",
       "primary__blend": "#95e2ce",
       "primaryalt": "#f3f7f4",
+      "primaryalt__blend": "#aec9b5",
       "purple": "#9244ec",
       "purple__blend": "#b885f3",
       "red": "#df3c3c",
@@ -2515,10 +2562,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2541,6 +2589,7 @@
       "primary": "#d1174f",
       "primary__blend": "#f183a4",
       "primaryalt": "#f6eff1",
+      "primaryalt__blend": "#cda7b2",
       "purple": "#9244ec",
       "purple__blend": "#b682f2",
       "red": "#df3c3c",
@@ -2586,10 +2635,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2612,6 +2662,7 @@
       "primary": "#937416",
       "primary__blend": "#ecd180",
       "primaryalt": "#efebe1",
+      "primaryalt__blend": "#ccbfa0",
       "purple": "#9244ec",
       "purple__blend": "#b27af2",
       "red": "#df3c3c",
@@ -2683,10 +2734,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2709,6 +2761,7 @@
       "primary": "#98a2b5",
       "primary__blend": "#535e74",
       "primaryalt": "#282d3a",
+      "primaryalt__blend": "#515b76",
       "purple": "#ab9df2",
       "purple__blend": "#3017b0",
       "red": "#fc6a67",
@@ -2754,10 +2807,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2780,6 +2834,7 @@
       "primary": "#98a2b5",
       "primary__blend": "#4e586c",
       "primaryalt": "#212430",
+      "primaryalt__blend": "#4c536e",
       "purple": "#ab9df2",
       "purple__blend": "#2d16a4",
       "red": "#fc6a67",
@@ -2825,10 +2880,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2851,6 +2907,7 @@
       "primary": "#9AA2A6",
       "primary__blend": "#616a6e",
       "primaryalt": "#363941",
+      "primaryalt__blend": "#5e6371",
       "purple": "#ab9df2",
       "purple__blend": "#3218b7",
       "red": "#fc6a67",
@@ -2896,10 +2953,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -2922,6 +2980,7 @@
       "primary": "#b0a2a6",
       "primary__blend": "#6c5c61",
       "primaryalt": "#332f37",
+      "primaryalt__blend": "#645c6c",
       "purple": "#ab9df2",
       "purple__blend": "#3117b1",
       "red": "#fc6a67",
@@ -2993,10 +3052,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3019,6 +3079,7 @@
       "primary": "#97c892",
       "primary__blend": "#457e3f",
       "primaryalt": "#1e303a",
+      "primaryalt__blend": "#41677d",
       "purple": "#978dd6",
       "purple__blend": "#3e328b",
       "red": "#B4552D",
@@ -3090,10 +3151,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3116,6 +3178,7 @@
       "primary": "#2aa198",
       "primary__blend": "#94e3dd",
       "primaryalt": "#fef9ed",
+      "primaryalt__blend": "#f8d47f",
       "purple": "#767cde",
       "purple__blend": "#9297e5",
       "red": "#eb4937",
@@ -3161,10 +3224,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3187,6 +3251,7 @@
       "primary": "#47cfc4",
       "primary__blend": "#27948b",
       "primaryalt": "#17303a",
+      "primaryalt__blend": "#356f86",
       "purple": "#767cde",
       "purple__blend": "#242b96",
       "red": "#eb4937",
@@ -3232,10 +3297,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3258,6 +3324,7 @@
       "primary": "#3A7FFF",
       "primary__blend": "#0043bf",
       "primaryalt": "#1a2137",
+      "primaryalt__blend": "#3d4e82",
       "purple": "#935cd1",
       "purple__blend": "#5d2a95",
       "red": "#C13838",
@@ -3303,10 +3370,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3329,6 +3397,7 @@
       "primary": "#a948ef",
       "primary__blend": "#7010b5",
       "primaryalt": "#2c223b",
+      "primaryalt__blend": "#5d487d",
       "purple": "#935cd1",
       "purple__blend": "#5f2b99",
       "red": "#C13838",
@@ -3373,11 +3442,12 @@
         "OK": "success__blend",
         "SEG": [
           "red__blend",
-          "orange__blend",
+          "salmon__blend",
           "primary__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "warning__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3400,11 +3470,13 @@
       "primary": "#c93e71",
       "primary__blend": "#962a52",
       "primaryalt": "#441f30",
+      "primaryalt__blend": "#843c5d",
       "purple": "#CC9B52",
       "purple__blend": "#946a2c",
       "red": "#C13838",
       "red__blend": "#952b2b",
       "salmon": "#B85C40",
+      "salmon__blend": "#8e4732",
       "success": "#a9dc76",
       "success__blend": "#609927",
       "turquoize": "#c93e71",
@@ -3444,11 +3516,12 @@
         "OK": "success__blend",
         "SEG": [
           "red__blend",
-          "orange__blend",
-          "primary__blend",
+          "salmon__blend",
+          "defaultalt__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "warning__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3460,6 +3533,7 @@
       "default": "#d0c1de",
       "defaultMain": "#b6a0cc",
       "defaultalt": "#5d4179",
+      "defaultalt__blend": "#60437d",
       "green": "#a9dc76",
       "greenAlt": "#b7d175",
       "green__blend": "#609927",
@@ -3471,11 +3545,13 @@
       "primary": "#d24e4e",
       "primary__blend": "#992727",
       "primaryalt": "#441f30",
+      "primaryalt__blend": "#843c5d",
       "purple": "#CC9B52",
       "purple__blend": "#956a2c",
       "red": "#C13838",
       "red__blend": "#952b2b",
       "salmon": "#B85C40",
+      "salmon__blend": "#8f4732",
       "success": "#a9dc76",
       "success__blend": "#609927",
       "turquoize": "#d24e4e",
@@ -3515,11 +3591,12 @@
         "OK": "success__blend",
         "SEG": [
           "red__blend",
+          "salmon__blend",
           "orange__blend",
-          "primary__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "warning__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3542,11 +3619,13 @@
       "primary": "#da6c62",
       "primary__blend": "#9c2f25",
       "primaryalt": "#5f3333",
+      "primaryalt__blend": "#7d4343",
       "purple": "#CC9B52",
       "purple__blend": "#956a2c",
       "red": "#C13838",
       "red__blend": "#952b2b",
       "salmon": "#B85C40",
+      "salmon__blend": "#8f4732",
       "success": "#a9dc76",
       "success__blend": "#609927",
       "turquoize": "#da6c62",
@@ -3561,6 +3640,17 @@
     },
     "themanopia": {
       "_blended": false,
+      "_roles": {
+        "SEG": [
+          "red",
+          "orange",
+          "primary",
+          "green",
+          "blue",
+          "yellow",
+          "primaryalt"
+        ]
+      },
       "blue": "#32A7FF",
       "border": "#0f1016",
       "danger": "#FF5B82",
@@ -3639,10 +3729,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3665,6 +3756,7 @@
       "primary": "#7e7e7e",
       "primary__blend": "#bdbdbd",
       "primaryalt": "#f9f9f9",
+      "primaryalt__blend": "#bdbdbd",
       "purple": "#A95EFF",
       "purple__blend": "#b97cff",
       "red": "#D62C2C",
@@ -3710,10 +3802,11 @@
         "SEG": [
           "red__blend",
           "orange__blend",
-          "primary__blend",
+          "purple__blend",
           "green__blend",
           "blue__blend",
-          "purple__blend"
+          "yellow__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3736,6 +3829,7 @@
       "primary": "#A680FF",
       "primary__blend": "#3b00c4",
       "primaryalt": "#201844",
+      "primaryalt__blend": "#443391",
       "purple": "#A95EFF",
       "purple__blend": "#5b00c4",
       "red": "#D62C2C",
@@ -3780,11 +3874,12 @@
         "OK": "success__blend",
         "SEG": [
           "red__blend",
-          "orange__blend",
+          "salmon__blend",
           "primary__blend",
-          "green__blend",
-          "blue__blend",
-          "purple__blend"
+          "greenAlt__blend",
+          "orange__blend",
+          "warning__blend",
+          "primaryalt__blend"
         ],
         "WARN": "warning__blend"
       },
@@ -3798,6 +3893,7 @@
       "defaultalt": "#4f4273",
       "green": "#6DBBFF",
       "greenAlt": "#2C729E",
+      "greenAlt__blend": "#296b95",
       "green__blend": "#0066be",
       "info": "#04c4d9",
       "orange": "#3D8DE2",
@@ -3807,11 +3903,13 @@
       "primary": "#7A63ED",
       "primary__blend": "#2d14ab",
       "primaryalt": "#221c32",
+      "primaryalt__blend": "#53447a",
       "purple": "#2BD3E2",
       "purple__blend": "#179ba7",
       "red": "#C13838",
       "red__blend": "#932b2b",
       "salmon": "#D65170",
+      "salmon__blend": "#9a2440",
       "success": "#14b871",
       "success__blend": "#13ac69",
       "turquoize": "#89C4FF",
@@ -3871,7 +3969,8 @@
           "blue",
           "green",
           "teal",
-          "yellow"
+          "yellow",
+          "surface0"
         ]
       },
       "base": "#303446",
@@ -3921,7 +4020,8 @@
           "lavender",
           "green",
           "sapphire",
-          "yellow"
+          "yellow",
+          "surface0"
         ]
       },
       "base": "#eff1f5",
@@ -3971,7 +4071,8 @@
           "mauve",
           "green",
           "sky",
-          "yellow"
+          "yellow",
+          "flamingo"
         ]
       },
       "base": "#24273a",
@@ -4021,7 +4122,8 @@
           "lavender",
           "green",
           "sapphire",
-          "yellow"
+          "yellow",
+          "flamingo"
         ]
       },
       "base": "#1e1e2e",
@@ -4092,6 +4194,7 @@
         "pu",
         "gr",
         "cy",
+        "ye",
         "tx-2"
       ],
       "TEXT": "tx",
@@ -4128,6 +4231,17 @@
       "_blended": false,
       "_delta": {
         "syntax_theme": "flexoki-light"
+      },
+      "_roles": {
+        "SEG": [
+          "re",
+          "or",
+          "pu",
+          "gr",
+          "cy",
+          "ye-2",
+          "tx-2"
+        ]
       },
       "bg": "#FFFCF0",
       "bg-2": "#F2F0E5",
@@ -4195,6 +4309,7 @@
         "neutral_purple",
         "bright_green",
         "bright_aqua",
+        "",
         "gray"
       ],
       "TEXT": "light1",
@@ -4202,6 +4317,17 @@
     },
     "dark": {
       "_blended": false,
+      "_roles": {
+        "SEG": [
+          "bright_red",
+          "bright_orange",
+          "neutral_purple",
+          "bright_green",
+          "bright_aqua",
+          "bright_yellow",
+          "gray"
+        ]
+      },
       "bright_aqua": "#8ec07c",
       "bright_blue": "#83a598",
       "bright_green": "#b8bb26",
@@ -4288,6 +4414,7 @@
           "neutral_purple__blend",
           "bright_green__blend",
           "bright_aqua__blend",
+          "bright_yellow__blend",
           "gray__blend"
         ],
         "WARN": "bright_yellow__blend"
@@ -4388,6 +4515,7 @@
           "neutral_purple__blend",
           "bright_green__blend",
           "bright_aqua__blend",
+          "neutral_yellow__blend",
           "gray__blend"
         ],
         "WARN": "bright_yellow__blend"
@@ -4455,7 +4583,8 @@
       "neutral_purple": "#b16286",
       "neutral_purple__blend": "#773b57",
       "neutral_red": "#cc241d",
-      "neutral_yellow": "#d79921"
+      "neutral_yellow": "#d79921",
+      "neutral_yellow__blend": "#9b6e18"
     },
     "light": {
       "_blended": true,
@@ -4492,6 +4621,7 @@
           "neutral_purple__blend",
           "bright_green__blend",
           "bright_aqua__blend",
+          "faded_yellow__blend",
           "gray__blend"
         ],
         "TEXT": "dark1",
@@ -4534,6 +4664,7 @@
       "faded_purple": "#8f3f71",
       "faded_red": "#9d0006",
       "faded_yellow": "#b57614",
+      "faded_yellow__blend": "#f2ca8c",
       "gray": "#928374",
       "gray__blend": "#c7bfb8",
       "light0": "#fbf1c7",
@@ -4605,6 +4736,7 @@
           "pink",
           "green",
           "teal",
+          "yellow",
           "gray"
         ],
         "TEXT": "white",
@@ -4671,7 +4803,8 @@
           "violet1",
           "green",
           "blue3",
-          "white0"
+          "yellow",
+          "gray3"
         ],
         "TEXT": "ink1",
         "WARN": "yellow"
@@ -4753,7 +4886,8 @@
           "oniViolet",
           "springGreen",
           "waveAqua2",
-          "oldWhite"
+          "oldWhite",
+          "sumiInk4"
         ],
         "TEXT": "fujiWhite",
         "WARN": "carpYellow"
@@ -4839,6 +4973,7 @@
         "accent6",
         "accent4",
         "accent5",
+        "accent3",
         "dimmed1"
       ],
       "TEXT": "text",
@@ -5008,7 +5143,8 @@
         "lavender",
         "palm",
         "sky",
-        "khaki"
+        "sunshine",
+        "slate"
       ],
       "TEXT": "fg",
       "WARN": "sunset"
@@ -5088,7 +5224,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5136,6 +5273,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ff9a3c",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f6b245",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -5173,7 +5311,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5221,6 +5360,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ffa14a",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f7b752",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -5258,7 +5398,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5306,6 +5447,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ffbd80",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f9cc85",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -5343,7 +5485,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5391,6 +5534,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ffaf65",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f8c26c",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -5428,7 +5572,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5476,6 +5621,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ff9d42",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f6b44a",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -5513,7 +5659,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5561,6 +5708,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ffa14a",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f7b752",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -5598,7 +5746,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5646,6 +5795,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ff7f07",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f49c12",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -5683,7 +5833,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5731,6 +5882,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ff9a3c",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f6b245",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -5768,7 +5920,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5816,6 +5969,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ff7f07",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f49c12",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -5853,7 +6007,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5901,6 +6056,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ff8614",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f4a11f",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -5938,7 +6094,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -5986,6 +6143,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ffb167",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f8c36e",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -6023,7 +6181,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -6071,6 +6230,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#f87800",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#ed950b",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -6108,7 +6268,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -6156,6 +6317,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ffa14a",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f7b752",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -6193,7 +6355,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -6241,6 +6404,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#b25600",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#aa6b08",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     },
@@ -6278,7 +6442,8 @@
           "lavender__blend",
           "palm__blend",
           "sky__blend",
-          "khaki__blend"
+          "sunshine__blend",
+          "slate__blend"
         ],
         "WARN": "sunset__blend"
       },
@@ -6326,6 +6491,7 @@
       "sunset": "#FFA34D",
       "sunset__blend": "#ff9a3c",
       "sunshine": "#F5A72C",
+      "sunshine__blend": "#f6b245",
       "teal": "#8FD1C7",
       "wood": "#D2A48F"
     }
@@ -6376,7 +6542,8 @@
           "purple",
           "green",
           "cyan",
-          "yellow"
+          "yellow",
+          "white"
         ]
       },
       "bg": "#282c34",
@@ -6406,7 +6573,8 @@
           "purple",
           "green",
           "blue",
-          "yellow"
+          "yellow",
+          "white"
         ]
       },
       "bg": "#000000",
@@ -6458,7 +6626,8 @@
           "purple__blend",
           "green__blend",
           "blue__blend",
-          "yellow__blend"
+          "yellow__blend",
+          "white__blend"
         ],
         "WARN": "yellow__blend"
       },
@@ -6482,6 +6651,7 @@
       "red": "#ef596f",
       "red__blend": "#c5132d",
       "white": "#abb2bf",
+      "white__blend": "#5d687b",
       "yellow": "#e5c07b",
       "yellow__blend": "#b48224"
     },
@@ -6497,7 +6667,8 @@
           "purple",
           "green",
           "cyan",
-          "yellow"
+          "yellow",
+          "white"
         ]
       },
       "bg": "#fafafa",
@@ -6568,6 +6739,7 @@
           "magenta",
           "green",
           "blue",
+          "yellow",
           "fg_dark"
         ]
       },
@@ -6623,7 +6795,8 @@
           "magenta",
           "green",
           "blue",
-          "fg_dark"
+          "yellow",
+          "bg_dark"
         ]
       },
       "add": "#449dab",
@@ -6694,6 +6867,7 @@
           "purple__blend",
           "green__blend",
           "blue1__blend",
+          "yellow__blend",
           "dark5__blend"
         ],
         "WARN": "yellow__blend"

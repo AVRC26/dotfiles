@@ -6,7 +6,7 @@
     "_roles": {
       "BG": "background",
       "TEXT": "text",
-      "SEG": ["accent1", "accent2", "accent6", "accent4", "accent5", "dimmed1"],
+      "SEG": ["accent1", "accent2", "accent6", "accent4", "accent5", "accent3", "dimmed1"],
       "FG": "dark2",
       "OK": "accent4",
       "ERR": "accent1",
@@ -59,7 +59,7 @@
     "frappe": {
       "_delta": { "syntax_theme": "Catppuccin Frappe" },
       "_roles": {
-        "SEG": ["maroon", "peach", "blue", "green", "teal", "yellow"],
+        "SEG": ["maroon", "peach", "blue", "green", "teal", "yellow", "surface0"],
         "DC_DIR": "teal",
         "DC_LINK": "blue",
         "DC_IMAGE": "maroon",
@@ -73,7 +73,7 @@
     "latte": {
       "_delta": { "syntax_theme": "Catppuccin Latte" },
       "_roles": {
-        "SEG": ["red", "peach", "lavender", "green", "sapphire", "yellow"],
+        "SEG": ["red", "peach", "lavender", "green", "sapphire", "yellow", "surface0"],
         "DC_DIR": "sapphire",
         "DC_LINK": "mauve",
         "DC_IMAGE": "pink",
@@ -87,7 +87,7 @@
     "macchiato": {
       "_delta": { "syntax_theme": "Catppuccin Macchiato" },
       "_roles": {
-        "SEG": ["red", "peach", "mauve", "green", "sky", "yellow"],
+        "SEG": ["red", "peach", "mauve", "green", "sky", "yellow", "flamingo"],
         "DC_DIR": "sky",
         "DC_LINK": "lavender",
         "DC_IMAGE": "flamingo",
@@ -101,7 +101,7 @@
     "mocha": {
       "_delta": { "syntax_theme": "Catppuccin Mocha" },
       "_roles": {
-        "SEG": ["red", "peach", "lavender", "green", "sapphire", "yellow"],
+        "SEG": ["red", "peach", "lavender", "green", "sapphire", "yellow", "flamingo"],
         "DC_DIR": "sapphire",
         "DC_LINK": "mauve",
         "DC_IMAGE": "pink",
@@ -121,7 +121,7 @@
       "_roles": {
         "BG": "sumiInk0",
         "TEXT": "fujiWhite",
-        "SEG": ["surimiOrange", "springBlue", "oniViolet", "springGreen", "waveAqua2", "oldWhite"],
+        "SEG": ["surimiOrange", "springBlue", "oniViolet", "springGreen", "waveAqua2", "oldWhite", "sumiInk4"],
         "FG": "sumiInk3",
         "OK": "springGreen",
         "ERR": "autumnRed",
@@ -153,7 +153,7 @@
       "_roles": {
         "BG": "black3",
         "TEXT": "white",
-        "SEG": ["orange", "blue2", "pink", "green", "teal", "gray"],
+        "SEG": ["orange", "blue2", "pink", "green", "teal", "yellow", "gray"],
         "FG": "black2",
         "OK": "green",
         "ERR": "red",
@@ -185,7 +185,7 @@
       "_roles": {
         "BG": "white3",
         "TEXT": "ink1",
-        "SEG": ["orange", "teal1", "violet1", "green", "blue3", "white0"],
+        "SEG": ["orange", "teal1", "violet1", "green", "blue3", "yellow", "gray3"],
         "FG": "ink2",
         "OK": "green",
         "ERR": "red",
@@ -217,12 +217,10 @@
     "_default_flavor": "dark",
     "_delta": { "syntax_theme": "gruvbox-dark" },
     "_nvim": { "theme": "gruvbox", "variant_key": "gruvbox_flavor" },
-    "dark-hard": {},
-    "dark-soft": {},
     "_roles": {
       "BG": "dark0",
       "TEXT": "light1",
-      "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "gray"],
+      "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "", "gray"],
       "FG": "dark0",
       "OK": "bright_green",
       "ERR": "bright_red",
@@ -248,13 +246,16 @@
       "GC_META": "bright_yellow",
       "GC_FRAG": "neutral_purple"
     },
+    "dark": { "_roles": { "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "bright_yellow", "gray"] } },
+    "dark-hard": { "_roles": { "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "bright_yellow", "gray"] } },
+    "dark-soft": { "_roles": { "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "neutral_yellow", "gray"] } },
     "light": {
       "_delta": { "syntax_theme": "gruvbox-light" },
       "_roles": {
         "BG": "light0",
         "TEXT": "dark1",
         "DC_DIMMED": "light3"
-      }
+      , "SEG": ["bright_red", "bright_orange", "neutral_purple", "bright_green", "bright_aqua", "faded_yellow", "gray"] }
     }
   },
   "bearded": {
@@ -264,7 +265,7 @@
     "_roles": {
       "BG": "uibackground",
       "TEXT": "default",
-      "SEG": ["red", "orange", "primary", "green", "blue", "purple"],
+      "SEG": ["red", "orange", "purple", "green", "blue", "yellow", "primaryalt"],
       "FG": "border",
       "OK": "success",
       "ERR": "danger",
@@ -290,11 +291,14 @@
       "GC_META": "yellow",
       "GC_FRAG": "purple"
     },
-    "altica": {
-      "_roles": { "SEG": ["red", "orange", "yellow", "green", "blue", "purple"] }
-    },
+    "void": { "_roles": { "SEG": ["red", "salmon", "primary", "greenAlt", "orange", "warning", "primaryalt"] } },
+    "surprising-watermelon": { "_roles": { "SEG": ["red", "salmon", "orange", "green", "blue", "warning", "primaryalt"] } },
+    "surprising-eggplant": { "_roles": { "SEG": ["red", "salmon", "defaultalt", "green", "blue", "warning", "primaryalt"] } },
+    "surprising-blueberry": { "_roles": { "SEG": ["red", "salmon", "primary", "green", "blue", "warning", "primaryalt"] } },
+    "themanopia": { "_roles": { "SEG": ["red", "orange", "primary", "green", "blue", "yellow", "primaryalt"] } },
+    "earth": { "_roles": { "SEG": ["red", "orange", "primary", "green", "blue", "yellow", "primaryalt"] } },
     "feat-webdevcody": {
-      "_roles": { "SEG": ["red", "turquoize", "primary", "success", "blue", "salmon"] }
+      "_roles": { "SEG": ["red", "turquoize", "primary", "success", "blue", "info", "primaryalt"] }
     }
   },
   "tokyonight": {
@@ -329,7 +333,7 @@
     "moon": {
       "_delta": { "syntax_theme": "tokyonight_moon" },
       "_roles": {
-        "SEG": ["red", "orange", "magenta", "green", "blue", "fg_dark"],
+        "SEG": ["red", "orange", "magenta", "green", "blue", "yellow", "fg_dark"],
         "DC_DIR": "cyan",
         "DC_LINK": "magenta",
         "DC_MEDIA": "magenta",
@@ -341,7 +345,7 @@
     "night": {
       "_delta": { "syntax_theme": "tokyonight_night" },
       "_roles": {
-        "SEG": ["red", "orange", "magenta", "green", "blue", "fg_dark"],
+        "SEG": ["red", "orange", "magenta", "green", "blue", "yellow", "bg_dark"],
         "DC_DIR": "cyan",
         "DC_LINK": "magenta",
         "DC_MEDIA": "magenta",
@@ -353,7 +357,7 @@
     "storm": {
       "_delta": { "syntax_theme": "tokyonight_storm" },
       "_roles": {
-        "SEG": ["red", "orange", "purple", "green", "blue1", "dark5"],
+        "SEG": ["red", "orange", "purple", "green", "blue1", "yellow", "dark5"],
         "DC_DIR": "teal",
         "DC_LINK": "purple",
         "DC_MEDIA": "purple",
@@ -367,13 +371,10 @@
     "_default_flavor": "dark",
     "_delta": { "syntax_theme": "flexoki-dark" },
     "_nvim": { "theme": "flexoki", "variant_key": "flexoki_style" },
-    "light": {
-      "_delta": { "syntax_theme": "flexoki-light" }
-    },
     "_roles": {
       "BG": "bg",
       "TEXT": "tx",
-      "SEG": ["re", "or", "pu", "gr", "cy", "tx-2"],
+      "SEG": ["re", "or", "pu", "gr", "cy", "ye", "tx-2"],
       "FG": "bg",
       "OK": "gr",
       "ERR": "re",
@@ -398,7 +399,8 @@
       "GC_NEW": "gr",
       "GC_META": "ye",
       "GC_FRAG": "pu"
-    }
+    },
+    "light": { "_delta": { "syntax_theme": "flexoki-light" }, "_roles": { "SEG": ["re", "or", "pu", "gr", "cy", "ye-2", "tx-2"] } }
   },
   "bamboo": {
     "_default_flavor": "vulgaris",
@@ -406,7 +408,7 @@
     "_roles": {
       "BG": "bg0",
       "TEXT": "fg",
-      "SEG": ["red", "orange", "purple", "green", "cyan", "yellow"],
+      "SEG": ["red", "orange", "purple", "green", "cyan", "yellow", "light_grey"],
       "FG": "bg0",
       "OK": "green",
       "ERR": "red",
@@ -445,7 +447,7 @@
     "_roles": {
       "BG": "bg",
       "TEXT": "fg",
-      "SEG": ["rose", "sunrise", "lavender", "palm", "sky", "khaki"],
+      "SEG": ["rose", "sunrise", "lavender", "palm", "sky", "sunshine", "slate"],
       "FG": "bg",
       "OK": "palm",
       "ERR": "red",
@@ -521,19 +523,19 @@
     },
     "onedark": {
       "_delta": { "syntax_theme": "" },
-      "_roles": { "SEG": ["red", "orange", "purple", "green", "cyan", "yellow"] }
+      "_roles": { "SEG": ["red", "orange", "purple", "green", "cyan", "yellow", "white"] }
     },
     "onelight": {
       "_delta": { "syntax_theme": "" },
-      "_roles": { "SEG": ["red", "orange", "purple", "green", "cyan", "yellow"] }
+      "_roles": { "SEG": ["red", "orange", "purple", "green", "cyan", "yellow", "white"] }
     },
     "onedark_vivid": {
       "_delta": { "syntax_theme": "" },
-      "_roles": { "SEG": ["red", "orange", "purple", "green", "blue", "yellow"] }
+      "_roles": { "SEG": ["red", "orange", "purple", "green", "blue", "yellow", "white"] }
     },
     "onedark_dark": {
       "_delta": { "syntax_theme": "" },
-      "_roles": { "SEG": ["red", "orange", "purple", "green", "blue", "yellow"] }
+      "_roles": { "SEG": ["red", "orange", "purple", "green", "blue", "yellow", "white"] }
     }
   }
 }

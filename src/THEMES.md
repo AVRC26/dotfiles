@@ -283,7 +283,7 @@ Each role key lives under `"_roles"` in `roles.json`. `render-theme.py` resolves
 
 ### Starship prompt roles → `{{COLOR_*}}`
 
-The user/host pill uses `BG`/`TEXT` exclusively, colored separately from the `SEG` array. `SEG0`–`SEG5` color the rest of the prompt, and — because every template's stats line (row 1: shell/memory/cpu/disk/duration/battery cluster) and main line (row 2: os/dir/git/lang/tools/time) both draw from the same six-slot palette — each `SEG` index carries **two** meanings depending which line it's rendering:
+The user/host pill uses `BG`/`TEXT` exclusively, colored separately from the `SEG` array. `SEG0`–`SEG6` color the rest of the prompt — because every template's stats line (row 1: shell/memory/cpu/disk/duration/battery cluster) and main line (row 2: os/dir/git/lang/tools/time) both draw from the same seven-slot palette, most `SEG` indices carry **two** meanings depending which line is rendering. `SEG5` is the exception: it's a spare vivid-accent slot with no module assigned yet (see below).
 
 | Role | Placeholder | What it colors |
 |------|-------------|----------------|
@@ -294,8 +294,9 @@ The user/host pill uses `BG`/`TEXT` exclusively, colored separately from the `SE
 | `SEG2` | `{{COLOR_SEG2}}` | Main line: `git` · Stats line: `cpu` |
 | `SEG3` | `{{COLOR_SEG3}}` | Main line: `lang` · Stats line: `disk` |
 | `SEG4` | `{{COLOR_SEG4}}` | Main line: `tools` (docker/terraform/conda/gcloud/aws) · Stats line: `duration` (`cmd_duration`) |
-| `SEG5` | `{{COLOR_SEG5}}` | Main line: `time` · Stats line: `battery`/`status`/`jobs` |
-| `FG` | `{{COLOR_FG}}` | Foreground text on SEG0–SEG5 pills |
+| `SEG5` | `{{COLOR_SEG5}}` | **Spare** — no module assigned yet. Defined in every template (`color_seg5`) but currently unreferenced by any module. Historically this was the muted/neutral "leftover" slot; that convention now lives at `SEG6` instead. |
+| `SEG6` | `{{COLOR_SEG6}}` | Main line: `time` · Stats line: `battery`/`status`/`jobs` — took over from `SEG5`. Pick a low-ranked, low-saturation color here (the muted-neutral convention every theme's old `SEG5` followed — see [When hex differences are enough](#when-hex-differences-are-enough)). |
+| `FG` | `{{COLOR_FG}}` | Foreground text on SEG0–SEG6 pills |
 | `OK` | `{{COLOR_OK}}` | `❯` prompt character — last command succeeded |
 | `ERR` | `{{COLOR_ERR}}` | `❯` prompt character — last command failed |
 | `WARN` | `{{COLOR_WARN}}` | `❯` prompt character — vim replace/visual mode |
@@ -352,7 +353,7 @@ These are **not** stored in `roles.json` — `render-theme.py` derives them auto
 
 Some themes' Neovim plugin source reuses the same accent hex across two or more flavors, so those flavors render visually identical in the prompt/dircolors/git except for the username/hostname pill. This isn't always whole-theme — `bearded` has 63 flavors but only 19 distinct `SEG0` values, e.g. `arc`/`arc-blueberry`/`arc-eggplant`/`arc-eolstorm`/`arc-reversed` plus six `black-&-*` variants (11 flavors total) all share one `SEG0`, even though most of bearded's other flavors don't collide with anything.
 
-`get-colors.py --export --blend` detects and fixes this per-theme, per-**flavor** (no hardcoded theme or flavor list — any future collision is caught automatically), using a sequential dedup: flavors are walked in sorted order, and the *first* flavor to use a given `SEG0` hex is left completely untouched (the "canonical" holder of that color) — every *later* flavor resolving the same `SEG0` gets `SEG0-5`/`OK`/`ERR`/`WARN` reshaded to a color of its own. This is why `bearded/arc` (the alphabetically-first of its cluster) keeps its original `#E35535` while `arc-blueberry`/`arc-eggplant`/etc. each get a distinct shade.
+`get-colors.py --export --blend` detects and fixes this per-theme, per-**flavor** (no hardcoded theme or flavor list — any future collision is caught automatically), using a sequential dedup: flavors are walked in sorted order, and the *first* flavor to use a given `SEG0` hex is left completely untouched (the "canonical" holder of that color) — every *later* flavor resolving the same `SEG0` gets every `SEG` slot (however many entries that theme's `SEG` array has — `SEG0-6` now that `SEG6` exists)/`OK`/`ERR`/`WARN` reshaded to a color of its own. This is why `bearded/arc` (the alphabetically-first of its cluster) keeps its original `#E35535` while `arc-blueberry`/`arc-eggplant`/etc. each get a distinct shade.
 
 Any `DC_*`/`GC_*` (dircolors/git-diff) role that reuses one of the reshaded color names is reshaded to the same new entry too — e.g. if a theme's `OK` and `DC_EXEC` both point at `accent4`, both get pointed at the same `accent4__blend` once, not two independently-blended results. Without this, a duplicate flavor would show its dircolors/git-diff output still in the stale, still-colliding shade even after its prompt colors were fixed.
 
@@ -373,7 +374,7 @@ The mechanism (full detail in [Managing palettes.json](#managing-palettesjson)):
 **How to read it when choosing roles:**
 
 - **High rank = the theme itself treats this color as important** (core syntax, `Normal`, diagnostics). These are your `SEG0`–`SEG4`/`OK`/`ERR`/`WARN` candidates — pick the ones whose hue matches the semantic role you need (still need eyes for "which one is red," rank alone doesn't know hue).
-- **Low rank = present in the palette but barely rendered** (rarely-used UI chrome, a background gradation, an unused leftover). These are exactly the muted/neutral colors that pattern-match the `SEG5` convention documented in [Color selection philosophy](#color-selection-philosophy) — every theme investigated puts a low-saturation, low-rank color there rather than a 6th vivid accent.
+- **Low rank = present in the palette but barely rendered** (rarely-used UI chrome, a background gradation, an unused leftover). These are exactly the muted/neutral colors that pattern-match the `SEG6` convention documented in [Color selection philosophy](#color-selection-philosophy) — every theme investigated puts a low-saturation, low-rank color there rather than a 7th vivid accent. (`SEG5` is a spare vivid-accent slot instead — see the `SEG5`/`SEG6` rows in [Color roles reference](#color-roles-reference).)
 - **`Used: no`** on a high-rank color is a signal worth noticing — it means the real theme leans on that color heavily, but this repo's `_roles` doesn't reference it at all yet. Worth a second look before finalizing a mapping.
 
 **Highlight-group tiers** — the `Group Tier` column reflects the *best* (lowest-number) tier of any highlight group that renders that color; a color's actual `Rank` is the *summed* weight of every group that renders it, so two colors can show the same Group Tier badge while ranking very differently (see [Rank vs. Group Tier](#rank-vs-group-tier) below). This list is hand-classified once in `get-colors.py` (`_TIER1_GROUPS`/`_TIER2_GROUPS`/`_group_tier_weight`/`_group_tier_number`) and reused for every theme — it's about what the highlight group itself controls, not any one theme's opinion. Not derived from `:hi link` chains (see above — no signal there for modern themes).
@@ -411,7 +412,7 @@ For themes where all accents are identical between flavors (tokyonight night vs 
 
 Both colors exist in both palettes with the same hexes, but by *choosing* different names per flavor, the rendered output differs in hue.
 
-As of the `--blend` export flag (see [Accent-blend export option](#accent-blend-export-option)), this class of problem can also be handled automatically: `get-colors.py --export --blend` finds any *flavor* that duplicates an earlier flavor's `SEG0` — not just whole-theme reuse — and reshades that flavor's `SEG0-5`/`OK`/`ERR`/`WARN` to a lighter or darker version of themselves, ranked by its own `BG`. The first flavor to use a color is always left untouched; only later duplicates get reshaded. Hue/saturation never move, so a status color stays the same recognizable red/green/yellow, just a different shade. The manual technique above is still worth reaching for when you want a deliberately different color *family* per flavor (not just a lighter/darker shade of the same accent), or when a subtler/stronger distinction than the default lightness range produces is desired.
+As of the `--blend` export flag (see [Accent-blend export option](#accent-blend-export-option)), this class of problem can also be handled automatically: `get-colors.py --export --blend` finds any *flavor* that duplicates an earlier flavor's `SEG0` — not just whole-theme reuse — and reshades that flavor's `SEG0-6`/`OK`/`ERR`/`WARN` to a lighter or darker version of themselves, ranked by its own `BG`. The first flavor to use a color is always left untouched; only later duplicates get reshaded. Hue/saturation never move, so a status color stays the same recognizable red/green/yellow, just a different shade. The manual technique above is still worth reaching for when you want a deliberately different color *family* per flavor (not just a lighter/darker shade of the same accent), or when a subtler/stronger distinction than the default lightness range produces is desired.
 
 For themes where accents differ subtly (catppuccin dark flavors), we anchor each flavor to a **different color family** for the navigation/link roles:
 
@@ -426,7 +427,7 @@ For themes where accents differ subtly (catppuccin dark flavors), we anchor each
 
 Themes where shared `_roles` gives sufficient differentiation:
 
-- **Monokai** — 7 filters have deliberately distinct backgrounds and accent palettes (machine is electric-blue-tinted, ristretto is warm/desaturated, spectrum is near-black with vivid accents). The `BG` pill carries the identity difference automatically. Only 6 accents exist (`accent1`–`accent6`), and `accent3` is already claimed by `WARN`/`DC_TEXT`/`GC_TAG`/`GC_META` — so `SEG`'s last slot (time) uses `dimmed1`, a muted neutral, instead of a 7th accent.
+- **Monokai** — 7 filters have deliberately distinct backgrounds and accent palettes (machine is electric-blue-tinted, ristretto is warm/desaturated, spectrum is near-black with vivid accents). The `BG` pill carries the identity difference automatically. Only 6 accents exist in the theme's own source (`accent1`–`accent6`), and `accent3` is already claimed by `WARN`/`DC_TEXT`/`GC_TAG`/`GC_META` — so `SEG6` (time/battery, formerly `SEG5`'s job) uses `dimmed1`, a muted neutral, instead of stretching to a 7th theme-native accent.
 - **Bearded** — 63 flavors with very different palettes per flavor. The shared role names resolve to completely different hex values.
 - **Gruvbox** — dark vs light is structurally different (even without per-flavor roles, the `BG` hex contrast is extreme: `#282828` vs `#fbf1c7`).
 - **Flexoki** — dark `bg` = `#100F0F` (near-black), light `bg` = `#FFFCF0` (warm paper). Same role name, completely different hex.
@@ -439,7 +440,7 @@ Themes where shared `_roles` gives sufficient differentiation:
 3. Set `FG` = same key as `BG` (dark text on bright accent pills works for both dark and light themes)
 4. If flavors share accent hex values → use per-flavor `_roles` with different color name choices (or run `--export --blend` for an automatic, no-authoring alternative — see [Managing palettes.json](#managing-palettesjson))
 5. If flavors have genuinely different accent palettes → shared `_roles` is fine, `BG` carries the identity
-6. For `SEG0`–`SEG4`/`OK`/`ERR`/`WARN`: prefer Accent Ranking's higher-ranked colors, matched by hue to the semantic role you need. For `SEG5`: prefer a low-ranked, low-saturation color — matches the muted-neutral pattern every existing theme's own `SEG5` follows (see [When hex differences are enough](#when-hex-differences-are-enough)).
+6. For `SEG0`–`SEG5`/`OK`/`ERR`/`WARN`: prefer Accent Ranking's higher-ranked colors, matched by hue to the semantic role you need (`SEG5` has no module of its own yet — it's a spare vivid-accent slot). For `SEG6`: prefer a low-ranked, low-saturation color — matches the muted-neutral pattern every existing theme's own `time`/`battery` slot follows (see [When hex differences are enough](#when-hex-differences-are-enough)).
 
 **Per-flavor `_roles` only needs the keys that differ.** `render-theme.py`/`get-colors.py` deep-merge a flavor's `_roles` on top of its theme's `_roles` (flavor keys win, everything else is inherited) — a flavor override is **not** a full replacement. So when adding a new flavor to an existing theme, don't copy the theme's entire `_roles` block into the flavor and tweak a value; write only the keys that actually differ (usually just `SEG`, plus whichever `DC_*`/`GC_*` roles carry that flavor's identity-anchor color). See `onedarkpro`/`catppuccin`/`tokyonight` in `roles.json` for the pattern — each flavor's `_roles` is a handful of keys, not a 27-key copy.
 
@@ -516,7 +517,7 @@ If you want to colorize a new terminal component (e.g. tmux status line, fzf col
 
 `--export` also (re)generates two other committed files in the same run: `COLORS.md` (a human-browsable per-theme/flavor color reference — see the [Color roles reference](#color-roles-reference) section above for what each `SEG` slot means) and `.assets/swatches/*.png` (one small solid-color PNG per unique hex value, self-generated so `COLORS.md` shows real color swatches — GitHub's inline color-dot Markdown only renders inside issues/PRs/discussions, never inside repo files, so an image is the only way to show actual color there).
 
-Each theme's `COLORS.md` section has up to four subsections, all linked from the nested table of contents: **Elements** (the `SEG0-5` prompt swatches), **DirColors** (the `DC_*` swatches), **GitColors** (the `GC_*` swatches), and **Accent Ranking**. DirColors and GitColors are separate tables — each only appears if that theme actually defines roles of that prefix. Accent Ranking scores every palette color by how it's *actually* used in the real theme — `get-colors.py` loads each theme/flavor in headless Neovim (reusing the same `theme.lua` dispatch mechanism `preview-themes.py` uses for its live previews) and reads back every highlight group's resolved color via `nvim_get_hl`. Each highlight group is weighted by a hand-classified importance tier (`_TIER1_GROUPS`/`_TIER2_GROUPS` in `get-colors.py` — core UI/legacy syntax groups outrank diagnostics/statusline chrome, which outrank everything else); a color's rank is the sum of the weights of every group that renders it. This is intentionally *not* derived from `:hi link` chains — modern Lua colorschemes set every highlight group's colors directly rather than linking to Vim's classic ~18 syntax groups, so there's no link signal to use (confirmed empirically: zero linked groups across monokai and tokyonight). The `Used` column is separate — it marks whether this repo's own `SEG`/`DC_*`/`GC_*` roles reference that color name, independent of its real-theme usage rank. If Neovim (or a theme's `_nvim` metadata) isn't available, that theme's Accent Ranking section is skipped with a note rather than failing the whole export.
+Each theme's `COLORS.md` section has up to four subsections, all linked from the nested table of contents: **Elements** (the `SEG0-6` prompt swatches), **DirColors** (the `DC_*` swatches), **GitColors** (the `GC_*` swatches), and **Accent Ranking**. DirColors and GitColors are separate tables — each only appears if that theme actually defines roles of that prefix. Accent Ranking scores every palette color by how it's *actually* used in the real theme — `get-colors.py` loads each theme/flavor in headless Neovim (reusing the same `theme.lua` dispatch mechanism `preview-themes.py` uses for its live previews) and reads back every highlight group's resolved color via `nvim_get_hl`. Each highlight group is weighted by a hand-classified importance tier (`_TIER1_GROUPS`/`_TIER2_GROUPS` in `get-colors.py` — core UI/legacy syntax groups outrank diagnostics/statusline chrome, which outrank everything else); a color's rank is the sum of the weights of every group that renders it. This is intentionally *not* derived from `:hi link` chains — modern Lua colorschemes set every highlight group's colors directly rather than linking to Vim's classic ~18 syntax groups, so there's no link signal to use (confirmed empirically: zero linked groups across monokai and tokyonight). The `Used` column is separate — it marks whether this repo's own `SEG`/`DC_*`/`GC_*` roles reference that color name, independent of its real-theme usage rank. If Neovim (or a theme's `_nvim` metadata) isn't available, that theme's Accent Ranking section is skipped with a note rather than failing the whole export.
 
 ### When to regenerate
 
@@ -548,7 +549,7 @@ python3 src/get-colors.py --export --output /tmp/palettes-preview.json
 # With automatic per-flavor accent differentiation: any flavor that
 # duplicates an earlier flavor's SEG0 (whole-theme, like oasis/gruvbox,
 # or a cluster within a theme, like bearded's arc/arc-blueberry/...
-# group) gets SEG0-5/OK/ERR/WARN reshaded lighter/darker (hue/
+# group) gets SEG0-6/OK/ERR/WARN reshaded lighter/darker (hue/
 # saturation untouched), ranked by that flavor's own BG. The first
 # flavor to use a color is left untouched. Without --blend, --export
 # still detects and warns about affected flavors but leaves the raw
@@ -675,7 +676,7 @@ Then run `--export` and open `COLORS.md`'s `mytheme` → **Accent Ranking** sect
 python3 src/get-colors.py --export
 ```
 
-This loads the real theme in headless Neovim and ranks every extracted color by how much the theme *actually* uses it (see [Accent Ranking — objective per-color usage](#accent-ranking--objective-per-color-usage) for the full mechanism). It works with zero `_roles` authored — this is the starting point, not something you do after guessing. Read the ranked list top-to-bottom: the highest-ranked colors are what the theme itself leans on most (good `SEG0`–`SEG4`/`OK`/`ERR`/`WARN` candidates, matched by hue to the role you need); the lowest-ranked, least-saturated color is your `SEG5` candidate — every existing theme puts a muted/neutral color there rather than a 6th vivid accent (see [When hex differences are enough](#when-hex-differences-are-enough)).
+This loads the real theme in headless Neovim and ranks every extracted color by how much the theme *actually* uses it (see [Accent Ranking — objective per-color usage](#accent-ranking--objective-per-color-usage) for the full mechanism). It works with zero `_roles` authored — this is the starting point, not something you do after guessing. Read the ranked list top-to-bottom: the highest-ranked colors are what the theme itself leans on most (good `SEG0`–`SEG5`/`OK`/`ERR`/`WARN` candidates, matched by hue to the role you need); the lowest-ranked, least-saturated color is your `SEG6` candidate — every existing theme puts a muted/neutral color there rather than a 7th vivid accent (see [When hex differences are enough](#when-hex-differences-are-enough)).
 
 Use the mapping table below as a **secondary aid** — once Accent Ranking has told you *which* colors matter, this table helps you match ranked candidates to *which* semantic role they fit by typical key-name conventions:
 
@@ -683,8 +684,8 @@ Use the mapping table below as a **secondary aid** — once Accent Ranking has t
 |---------|-------------|-------------------|
 | `BG` | Editor background — nvim `Normal` bg. The one color that makes a flavor instantly recognizable. | `bg`, `base`, `background`, `uibackground` |
 | `TEXT` | Editor body text — nvim `Normal` fg. Must contrast with `BG`. | `fg`, `text`, `default`, `fujiWhite` |
-| `FG` | Text on accent pills (SEG1–SEG5). Use a near-black/near-white, often the same key as `BG`. | same as `BG`, or a near-black/paper-white |
-| `SEG` (×6) | 6 vibrant accent colors for segment backgrounds, left→right. | any 6 distinct accents |
+| `FG` | Text on accent pills (SEG1–SEG6). Use a near-black/near-white, often the same key as `BG`. | same as `BG`, or a near-black/paper-white |
+| `SEG` (×7) | 7 accent colors for segment backgrounds, left→right — `SEG0`-`SEG5` vibrant, `SEG6` muted/neutral (see [Color roles reference](#color-roles-reference)). | any 7 distinct accents, last one muted |
 | `OK`, `GC_ADDED`, `GC_NEW`, `DC_EXEC`, `DC_SOURCE` | Green-ish | `green`, `success`, `bright_green` |
 | `ERR`, `GC_UNTRACKED`, `GC_OLD` | Red-ish | `red`, `danger`, `bright_red` |
 | `WARN`, `GC_CHANGED`, `GC_ARCHIVE` | Orange or warm yellow | `orange`, `warning`, `bright_orange` |
@@ -721,7 +722,7 @@ Use the mapping table below as a **secondary aid** — once Accent Ranking has t
     "_roles": {
         "BG":   "bg_editor",
         "TEXT": "fg_editor",
-        "SEG": ["accent_red", "accent_orange", "accent_yellow", "accent_green", "accent_cyan", "accent_purple"],
+        "SEG": ["accent_red", "accent_orange", "accent_yellow", "accent_green", "accent_cyan", "accent_purple", "muted_gray"],
         "FG": "bg_editor",
         "OK": "accent_green",   "ERR": "accent_red",    "WARN": "accent_yellow",
         "DC_DIR":     "accent_cyan",    "DC_LINK":    "accent_purple",
@@ -748,7 +749,7 @@ Use the mapping table below as a **secondary aid** — once Accent Ranking has t
         "_delta": { "syntax_theme": "Mytheme Dark" },
         "_roles": {
             "BG": "bg_dark", "TEXT": "fg_dark", "FG": "bg_dark",
-            "SEG": ["dark_red", "dark_orange", "dark_yellow", "dark_green", "dark_cyan", "dark_purple"],
+            "SEG": ["dark_red", "dark_orange", "dark_yellow", "dark_green", "dark_cyan", "dark_purple", "dark_gray"],
             "DC_DIR": "dark_cyan",  "GC_BRANCH": "dark_cyan",
             "GC_FRAG": "dark_purple", "DC_LINK": "dark_purple",
             ...
@@ -758,7 +759,7 @@ Use the mapping table below as a **secondary aid** — once Accent Ranking has t
         "_delta": { "syntax_theme": "Mytheme Light" },
         "_roles": {
             "BG": "bg_light", "TEXT": "fg_light", "FG": "bg_light",
-            "SEG": ["light_red", "light_orange", "light_yellow", "light_green", "light_teal", "light_mauve"],
+            "SEG": ["light_red", "light_orange", "light_yellow", "light_green", "light_teal", "light_mauve", "light_gray"],
             "DC_DIR": "light_teal", "GC_BRANCH": "light_teal",
             ...
         }
@@ -1021,7 +1022,7 @@ python3 src/get-colors.py --export --output /tmp/palettes-preview.json
 
 | Flag | Columns | Use for |
 |---------|---------|---------|
-| `--matrix --prompt` | SEG0–SEG5, BG, TEXT, FG, OK, ERR, WARN | Checking prompt color identity per flavor |
+| `--matrix --prompt` | SEG0–SEG6, BG, TEXT, FG, OK, ERR, WARN | Checking prompt color identity per flavor |
 | `--matrix --colors` | DC_DIR…DC_DIMMED + GC_ADDED…GC_FRAG | Checking ls + git color assignments |
 | `--matrix` (no flags) | All of the above | Full overview |
 | `--matrix --theme NAME` | same as above, filtered | One theme, all its flavors |

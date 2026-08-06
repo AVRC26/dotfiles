@@ -36,11 +36,11 @@ $memory_usage\
 ${custom.cpu_load}\
 ${custom.disk_usage}\
 $cmd_duration\
-[](fg:color_seg4 bg:color_seg5)\
+[](fg:color_seg4 bg:color_seg6)\
 $battery\
 $status\
 $jobs\
-[](fg:color_seg5 bg:none)\
+[](fg:color_seg6 bg:none)\
 $line_break\
 [](bg:none fg:color_seg0)\
 $os\
@@ -137,21 +137,21 @@ $netns\
 $openstack\
 $pixi\
 $singularity\
-[](fg:color_seg4 bg:color_seg5)\
+[](fg:color_seg4 bg:color_seg6)\
 $time\
-[](fg:color_seg5)\
+[](fg:color_seg6)\
 $line_break\
 $character"""
 
 #${custom.files}${custom.directories}\
 
 # A continuation prompt that displays right half-circle and filled-in arrow
-continuation_prompt = "[ ](bg:color_seg5)[ ](fg:color_seg5)"
+continuation_prompt = "[ ](bg:color_seg6)[ ](fg:color_seg6)"
 
 #the continuation prompt may not be shown if the right prompt is used; RP only appears in fish/zsh/xonsh, not bash/pwsh/tcsh/ion
 # right_format = """
-# [ ](fg:color_seg5)\
-# [ ](fg:color_seg4 bg:color_seg5)\
+# [ ](fg:color_seg6)\
+# [ ](fg:color_seg4 bg:color_seg6)\
 # [ ](fg:color_seg0 bg:color_seg4)\
 # [test](fg:color_fg bg:color_seg0)\
 # [](fg:color_seg0)\
@@ -166,6 +166,7 @@ color_seg2 = "{{COLOR_SEG2}}"
 color_seg3 = "{{COLOR_SEG3}}"
 color_seg4 = "{{COLOR_SEG4}}"
 color_seg5 = "{{COLOR_SEG5}}"
+color_seg6 = "{{COLOR_SEG6}}"
 color_bg   = "{{COLOR_BG}}"
 color_text = "{{COLOR_TEXT}}"
 color_fg   = "{{COLOR_FG}}"
@@ -271,7 +272,7 @@ disabled           = true
 
 [[battery.display]]
 threshold = 100
-style     = "fg:color_fg bg:color_seg5"
+style     = "fg:color_fg bg:color_seg6"
 # style = "bold fg:green bg:color_seg4"
 
 # ==========status========
@@ -288,7 +289,7 @@ vimcmd_symbol  = '[❮](bold fg:color_ok)'
 
 [status]
 disabled = false
-format   = '[ $status:$common_meaning ](fg:color_err bg:color_seg5)'
+format   = '[ $status:$common_meaning ](fg:color_err bg:color_seg6)'
 
 [sudo]
 symbol   = "" #
@@ -859,8 +860,8 @@ format   = '[ $symbol $context $namespace]($style) ' #AppTainer
 
 [time]
 disabled = false
-style    = "bg:color_seg5"
-format   = '[[  $time ](fg:color_fg bg:color_seg5)]($style)'
+style    = "bg:color_seg6"
+format   = '[[  $time ](fg:color_fg bg:color_seg6)]($style)'
 
 [shell]
 disabled             = false
@@ -889,7 +890,7 @@ disabled         = false
 symbol           = ''
 number_threshold = 1
 symbol_threshold = 1
-style            = "fg:color_fg bg:color_seg5"
+style            = "fg:color_fg bg:color_seg6"
 format           = "[ $symbol $number ]($style)"
 
 [memory_usage]

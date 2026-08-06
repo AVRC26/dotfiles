@@ -12,11 +12,11 @@ $memory_usage\
 ${custom.cpu_load}\
 ${custom.disk_usage}\
 $cmd_duration\
-[](fg:color_seg4 bg:color_seg5)\
+[](fg:color_seg4 bg:color_seg6)\
 $battery\
 $status\
 $jobs\
-[](fg:color_seg5 bg:none)\
+[](fg:color_seg6 bg:none)\
 $line_break\
 [├─](bg:none fg:color_seg0)\
 $os\
@@ -106,7 +106,7 @@ $singularity\
 [](fg:color_seg4)\
 $fill\
 $time\
-[─╮](fg:color_seg5)\
+[─╮](fg:color_seg6)\
 $line_break\
 [╰─](fg:color_seg0)\
 $character\
@@ -121,6 +121,7 @@ color_seg2 = "{{COLOR_SEG2}}"
 color_seg3 = "{{COLOR_SEG3}}"
 color_seg4 = "{{COLOR_SEG4}}"
 color_seg5 = "{{COLOR_SEG5}}"
+color_seg6 = "{{COLOR_SEG6}}"
 color_bg   = "{{COLOR_BG}}"
 color_text = "{{COLOR_TEXT}}"
 color_fg   = "{{COLOR_FG}}"
@@ -205,7 +206,7 @@ disabled = false
 
 [fill]
 symbol = ' '
-style  = 'bold fg:color_seg5'
+style  = 'bold fg:color_seg6'
 
 [directory]
 style             = "bg:color_seg1 fg:color_fg"
@@ -253,8 +254,8 @@ deleted     = "$count "
 typechanged = "$count "
 
 [status]
-format   = "[[ $status:$common_meaning ](fg:color_err bg:color_seg5)]($style)"
-style    = 'bg:color_seg5 fg:color_err'
+format   = "[[ $status:$common_meaning ](fg:color_err bg:color_seg6)]($style)"
+style    = 'bg:color_seg6 fg:color_err'
 disabled = false
 
 [buf]
@@ -623,7 +624,7 @@ format      = "[ $symbol $output ](bg:color_seg3 fg:color_fg)[](bg:color_seg4
 when        = "true"
 
 [time]
-format   = "[](fg:color_seg5)[ $time ](bg:color_seg5 fg:color_bg)"
+format   = "[](fg:color_seg6)[ $time ](bg:color_seg6 fg:color_bg)"
 disabled = false
 
 [cmd_duration]
@@ -662,7 +663,7 @@ symbol           = ''
 number_threshold = 1
 symbol_threshold = 1
 disabled         = false
-format           = '[[ $symbol $number ](fg:color_fg bg:color_seg5)]($style)'
+format           = '[[ $symbol $number ](fg:color_fg bg:color_seg6)]($style)'
 
 
 [character]
@@ -672,8 +673,8 @@ vimcmd_symbol  = '[❯](bold fg:color_ok)'
 
 [battery]
 disabled = true
-format   = '[[ $symbol $percentage ](fg:color_fg bg:color_seg5)]($style)'
-style    = 'bg:color_seg5'
+format   = '[[ $symbol $percentage ](fg:color_fg bg:color_seg6)]($style)'
+style    = 'bg:color_seg6'
 
 full_symbol        = "󰁹"
 charging_symbol    = "󰂄"
